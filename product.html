@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STYLISH</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/product.css">
+
+</head>
+
+<body>
+    <script>
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                indexStatusChangeCallback(response);
+
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2888776061346906',
+                cookie: true,  // enable cookies to allow the server to access 
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v3.3' // The Graph API version to use for the call
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                        indexStatusChangeCallback(response);}
+                    });
+        };
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="web">
+        <div class="base">
+            <div class="btn_00">
+                <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
+                <div class="btn_01">
+                    <ul class="shopHeader">
+                        <li><a href="index.html?tag=women">女裝</a></li>
+                        <li><a href="index.html?tag=men">男裝</a></li>
+                        <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="userAct">
+                <div class="web_searchbar">
+                    <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
+                    <img class="search" src="images/search.png" onclick="search()">
+                </div>
+                <div class="cartAct">
+                    <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
+                    <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                    <div class="cartNum" onclick="goCart()"></div>
+                    <div class="cart">購物車</div>
+                    <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
+                    <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                    <div class="member">會員</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_logo01">
+            <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
+
+            <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
+
+            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
+            <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
+        </div>
+        <div class=mobile_nav01>
+            <ul class="mobile_nav">
+                <li><a href="index.html?tag=women">女裝</a></li>
+                <li><a href="index.html?tag=men">男裝</a></li>
+                <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+            </ul>
+        </div>
+        <div class="mobile_user">
+            <div class="cart">
+                <img class="btn_shopping-mob" src="images/cart-mobile.png">
+                <span>購物車</span>
+            </div>
+            <span class="mo_cart_center">|</span>
+            <div class="member">
+                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                <span>會員</span>
+            </div>
+        </div>
+        <div class="baseBorder"></div>
+        <div class="productPage">
+            <!-- <div class="productContainer">
+                <img class="main_pic">
+                <div class="info">
+                    <div class="title">前開衩扭結洋裝</div>
+                    <div class="id">03040047</div>
+                    <div class="price">TWD.590</div>
+                    <div class="shortLine"></div>
+                    <div class="colorContainer">
+                        <div class="color">顏色</div>
+                        <div class="rect"></div>
+                        <div class="rect"></div>
+                    </div>
+                <div class="sizeContainer">
+                        <div class="size">尺寸</div>
+                        <div class="size-icon">S</div>
+                        <div class="size-icon">M</div>
+                        <div class="size-icon">L</div>
+                        <div class="size-icon">XL</div>
+                    </div>
+                <div class="countContainer">
+                        <div class="count">數量</div>
+                        <div class="counter">
+                            <div class="plus">+</div>
+                            <div class="quantity">1</div>
+                            <div class="subtract">-</div>
+                        </div>
+            </div>
+            <button type="submit" class="add_in_cart">加入購物車</button>
+            <div>
+                <div class="note">*實品顏色依單品照為主</div>
+                <div class="texture">棉100%<br>
+                    厚薄：薄<br>彈性：無
+                </div>
+                <div class="place">
+                    <div class="fromplace">素材產地:中國</div>
+                    <div class="madeplace">加工產地:中國</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail">
+        <div class="explain">細部說明</div>
+        <div class="longLine"></div>
+    </div>
+    <div class="storyboard">
+        <div class="story">O.N.S is all about options, which is why we took our staple polo shirt and upgraded
+            it with slubby linen jersey, making it even lighter for those who prefer their summer style
+            extra-breezy.</div>
+        <div class="subpic">
+            <img>
+        </div>
+        <div class="story">O.N.S is all about options, which is why we took our staple polo shirt and upgraded
+            it with slubby linen jersey, making it even lighter for those who prefer their summer style
+            extra-breezy.</div>
+        <div class="subpic">
+            <img>
+        </div>
+    </div> -->
+        </div>
+        <div class="Rectangle-4">
+            <div class="footer">
+                <div class="footer_menu">
+                    <ul class="compDescrib">
+                        <li>關於Stylish</li>
+                        <li>服務條款</li>
+                        <li>隱私政策</li>
+                        <li>聯絡我們</li>
+                        <li id="FAQ">FAQ</li>
+                    </ul>
+                </div>
+                <div class="socialMedia">
+                    <img class="btn_line01_normal" src="images/line.png">
+                    <img class="btn_twitter01_normal" src="images/twitter.png">
+                    <img class="btn_facebook01_normal" src="images/facebook.png">
+                </div>
+            </div>
+            <div class="copyright">&copy; 2018 All rights reserved.</div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/product.js"></script>
+    <script src="js/checkfb.js"></script>
+</body>
+
+</html>

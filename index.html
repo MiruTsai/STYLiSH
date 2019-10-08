@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>STYLISH</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+    <script>
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                indexStatusChangeCallback(response);
+            });
+        }
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2888776061346906',
+                cookie: true,  // enable cookies to allow the server to access 
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v3.3' // The Graph API version to use for the call
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call 
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+
+            FB.getLoginStatus(function (response) {
+                if (response.status === 'connected') {
+                    indexStatusChangeCallback(response);
+                }
+            });
+        };
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="web">
+        <div class="base">
+            <div class="btn_00">
+                <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
+                <div class="btn_01">
+                    <ul class="shopHeader">
+                        <li><a href="index.html?tag=women">女裝</a></li>
+                        <li><a href="index.html?tag=men">男裝</a></li>
+                        <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="userAct">
+                <div class="web_searchbar">
+                    <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
+                    <img class="search" src="images/search.png" onclick="search()">
+                </div>
+                <div class="cartAct">
+                    <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
+                    <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                    <div class="cartNum" onclick="goCart()"></div>
+                    <div class="cart">購物車</div>
+                    <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
+                    <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                    <div class="member">會員</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_logo01">
+            <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
+            <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
+            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
+            <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
+        </div>
+
+        <div class=mobile_nav01>
+            <ul class="mobile_nav">
+                <li><a href="index.html?tag=women">女裝</a></li>
+                <li><a href="index.html?tag=men">男裝</a></li>
+                <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+            </ul>
+        </div>
+        <div class="mobile_user">
+            <div class="cart">
+                <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                <span onclick="goCart()">購物車</span>
+            </div>
+            <span class="mo_cart_center">|</span>
+            <div class="member">
+                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                <span>會員</span>
+            </div>
+        </div>
+        <div class="baseBorder"></div>
+        <div id="main-banner">
+            <!-- <div class="main-banner-text">
+            <div class="main-banner-main">於是</div>
+                <div class="main-banner-main">我也想要給你</div>                
+                    <div class="main-banner-main">一個那麼美好的自己</div>
+                    <div class="main-banner-sub">不朽《與自己和好如初》</div>
+                </div> -->
+        </div>
+        <div id="p_container">
+            <!-- <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3"></div>
+                    </div>
+                    <p class="p_title">後鬆緊牛仔落地寬褲</p>
+                    <p class="p_price">TWD.590</p>
+                </div>
+            </div>
+            <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3-Copy"></div>
+                        <div class="Rectangle-3-Copy-2"></div>
+                    </div>
+                    <p class="p_title">前開衩扭結洋裝</p>
+                    <p class="p_price">TWD.690</p>
+                </div>
+            </div>
+            <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3-Copy-3"></div>
+                        <div class="Rectangle-3-Copy-4"></div>
+                    </div>
+                    <p class="p_title">涼感垂墬斯滑寬</p>
+                    <p class="p_price">TWD.430</p>
+                </div>
+            </div>
+            <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3-copy-10"></div>
+                        <div class="Rectangle-3-Copy-11"></div>
+                    </div>
+                    <p class="p_title">腰鬆緊棉麻褲裙</p>
+                    <p class="p_price">TWD.590</p>
+                </div>
+            </div>
+            <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3-Copy-6"></div>
+                        <div class="Rectangle-3-Copy-8"></div>
+                    </div>
+                    <p class="p_title">前開衩扭結洋裝</p>
+                    <p class="p_price">TWD.690</p>
+                </div>
+            </div>
+            <div class="p_content">
+                <div class="p_pic"></div>
+                <div class="p_descirb">
+                    <div class="p_color">
+                        <div class="Rectangle-3-Copy-7"></div>
+                    </div>
+                    <p class="p_title">透肌澎澎連袖防曬上衣</p>
+                    <p class="p_price">TWD.430</p>
+                </div>
+            </div> -->
+        </div>
+        <div class="Rectangle-4">
+            <div class="footer">
+                <div class="footer_menu">
+                    <ul class="compDescrib">
+                        <li>關於Stylish</li>
+                        <li>服務條款</li>
+                        <li>隱私政策</li>
+                        <li>聯絡我們</li>
+                        <li id="FAQ">FAQ</li>
+                    </ul>
+                </div>
+                <div class="socialMedia">
+                    <img class="btn_line01_normal" src="images/line.png">
+                    <img class="btn_twitter01_normal" src="images/twitter.png">
+                    <img class="btn_facebook01_normal" src="images/facebook.png">
+                </div>
+            </div>
+            <div class="copyright">&copy; 2018 All rights reserved.</div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/checkfb.js"></script>
+</body>
+
+</html>

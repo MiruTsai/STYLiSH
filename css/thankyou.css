@@ -1,0 +1,55 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Rectangle-4{
+    width: 100%;
+    position: fixed;
+    bottom:0;
+}
+
+/* ---------------------- */
+.thankYouPage{    
+    width: 70%;
+    text-align: center;
+    margin:  80px auto;
+}
+.message{
+    font-size: 20px;
+    margin: 30px;
+}
+.order{
+    display: inline-block;
+    font-weight: bold;
+    color:coral;
+}
+button{
+    margin: 0;
+    padding: 10px;
+    color: white;
+    border: 1px solid transparent;
+    outline: none;
+    background-color: black;
+}
+
+@media (max-width:880px){
+.thankYouPage{
+
+    width: 90%;
+    text-align: center;
+    margin:  20px auto;
+}
+
+.thanksPic{
+    width: 100%;
+}
+
+.message{
+    font-size: 16px;
+    margin: 20px;
+    text-align: left;
+}
+}

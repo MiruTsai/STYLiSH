@@ -1,0 +1,408 @@
+.cart_page{
+    width:70%;
+    margin: 0 auto;
+}
+.empty{
+    font-size: 16px;
+    padding:20px 30px;
+    font-weight: bold;
+}
+.title_list{
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.cartText{
+    flex-basis: 50%;
+    align-self: flex-start;
+    font-weight: bold;
+}
+.title_count{
+    justify-content: space-around;
+    flex-basis: 47%;
+}
+.itemQty{
+    justify-content: space-around;
+    flex-basis: 50%;
+    align-items: center;
+}
+.itemInfo{
+    flex-basis: 50%;
+}
+.title_list,
+.title_count,
+.orderItem,
+.shipping,
+.itemInfo,
+.itemDetail,
+.itemQty,
+.color,
+.size,
+.total,
+.totalText,
+.totalCost,
+.shippingTotal,
+.buttom,
+.userName,
+.mobile,
+.email,
+.address,
+.cardInfoZone,
+.shippingTime{
+    display: flex;  
+}
+.cartOrderList{
+    border: 1px solid grey;
+}
+.orderItem{
+    padding:20px 0 20px 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+.itemPic{
+    width:114px;
+    height:151.5px;
+}
+
+.itemInfo{
+    justify-content: flex-start;
+}
+.itemDetail{
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top:3px; 
+    padding-bottom: 20px;
+    padding-left:10px;
+}
+.centerLine{
+    padding:0 5px;
+}
+.quantity{
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    border: solid 1px #979797;
+    background-color: #f3f3f3;
+}
+
+.remove{
+    width: 40px;
+    height: 40px;
+}
+.shipping{
+    background-color: #e8e8e8;
+    height: 74px;
+    align-items: center;
+    margin: 30px auto;
+    justify-content: flex-start;    
+}
+select{
+    height: 30px;
+    border-radius: 8px;
+    border: solid 1px #979797;
+    background-color: #f3f3f3;
+    margin-left: 15px;
+    text-align: center;
+}
+.shippingMethod{
+    margin:0 100px 0 30px;
+}
+.notice{
+    line-height: 1.63;
+    color: #3f3a3a;
+    font-size: 16px;    
+    margin:20px 0 50px;
+}
+.userNotice{
+    font-size: 16px;
+    text-align: right;
+    margin-top: 10px;
+    color: #8b572a;
+}
+
+.orderInfo{
+  margin-top:50px;
+  font-size: 16px;
+  text-align: left;
+  color: #3f3a3a;
+  font-weight: bold;
+}
+.userInfo{
+    width: 50%;
+}
+.userName{
+    margin: 5px 0;
+}
+.mobile,
+.address,
+.cardInfoZone,
+.email{
+    margin: 25px 0;
+}
+.userName,
+.mobile,
+.email,
+.address,
+.cardInfoZone{
+    justify-content: space-between;
+}
+
+.shippingTime{
+    align-items: center;
+}
+.choice{
+    margin-left:55px; 
+}
+.inputText{
+  width:80%;
+  height: 30px;
+  border-radius: 8px;
+  border: solid 1px #979797;
+  background-color: #ffffff;
+  margin-left: 10px;
+  padding-left: 10px;
+}    
+input[type="email"]{
+    width:80%;
+    height: 30px;
+    border-radius: 8px;
+    border: solid 1px #979797;
+    background-color: #ffffff;
+    margin-left: 10px;
+  } 
+input[type="radio"]{
+    margin:20px 10px;
+}
+input[type="number"]{
+  text-align: center;
+  width: 80px;
+  height: 30px;
+  border-radius: 8px;
+  border: solid 1px #979797;
+  
+}
+
+
+.horizon{
+    width: 100%;
+    margin: 20px 0;
+    border:1px solid #979797;
+}
+.buttom{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.total{
+    width:20%;
+    text-align: left;    
+    margin:30px 0 50px;
+    flex-direction: column;    
+}
+.totalText,
+.totalCost,
+.shippingTotal{
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.billMoney,
+.shippingMoney,
+.totalMoney{
+    font-size: 30px;
+}
+.NTD{
+    padding-right: 15px;
+    font-size: 16px;
+    text-align: left;
+    color: #3f3a3a;
+}
+.payButton{
+    width:100%;
+    height:60px;
+    margin: 30px 0;
+    padding: 0;
+    border: 1px solid transparent; 
+    outline: none;  
+    background-color: black;
+    color:white;
+    font-size: 20px;
+    letter-spacing: 4px;
+}
+
+
+.tpfield {
+  width:80%;
+  height: 30px;
+  border-radius: 8px;
+  border: solid 1px #979797;
+  background-color: #ffffff;
+  padding-left: 10px;
+}
+
+.cardInfo{
+    margin: 10px 0;
+}
+
+
+
+/* for mobile */
+.mobileQty,
+.mobileRemove,
+.mobilePayButton{
+    display: none;
+}
+
+
+/* media query */
+
+@media(max-width:1200px){
+.cart_page{
+    width:90%;
+}
+.total{
+    width:50%;
+}
+}
+
+@media(max-width:640px){
+
+.cartOrderList{
+    border: 0;
+}
+
+.shippingMethod,
+.payMethod{
+    margin: 10px auto;
+    text-align: left;
+    width:90%;
+}
+.shipCountry,
+.payment{
+    margin: 5px 0;
+}
+.shipping{
+    height: 164px;
+    width: 100%;
+    
+    justify-content: center;   
+}
+.orderItem{
+    width:100%;
+    border-top:1px solid black;
+    border-bottom:1px solid black; 
+    padding:20px 0;
+}
+.mobileQty{
+    width:90%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+.title{
+    margin-bottom: 10px;
+}
+.itemQty,
+.title_count{
+    display: none;
+}
+.title_list{
+    justify-content: flex-start;
+}
+.orderItem,
+.userName,
+.email,
+.mobile,
+.address,
+.shippingTime,
+.cardInfoZone{
+    margin: 10px 0;
+    width:100%;
+    display: inline-block;
+}
+.mobileItemInfo{    
+    display: flex;
+    justify-content: space-between;
+
+}
+.itemInfo{
+    flex-basis: 90%;
+}
+.mobileRemove{
+    display: inline-block;  
+    width: 40px;
+    height: 40px;  
+    
+}
+.userInfo{
+    width: 90%;
+    display:flex;
+    flex-direction: column;
+    margin:0 auto;
+}
+.mobileQty{
+    display: flex;    
+    align-items: center;
+}
+
+.mobileQtyText,
+.mobileUnitPrice,
+.mobileTotal{
+    margin-top:20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipping{
+    flex-direction: column;
+}
+select{
+    width:100%;
+    margin: 0;
+}
+
+.userNotice{
+    width:100%;
+    text-align: left;    
+}
+input[type="email"]{
+    width:100%;
+    margin-left: 0px;
+  }   
+input[type="radio"]{
+    margin:15px 5px;
+} 
+.choice{
+    font-size: 15px;
+    margin-left:0px; 
+}
+.total{
+    width:70%;
+}
+.moInfo{
+    margin: 10px 0;
+}
+.mobilePayButton{
+    display: inline-block;
+    width:100%;
+    height:60px;
+    margin: 30px 0;
+    padding: 0;
+    border: 1px solid transparent; 
+    outline: none;  
+    background-color: black;
+    color:white;
+    font-size: 20px;
+    letter-spacing: 4px;
+}
+
+.inputText{
+    width:100%;
+    margin-left: 0px;
+  }    
+
+.remove,
+.mobile_user,
+.payButton{
+    display: none;
+}
+}
