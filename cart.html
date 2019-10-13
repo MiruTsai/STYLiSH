@@ -7,16 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cart.css">
-   
+
 </head>
+
 <body>
     <script>
         function checkLoginState() {
-            FB.getLoginStatus(function (response) {        
-                indexStatusChangeCallback(response);        
+            FB.getLoginStatus(function (response) {
+                indexStatusChangeCallback(response);
             });
         }
-        
+
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '2888776061346906',
@@ -25,26 +26,13 @@
                 xfbml: true,  // parse social plugins on this page
                 version: 'v3.3' // The Graph API version to use for the call
             });
-        
-            // Now that we've initialized the JavaScript SDK, we call 
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
-        
+
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
-                        indexStatusChangeCallback(response);}
-                    });
+                    indexStatusChangeCallback(response);
+                }
+            });
         };
-        
-        // Load the SDK asynchronously
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -52,7 +40,7 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-    </script>    
+    </script>
     <div class="web">
         <div class="base">
             <div class="btn_00">
@@ -119,280 +107,145 @@
                 </div>
             </div>
             <div class="cartOrderList">
-                <!-- <div class="orderItem">
-                    <div class="mobileItemInfo">
-                        <div class="itemInfo">
-                            <img class="itemPic">
-                            <div class="itemDetail">
-                                <div class="itemTitle">前開衩扭結洋裝</div>
-                                <div class="itemID">03040047</div>
-                                <div class="itemDescription">
-                                    <div class="color">
-                                        <div class="colorText">顏色</div>
-                                        <div class="centerLine">|</div>
-                                        <div class="colorName">白</div>
-                                    </div>
-                                    <div class="size">
-                                        <div class="sizeText">尺寸</div>
-                                        <div class="centerLine">|</div>
-                                        <div class="sizeName">M</div>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+            <div class="shipping">
+                <div class="shippingMethod">
+                    <form>
+                        <div class="shipCountry">配送國家
+                            <select class="shippingCountry">
+                                <option value="Taiwan">台灣及離島</option>
+                            </select>
                         </div>
-                        <img class="mobileRemove" src=images/cart-remove.png> 
-                    </div> 
-                    <div class="mobileQty">
-                        <div class="mobileQtyText">
-                            <span class="title">數量</span>
-                            <input type="number" class="quantity" min="1" max="5" value="1">
-                        </div>
-                        <div class="mobileUnitPrice">
-                            <span class="title">單價</span>
-                            <div class="itemUnitPrice">NT.590</div>
-                        </div>
-                        <div class="mobileTotal">
-                            <span class="title">小計</span>
-                            <div class="itemTotalPrice">NT.590</div>
-                        </div>
-                    </div>
-                    <div class="itemQty">
-                        <input type="number" class="quantity" min="1" max="5" value="1">
-                        <div class="itemUnitPrice">NT.590</div>
-                        <div class="itemTotalPrice">NT.590</div>
-
-                        <img class="remove" src=images/cart-remove.png> </div> </div> <div class="orderItem">
-                        <div class="mobileItemInfo">
-                            <div class="itemInfo">
-                                <img class="itemPic">
-                                <div class="itemDetail">
-                                    <div class="itemTitle">前開衩扭結洋裝</div>
-                                    <div class="itemID">03040047</div>
-                                    <div class="itemDescription">
-                                        <div class="color">
-                                            <div class="colorText">顏色</div>
-                                            <div class="centerLine">|</div>
-                                            <div class="colorName">白</div>
-                                        </div>
-                                        <div class="size">
-                                            <div class="sizeText">尺寸</div>
-                                            <div class="centerLine">|</div>
-                                            <div class="sizeName">M</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <img class="mobileRemove" src=images/cart-remove.png> 
-                        </div> 
-                        <div class="mobileQty">
-                            <div class="mobileQtyText">
-                                <span class="title">數量</span>
-                                <input type="number" class="quantity" min="1" max="5" value="1">
-                            </div>
-                            <div class="mobileUnitPrice">
-                                <span class="title">單價</span>
-                                <div class="itemUnitPrice">NT.590</div>
-                            </div>
-                            <div class="mobileTotal">
-                                <span class="title">小計</span>
-                                <div class="itemTotalPrice">NT.590</div>
-                            </div>
-                        </div>
-                        <div class="itemQty">
-                            <input type="number" class="quantity" min="1" max="5" value="1">
-                            <div class="itemUnitPrice">NT.590</div>
-                            <div class="itemTotalPrice">NT.590</div>
-
-                            <img class="remove" src=images/cart-remove.png> </div> </div> <div class="orderItem">
-                            <div class="mobileItemInfo">
-                                <div class="itemInfo">
-                                    <img class="itemPic">
-                                    <div class="itemDetail">
-                                        <div class="itemTitle">前開衩扭結洋裝</div>
-                                        <div class="itemID">03040047</div>
-                                        <div class="itemDescription">
-                                            <div class="color">
-                                                <div class="colorText">顏色</div>
-                                                <div class="centerLine">|</div>
-                                                <div class="colorName">白</div>
-                                            </div>
-                                            <div class="size">
-                                                <div class="sizeText">尺寸</div>
-                                                <div class="centerLine">|</div>
-                                                <div class="sizeName">M</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <img class="mobileRemove" src=images/cart-remove.png> </div> <div class="mobileQty">
-                                <div class="mobileQtyText">
-                                    <span class="title">數量</span>
-                                    <input type="number" class="quantity" min="1" max="5" value="1">
-                                </div>
-                                <div class="mobileUnitPrice">
-                                    <span class="title">單價</span>
-                                    <div class="itemUnitPrice">NT.590</div>
-                                </div>
-                                <div class="mobileTotal">
-                                    <span class="title">小計</span>
-                                    <div class="itemTotalPrice">NT.590</div>
-                                </div>
-                            </div>
-                            <div class="itemQty">
-                                <input type="number" class="quantity" min="1" max="5" value="1">
-                                <div class="itemUnitPrice">NT.590</div>
-                                <div class="itemTotalPrice">NT.590</div>
-
-                                <img class="remove" src=images/cart-remove.png> 
-                            </div> 
-                        </div>  -->
-                    </div> 
-                                <div class="shipping">
-                                <div class="shippingMethod">
-                                    <form>
-                                        <div class="shipCountry">配送國家
-                                            <select class="shippingCountry">
-                                                <option value="Taiwan">台灣及離島</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="payMethod">
-                                    <form>
-                                        <div class="payment">付款方式
-                                            <select class="paymentMethod">
-                                                <option value="credit_card">信用卡付款</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="notice">
-                                <span>※提醒您：<br>●選擇宅配-請填寫正確收件人資訊，避免包裹配送不達。<br>
-                                    ●選擇超商-請填寫正確收件人姓名(與證件相符)，避免無法領取</span>
-                            </div>        
-        
-                            <div class="orderInfo">訂購資料</div>
-                            <div class="horizon"></div>
-                            <div class="userInfo">
-                                <form>
-                                    <div class="userName">
-                                        <div class="moInfo">收件人姓名</div>
-                                        <input id="userName" class="inputText" type="text">
-
-                                    </div>
-                                    <div class="userNotice">務必填寫完整收件人姓名，避免包裹無法順利簽收</div>
-                                    <div class="mobile">
-                                        <div class="moInfo">手機</div>
-                                        <input id="mobileNumber" class="inputText" type="text">
-                                    </div>
-                                    <div class="email">
-                                        <div class="moInfo">E-mail</div>
-                                        <input id="email" class="inputText" type="email">
-                                    </div>
-                                    <div class="address">
-                                        <div class="moInfo">地址</div>
-                                        <input id="address" class="inputText" type="text">
-                                    </div>
-                                    <div class="shippingTime">
-                                        <div class="moInfo">配送時間</div>
-                                        <div class="choice">
-                                            <input type="radio" id="morning" name="shippingTime" value="morning">
-                                            <label for="morning">08:00-12:00</label>
-                                            <input type="radio" id="afternoon" name="shippingTime" value="afternoon">
-                                            <label for="afternoon">14:00-18:00</label>
-                                            <input type="radio" id="unsure" name="shippingTime" value="anytime">
-                                            <label for="anytime">不確定</label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="orderInfo">付款資料</div>
-                            <div class="horizon"></div>
-                            <div class="userInfo">
-
-                                    <div class="cardInfoZone">
-                                        <div class="cardInfo">信用卡號</div>
-                                    <div class="tpfield" id="card-number"></div>                           
-                                </div>
-                                    <div class="cardInfoZone">
-                                            <div class="cardInfo">卡片到期日</div>
-                                    <div class="tpfield" id="card-expiration-date"></div>
-                                </div>
-
-                                    <div class="cardInfoZone">
-                                            <div class="cardInfo">卡片後三碼</div>
-                                    <div class="tpfield" id="card-ccv">  </div>
-                                </div>
-                                </div>                                                     
-                           
-                            <div class="horizon"></div>
-                            <div class="buttom">
-                                <div></div>
-                                <div class="total">
-
-                                    <div class="totalText">
-                                        <div>總金額</div>
-                                        <div class="totalCost">
-                                            <div class="NTD">NT.</div>
-                                            <div class="billMoney"></div>
-                                        </div>
-                                    </div>
-                                    <div class="totalText">
-                                        <div>運費</div>
-                                        <div class="totalCost">
-                                            <div class="NTD">NT.</div>
-                                            <div class="shippingMoney">30</div>
-                                        </div>
-                                    </div>
-                                    <div class="horizon"></div>
-                                    <div class="totalText">
-                                        <div>應付金額</div>
-                                        <div class="totalCost">
-                                            <div class="NTD">NT.</div>
-                                            <div class="totalMoney"></div>
-                                        </div>
-                                    </div>
-                                    <button class="payButton" disabled="disabled" type="submit" onclick="onSubmit()">確認付款</button>
-                                </div>
-
-                            </div>
-                            <button class="mobilePayButton" disabled="disabled" type="submit" onclick="onSubmit()">確認付款</button>
-                        </div>
-                    </div>
-                    <div class="Rectangle-4">
-                        <div class="footer">
-                            <div class="footer_menu">
-                                <ul class="compDescrib">
-                                    <li>關於Stylish</li>
-                                    <li>服務條款</li>
-                                    <li>隱私政策</li>
-                                    <li>聯絡我們</li>
-                                    <li id="FAQ">FAQ</li>
-                                </ul>
-                            </div>
-                            <div class="socialMedia">
-                                <img class="btn_line01_normal" src="images/line.png">
-                                <img class="btn_twitter01_normal" src="images/twitter.png">
-                                <img class="btn_facebook01_normal" src="images/facebook.png">
-                            </div>
-                        </div>
-                        <div class="copyright">&copy; 2018 All rights reserved.</div>
-                    </div>
+                    </form>
                 </div>
+                <div class="payMethod">
+                    <form>
+                        <div class="payment">付款方式
+                            <select class="paymentMethod">
+                                <option value="credit_card">信用卡付款</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="notice">
+                <span>※提醒您：<br>●選擇宅配-請填寫正確收件人資訊，避免包裹配送不達。<br>
+                    ●選擇超商-請填寫正確收件人姓名(與證件相符)，避免無法領取</span>
+            </div>
+            <div class="orderInfo">訂購資料</div>
+            <div class="horizon"></div>
+            <div class="userInfo">
+                <form>
+                    <div class="userName">
+                        <div class="moInfo">收件人姓名</div>
+                        <input id="userName" class="inputText" type="text">
+                    </div>
+                    <div class="userNotice">務必填寫完整收件人姓名，避免包裹無法順利簽收</div>
+                    <div class="mobile">
+                        <div class="moInfo">手機</div>
+                        <input id="mobileNumber" class="inputText" type="text">
+                    </div>
+                    <div class="email">
+                        <div class="moInfo">E-mail</div>
+                        <input id="email" class="inputText" type="email">
+                    </div>
+                    <div class="address">
+                        <div class="moInfo">地址</div>
+                        <input id="address" class="inputText" type="text">
+                    </div>
+                    <div class="shippingTime">
+                        <div class="moInfo">配送時間</div>
+                        <div class="choice">
+                            <input type="radio" id="morning" name="shippingTime" value="morning">
+                            <label for="morning">08:00-12:00</label>
+                            <input type="radio" id="afternoon" name="shippingTime" value="afternoon">
+                            <label for="afternoon">14:00-18:00</label>
+                            <input type="radio" id="unsure" name="shippingTime" value="anytime">
+                            <label for="anytime">不確定</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="orderInfo">付款資料</div>
+            <div class="horizon"></div>
+            <div class="userInfo">
+                <div class="cardInfoZone">
+                    <div class="cardInfo">信用卡號</div>
+                    <div class="tpfield" id="card-number"></div>
+                </div>
+                <div class="cardInfoZone">
+                    <div class="cardInfo">卡片到期日</div>
+                    <div class="tpfield" id="card-expiration-date"></div>
+                </div>
+                <div class="cardInfoZone">
+                    <div class="cardInfo">卡片後三碼</div>
+                    <div class="tpfield" id="card-ccv"> </div>
+                </div>
+            </div>
+            <div class="horizon"></div>
+            <div class="buttom">
+                <div></div>
+                <div class="total">
+                    <div class="totalText">
+                        <div>總金額</div>
+                        <div class="totalCost">
+                            <div class="NTD">NT.</div>
+                            <div class="billMoney"></div>
+                        </div>
+                    </div>
+                    <div class="totalText">
+                        <div>運費</div>
+                        <div class="totalCost">
+                            <div class="NTD">NT.</div>
+                            <div class="shippingMoney">30</div>
+                        </div>
+                    </div>
+                    <div class="horizon"></div>
+                    <div class="totalText">
+                        <div>應付金額</div>
+                        <div class="totalCost">
+                            <div class="NTD">NT.</div>
+                            <div class="totalMoney"></div>
+                        </div>
+                    </div>
+                    <button class="payButton" disabled="disabled" type="submit" onclick="onSubmit()">確認付款</button>
+                </div>
+            </div>
+            <button class="mobilePayButton" disabled="disabled" type="submit" onclick="onSubmit()">確認付款</button>
+        </div>
+    </div>
+    <div class="Rectangle-4">
+        <div class="footer">
+            <div class="footer_menu">
+                <ul class="compDescrib">
+                    <li>關於Stylish</li>
+                    <li>服務條款</li>
+                    <li>隱私政策</li>
+                    <li>聯絡我們</li>
+                    <li id="FAQ">FAQ</li>
+                </ul>
+            </div>
+            <div class="socialMedia">
+                <img class="btn_line01_normal" src="images/line.png">
+                <img class="btn_twitter01_normal" src="images/twitter.png">
+                <img class="btn_facebook01_normal" src="images/facebook.png">
+            </div>
+        </div>
+        <div class="copyright">&copy; 2018 All rights reserved.</div>
+    </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        TPDirect.setupSDK(APP_ID, APP_KEY, 'sandbox');
+    </script>
+    <script src="js/checkfb.js"></script>
 
-                <script src="js/app.js"></script>
-                  
-                <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>   
-                <script src="js/cart.js"></script>   
-                <script>
-                    TPDirect.setupSDK(APP_ID, APP_KEY, 'sandbox')
-                </script>   
-                <script src="js/checkfb.js"></script>
-                
-               
-                
-                
-               
+
+
+
+
 </body>
+
 </html>

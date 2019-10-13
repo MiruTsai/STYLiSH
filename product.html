@@ -27,23 +27,11 @@
                 xfbml: true,  // parse social plugins on this page
                 version: 'v3.3' // The Graph API version to use for the call
             });
-
-            // Now that we've initialized the JavaScript SDK, we call 
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
-
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
-                        indexStatusChangeCallback(response);}
-                    });
+                    indexStatusChangeCallback(response);
+                }
+            });
         };
         // Load the SDK asynchronously
         (function (d, s, id) {
@@ -110,64 +98,6 @@
         </div>
         <div class="baseBorder"></div>
         <div class="productPage">
-            <!-- <div class="productContainer">
-                <img class="main_pic">
-                <div class="info">
-                    <div class="title">前開衩扭結洋裝</div>
-                    <div class="id">03040047</div>
-                    <div class="price">TWD.590</div>
-                    <div class="shortLine"></div>
-                    <div class="colorContainer">
-                        <div class="color">顏色</div>
-                        <div class="rect"></div>
-                        <div class="rect"></div>
-                    </div>
-                <div class="sizeContainer">
-                        <div class="size">尺寸</div>
-                        <div class="size-icon">S</div>
-                        <div class="size-icon">M</div>
-                        <div class="size-icon">L</div>
-                        <div class="size-icon">XL</div>
-                    </div>
-                <div class="countContainer">
-                        <div class="count">數量</div>
-                        <div class="counter">
-                            <div class="plus">+</div>
-                            <div class="quantity">1</div>
-                            <div class="subtract">-</div>
-                        </div>
-            </div>
-            <button type="submit" class="add_in_cart">加入購物車</button>
-            <div>
-                <div class="note">*實品顏色依單品照為主</div>
-                <div class="texture">棉100%<br>
-                    厚薄：薄<br>彈性：無
-                </div>
-                <div class="place">
-                    <div class="fromplace">素材產地:中國</div>
-                    <div class="madeplace">加工產地:中國</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="detail">
-        <div class="explain">細部說明</div>
-        <div class="longLine"></div>
-    </div>
-    <div class="storyboard">
-        <div class="story">O.N.S is all about options, which is why we took our staple polo shirt and upgraded
-            it with slubby linen jersey, making it even lighter for those who prefer their summer style
-            extra-breezy.</div>
-        <div class="subpic">
-            <img>
-        </div>
-        <div class="story">O.N.S is all about options, which is why we took our staple polo shirt and upgraded
-            it with slubby linen jersey, making it even lighter for those who prefer their summer style
-            extra-breezy.</div>
-        <div class="subpic">
-            <img>
-        </div>
-    </div> -->
         </div>
         <div class="Rectangle-4">
             <div class="footer">

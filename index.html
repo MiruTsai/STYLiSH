@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/index.css">
-
 </head>
 
 <body>
@@ -24,18 +23,6 @@
                 xfbml: true,  // parse social plugins on this page
                 version: 'v3.3' // The Graph API version to use for the call
             });
-
-            // Now that we've initialized the JavaScript SDK, we call 
-            // FB.getLoginStatus().  This function gets the state of the
-            // person visiting this page and can return one of three states to
-            // the callback you provide.  They can be:
-            //
-            // 1. Logged into your app ('connected')
-            // 2. Logged into Facebook, but not your app ('not_authorized')
-            // 3. Not logged into Facebook and can't tell if they are logged into
-            //    your app or not.
-            //
-            // These three cases are handled in the callback function.
 
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
@@ -88,7 +75,6 @@
             <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
             <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
         </div>
-
         <div class=mobile_nav01>
             <ul class="mobile_nav">
                 <li><a href="index.html?tag=women">女裝</a></li>
@@ -109,78 +95,8 @@
         </div>
         <div class="baseBorder"></div>
         <div id="main-banner">
-            <!-- <div class="main-banner-text">
-            <div class="main-banner-main">於是</div>
-                <div class="main-banner-main">我也想要給你</div>                
-                    <div class="main-banner-main">一個那麼美好的自己</div>
-                    <div class="main-banner-sub">不朽《與自己和好如初》</div>
-                </div> -->
         </div>
         <div id="p_container">
-            <!-- <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3"></div>
-                    </div>
-                    <p class="p_title">後鬆緊牛仔落地寬褲</p>
-                    <p class="p_price">TWD.590</p>
-                </div>
-            </div>
-            <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3-Copy"></div>
-                        <div class="Rectangle-3-Copy-2"></div>
-                    </div>
-                    <p class="p_title">前開衩扭結洋裝</p>
-                    <p class="p_price">TWD.690</p>
-                </div>
-            </div>
-            <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3-Copy-3"></div>
-                        <div class="Rectangle-3-Copy-4"></div>
-                    </div>
-                    <p class="p_title">涼感垂墬斯滑寬</p>
-                    <p class="p_price">TWD.430</p>
-                </div>
-            </div>
-            <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3-copy-10"></div>
-                        <div class="Rectangle-3-Copy-11"></div>
-                    </div>
-                    <p class="p_title">腰鬆緊棉麻褲裙</p>
-                    <p class="p_price">TWD.590</p>
-                </div>
-            </div>
-            <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3-Copy-6"></div>
-                        <div class="Rectangle-3-Copy-8"></div>
-                    </div>
-                    <p class="p_title">前開衩扭結洋裝</p>
-                    <p class="p_price">TWD.690</p>
-                </div>
-            </div>
-            <div class="p_content">
-                <div class="p_pic"></div>
-                <div class="p_descirb">
-                    <div class="p_color">
-                        <div class="Rectangle-3-Copy-7"></div>
-                    </div>
-                    <p class="p_title">透肌澎澎連袖防曬上衣</p>
-                    <p class="p_price">TWD.430</p>
-                </div>
-            </div> -->
         </div>
         <div class="Rectangle-4">
             <div class="footer">
