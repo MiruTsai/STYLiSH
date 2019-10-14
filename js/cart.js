@@ -6,12 +6,10 @@ const APP_ID = 12348;
 const APP_KEY = "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF";
 let prime;
 
-
 if (parseOrderList.length === 0 || parseOrderList === null) {
     cartOrderList.appendChild(empty);
     empty.textContent = "購物車空空的耶";
 }
-
 
 let mobileItemUnitPrice;
 let webQuantity;
@@ -20,7 +18,6 @@ let itemTotalPrice;
 let mobileUnitPrice
 let mobileTotalPrice;
 let mobileQuantity
-
 
 for (let i = 0; i < parseOrderList.length; i++) {
     let orderItem = document.createElement("div");
@@ -178,6 +175,16 @@ const cartText = document.querySelector(".cartText")
 cartText.textContent = `購物車(${parseOrderList.length})`
 
 //web pay
+function getOrderListPrice() {
+    let total = 0;
+    for (let i = 0; i < itemTotalPriceArea.length; i++) {
+        total += parseInt(itemTotalPriceArea[i].textContent.slice(4));
+    }
+    billMoneyArea.textContent = total;
+    totalMoney.textContent = total + parseInt(shippingMoney.textContent);
+}
+getOrderListPrice(); 
+
 function getItemTotalPrice() {
     for (let i = 0; i < counter.length; i++) {
         counter[i].addEventListener("click", (e) => {
@@ -189,17 +196,17 @@ function getItemTotalPrice() {
 }
 getItemTotalPrice();
 
-function getOrderListPrice() {
+//mobile pay
+function getMobileOrderListPrice() {
     let total = 0;
-    for (let i = 0; i < itemTotalPriceArea.length; i++) {
-        total += parseInt(itemTotalPriceArea[i].textContent.slice(4));
+    for (let i = 0; i < mobileTotalPriceArea.length; i++) {
+        total += parseInt(mobileTotalPriceArea[i].textContent.slice(4));
     }
     billMoneyArea.textContent = total;
     totalMoney.textContent = total + parseInt(shippingMoney.textContent);
 }
-getOrderListPrice();
+getMobileOrderListPrice();
 
-//mobile pay
 function getMobileItemTotalPrice() {
     for (let i = 0; i < mobileCounter.length; i++) {
         mobileCounter[i].addEventListener("click", (e) => {
@@ -210,16 +217,6 @@ function getMobileItemTotalPrice() {
     }
 }
 getMobileItemTotalPrice();
-
-function getMobileOrderListPrice() {
-    let total = 0;
-    for (let i = 0; i < mobileTotalPriceArea.length; i++) {
-        total += parseInt(mobileTotalPriceArea[i].textContent.slice(4));
-    }
-    billMoneyArea.textContent = total;
-    totalMoney.textContent = total + parseInt(shippingMoney.textContent);
-}
-getMobileOrderListPrice();
 
 // delete feature
 let deleteIcon = document.getElementsByClassName("remove");

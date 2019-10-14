@@ -1,9 +1,9 @@
 const AppScoolHostAPI = "https://api.appworks-school.tw/api/1.0";
 const productAPI = "https://api.appworks-school.tw/api/1.0/products/";
 let pagingQuery = "?paging="
+let category;
 let sourcePage = `${productAPI}${category}${pagingQuery}`;
 let paging;
-let category;
 let tag = "";
 let orderList = [];
 let parseOrderList = JSON.parse(localStorage.getItem("List"));
