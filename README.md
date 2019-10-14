@@ -2,6 +2,14 @@
 
 ### A fashion e-Commerce website
 ![](images/readme/index.png)
+
+## Technologies
+* HTML
+* CSS
+* RWD
+* TapPay
+* Facebook API
+
 ## Features
  * Implemented RWD with pure HTML and CSS
  * Connected to Backend API with AJAX for data capture
