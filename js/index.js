@@ -1,30 +1,29 @@
 //render index
-
 function render(parseData) {
     let products = JSON.parse(parseData);
     paging = products.paging;
     for (let i = 0; i < products.data.length; i += 1) {
-        let content = document.createElement('div');
+        let content = document.createElement("div");
         content.className = "p_content";
-        let pic = document.createElement('div');
+        let pic = document.createElement("div");
         pic.className = "p_pic";
-        let picsrc = document.createElement('img');
+        let picsrc = document.createElement("img");
         picsrc.src = `${products.data[i].main_image}`        
-        let id = document.createElement('a');
+        let id = document.createElement("a");
         id.className = "p_id";
         id.href = `product.html?id=${products.data[i].id}`;
-        let title = document.createElement('div');
+        let title = document.createElement("div");
         title.className = "p_title";
-        let price = document.createElement('div');
+        let price = document.createElement("div");
         price.className = "p_price";
-        let category = document.createElement('div');
+        let category = document.createElement("div");
         category.className = "p_category";
         category.style.display = "none";
         category.innerText = `${products.data[i].category}`;
-        let color = document.createElement('div');
+        let color = document.createElement("div");
         color.className = "p_color";
         for (let j = 0; j < products.data[i].colors.length; j += 1) {
-            let rect = document.createElement('div');
+            let rect = document.createElement("div");
             rect.className = "rect";
             rect.style.backgroundColor = `#${products.data[i].colors[j].code}`;
             color.appendChild(rect);
@@ -38,27 +37,12 @@ function render(parseData) {
         id.appendChild(title);
         id.appendChild(price);
         content.appendChild(id);
-        document.getElementById('p_container').appendChild(content);
+        document.getElementById("p_container").appendChild(content);
     }
 };
 
-// another way //
-//     products += `<div class="p_content">`;
-//     products += `<div class="p_pic"><img src="${data[i].main_image}"></div>`;
-//     products += `<div class="p_id" style="display:none">${data[i].id}</div>`;
-//     products += `<div class="p_category" style="display:none">${data[i].category}</div>`;
-//     products += `<div class="p_color">`
-//     for (let j = 0; j < data[i].colors.length; j += 1) {
-//         products += `<div class="rect" style="background-color:#${data[i].colors[j].code}"></div>`;
-//     }
-//     products += `</div>`
-//     products += `<div class="p_title">${data[i].title}</div>`;
-//     products += `<div class="p_price">TWD.${data[i].price}</div>`;
-//     products += `</div>`;
-// }
-// document.getElementById('p_container').innerHTML = products;
-
 //infiniteRoll
+let loading = false;
 function infiniteRoll() {
     let exportPage;
     if (paging) {
@@ -70,9 +54,8 @@ function infiniteRoll() {
     productPage(exportPage, function (response) { render(response); loading = false; })
 }
 
-let loading = false;
-window.addEventListener('scroll', function () {
-    let footerTop = document.querySelector('.Rectangle-4').getBoundingClientRect().top;
+window.addEventListener("scroll", function () {
+    let footerTop = document.querySelector(".Rectangle-4").getBoundingClientRect().top;
     let yScroll = window.pageYOffset;
     if (footerTop - yScroll < 0 && !loading) {
         window.requestAnimationFrame(function () {
@@ -83,51 +66,49 @@ window.addEventListener('scroll', function () {
 
 productPage(`${productAPI}${category}`, function (response) { render(response); })
 
-
-
 //campaigns
 let bannerText;
 
 function campaigns(cam) {
     let data = JSON.parse(cam).data;
     for (let i = 0; i < data.length; i++) {
-        let campaign = document.createElement('div');
-        campaign.className = ('campaign');
-        let bannerStory = document.createElement('div');
+        let campaign = document.createElement("div");
+        campaign.className = ("campaign");
+        let bannerStory = document.createElement("div");
         bannerStory.setAttribute("style", `background:url(https://api.appworks-school.tw${data[i].picture})`);
         bannerStory.className = "bannerPic";
-        let bannerTextContainer = document.createElement('div')
+        let bannerTextContainer = document.createElement("div")
         let splitText = data[i].story.split("\r\n");
         for (let j = 0; j < splitText.length; j += 1) {
-            let bannerText = document.createElement('div');
+            let bannerText = document.createElement("div");
             bannerText.className = "main-banner-text";
             bannerText.innerText = `${splitText[j]}`;
             bannerTextContainer.appendChild(bannerText);
         }
-        let camID = document.createElement('div');
+        let camID = document.createElement("div");
         camID.className = "camID";
         camID.innerText = `${data[i].id}`;
         camID.style.display = "none";
         bannerStory.appendChild(bannerTextContainer);
         campaign.appendChild(bannerStory);
         campaign.appendChild(camID);
-        document.getElementById('main-banner').appendChild(campaign);
+        document.getElementById("main-banner").appendChild(campaign);
     }
-    let circleZone = document.createElement('div');
+    let circleZone = document.createElement("div");
     circleZone.className="circleZone"; 
-    let count = document.getElementsByClassName('camID');
+    let count = document.getElementsByClassName("camID");
     for (let i = 0; i < count.length; i += 1) {
-    circle = document.createElement('div');
+    circle = document.createElement("div");
     circle.className = "circle";
     circleZone.appendChild(circle);
 }
-document.getElementById('main-banner').appendChild(circleZone);
+document.getElementById("main-banner").appendChild(circleZone);
 }
 //slideShow
 let slideIndex = 0;
 function slideShow() {
-    let slide = document.getElementsByClassName('campaign');
-    let chooseCircle = document.getElementsByClassName('circle');
+    let slide = document.getElementsByClassName("campaign");
+    let chooseCircle = document.getElementsByClassName("circle");
     for (let i = 0; i < slide.length; i++) {
         slide[i].style.display = "none";
         chooseCircle[i].removeAttribute("id");
@@ -140,32 +121,29 @@ function slideShow() {
 }
 productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) { campaigns(response); slideShow(); });
 
-
-
 //all clothes   past entrance ////
 // function all() {
-//     document.getElementById('p_container').innerHTML = null;
+//     document.getElementById("p_container").innerHTML = null;
 //     category = "all";
 //     productPage(`${productAPI}${category}`, function (response) { render(response); });
 // }
 
-
 //female clothes
 // function female() {
-//     document.getElementById('p_container').innerHTML = null;
+//     document.getElementById("p_container").innerHTML = null;
 //     category = "women";
 //     productPage(`${productAPI}${category}`, function (response) { render(response); })
 // }
 
 //male clothes
 // function male() {
-//     document.getElementById('p_container').innerHTML = null;
+//     document.getElementById("p_container").innerHTML = null;
 //     category = "men";    
 //     productPage(`${productAPI}${category}`, function (response) { render(response); })
 // }
 //accessories
 // function accessories() {
-//     document.getElementById('p_container').innerHTML = null;
+//     document.getElementById("p_container").innerHTML = null;
 //     category = "accessories"
 //     productPage(`${productAPI}${category}`, function (response) { render(response); })
 // }

@@ -1,6 +1,6 @@
 // let originalURL = window.location.href;
 // let params = new URL(originalURL);
-let id = params.searchParams.get('id')
+let id = params.searchParams.get("id")
 
 let stock;
 let noneStock;
@@ -14,70 +14,70 @@ let stockQuantity;
 function productRender(parseData) {
 
     let pDetail = JSON.parse(parseData);
-    let productContainer = document.createElement('div');
+    let productContainer = document.createElement("div");
     productContainer.className = "productContainer";
-    picture = document.createElement('img');
+    picture = document.createElement("img");
     picture.className = "main_pic";
     picture.src = pDetail.data.main_image;
     picture.textContent = pDetail.data.main_image;
-    let info = document.createElement('div');
+    let info = document.createElement("div");
     info.className = "info";
-    title = document.createElement('div');
+    title = document.createElement("div");
     title.className = "title";
     title.textContent = pDetail.data.title;
-    productID = document.createElement('div');
+    productID = document.createElement("div");
     productID.className = "id";
     productID.textContent = pDetail.data.id;
-    itemPrice = document.createElement('div');
+    itemPrice = document.createElement("div");
     itemPrice.className = "price";
     itemPrice.textContent = `TWD.${pDetail.data.price}`;
-    let shorLine = document.createElement('div');
+    let shorLine = document.createElement("div");
     shorLine.className = "shortLine";
-    let colorContainer = document.createElement('div');
+    let colorContainer = document.createElement("div");
     colorContainer.className = "colorContainer";
-    let colorText = document.createElement('div');
+    let colorText = document.createElement("div");
     colorText.className = "color";
     colorText.textContent = "顏色";
     colorContainer.appendChild(colorText);
     for (let i = 0; i < pDetail.data.colors.length; i += 1) {
-        let rect = document.createElement('button');
+        let rect = document.createElement("button");
         rect.className = "rect";
         rect.style.backgroundColor = `#${pDetail.data.colors[i].code}`;
         rect.title = `${pDetail.data.colors[i].name}`;
         colorContainer.appendChild(rect);
     }
 
-    let sizeContainer = document.createElement('div');
-    let size = document.createElement('div');
+    let sizeContainer = document.createElement("div");
+    let size = document.createElement("div");
     size.textContent = "尺寸";
     size.className = "size";
     sizeContainer.className = "sizeContainer";
     sizeContainer.appendChild(size);
     for (let i = 0; i < pDetail.data.sizes.length; i++) {
-        let sizeIcon = document.createElement('button');
+        let sizeIcon = document.createElement("button");
         sizeIcon.className = "size-icon";
         sizeIcon.name = "size"
         sizeIcon.textContent = pDetail.data.sizes[i];
         sizeContainer.appendChild(sizeIcon);
     }
 
-    let countName = document.createElement('div');
+    let countName = document.createElement("div");
     countName.className = "count";
     countName.textContent = "數量";
-    let countContainer = document.createElement('div');
+    let countContainer = document.createElement("div");
     countContainer.className = "countContainer";
 
 
-    let plus = document.createElement('button');
+    let plus = document.createElement("button");
     plus.className = "plus";
     plus.textContent = "+";
-    let quantity = document.createElement('div');
+    let quantity = document.createElement("div");
     quantity.className = "quantity";
     quantity.textContent = 1;
-    let subtract = document.createElement('button');
+    let subtract = document.createElement("button");
     subtract.className = "subtract";
     subtract.textContent = "-";
-    let counter = document.createElement('div');
+    let counter = document.createElement("div");
     counter.className = "counter";
     counter.appendChild(plus);
     counter.appendChild(quantity);
@@ -85,27 +85,27 @@ function productRender(parseData) {
     countContainer.appendChild(countName);
     countContainer.appendChild(counter);
 
-    cartButton = document.createElement('button');
+    cartButton = document.createElement("button");
     cartButton.className = "add_in_cart";
     cartButton.textContent = "加入購物車";
-    let noteContainer = document.createElement('div');
-    let note = document.createElement('div');
+    let noteContainer = document.createElement("div");
+    let note = document.createElement("div");
     note.textContent = pDetail.data.note;
     note.className = "note"
     noteContainer.appendChild(note);
-    let texture = document.createElement('div');
+    let texture = document.createElement("div");
     texture.className = "texture"
     texture.textContent = pDetail.data.texture;
     noteContainer.appendChild(texture);
     let splitDescription = pDetail.data.description.split("\r\n");
     for (let i = 0; i < splitDescription.length; i += 1) {
-        let description = document.createElement('div');
+        let description = document.createElement("div");
         description.textContent = splitDescription[i];
         description.className = "texture";
         noteContainer.appendChild(description);
     }
 
-    let place = document.createElement('div');
+    let place = document.createElement("div");
     place.className = "place"
     place.textContent = `產地：${pDetail.data.place}`;
 
@@ -121,23 +121,23 @@ function productRender(parseData) {
     info.appendChild(noteContainer);
     productContainer.appendChild(picture);
     productContainer.appendChild(info);
-    let detail = document.createElement('div');
+    let detail = document.createElement("div");
     detail.className = "detail";
-    let explain = document.createElement('div');
+    let explain = document.createElement("div");
     explain.textContent = "細部說明";
     explain.className = "explain";
-    let longLine = document.createElement('div');
+    let longLine = document.createElement("div");
     longLine.className = "longLine";
     detail.appendChild(explain);
     detail.appendChild(longLine);
-    let storyboard = document.createElement('div');
-    let story = document.createElement('div');
+    let storyboard = document.createElement("div");
+    let story = document.createElement("div");
     story.className = "story";
     story.textContent = pDetail.data.story
-    let subpic1 = document.createElement('img');
+    let subpic1 = document.createElement("img");
     subpic1.className = "subpic";
     subpic1.src = pDetail.data.images[0]
-    let subpic2 = document.createElement('img');
+    let subpic2 = document.createElement("img");
     subpic2.className = "subpic";
     subpic2.src = pDetail.data.images[1]
     storyboard.appendChild(story);
@@ -171,23 +171,23 @@ let index = 0;
 
 function selectItem() {
 
-    let rects = document.getElementsByClassName('rect');
+    let rects = document.getElementsByClassName("rect");
 
     //顏色預設值
-    rects[index].classList.add('rectSelect');
+    rects[index].classList.add("rectSelect");
     hexColor = rgbToHex(rects[index].style.backgroundColor);
     hexColorText = rects[index].title;
     
     //選顏色
     for (let i = 0; i < rects.length; i++) {
-        rects[i].addEventListener('click', event => {
+        rects[i].addEventListener("click", event => {
 
             //先一次全部取消
             removeDefaultColor();
             removeDefaultSize();
 
             //再加在被選擇的上面
-            event.target.classList.add('rectSelect');
+            event.target.classList.add("rectSelect");
 
             //記錄選中的顏色
             hexColor = rgbToHex(event.target.style.backgroundColor);
@@ -199,7 +199,7 @@ function selectItem() {
 
             //判斷誰有庫存   
             let noSize = outStock();
-            let size = document.getElementsByClassName('size-icon');
+            let size = document.getElementsByClassName("size-icon");
             for (let i = 0; i < size.length; i++) {
                 if (size[i].textContent === noSize) {
                     //沒庫存
@@ -214,9 +214,9 @@ function selectItem() {
     }
 
 
-    let sizeIcons = document.getElementsByClassName('size-icon');
+    let sizeIcons = document.getElementsByClassName("size-icon");
     //尺寸預設值
-    sizeIcons[index].classList.add('sizeSelect');
+    sizeIcons[index].classList.add("sizeSelect");
     selectSize = sizeIcons[index].textContent;
     
     
@@ -224,12 +224,12 @@ function selectItem() {
     //選尺寸
     for (let i = 0; i < sizeIcons.length; i++) {
 
-        sizeIcons[i].addEventListener('click', event => {
+        sizeIcons[i].addEventListener("click", event => {
             if (sizeIcons[i].disabled === true) {
                 return;
             } else {
                 removeDefaultSize();
-                event.target.classList.add('sizeSelect');
+                event.target.classList.add("sizeSelect");
                 selectSize = event.target.textContent;
 
                 getStock();
@@ -241,17 +241,17 @@ function selectItem() {
 }
 
 function removeDefaultColor() {
-    let selectColor = Array.from(document.getElementsByClassName('rect'));
+    let selectColor = Array.from(document.getElementsByClassName("rect"));
     selectColor.forEach(i => {
-        i.classList.remove('rectSelect');
+        i.classList.remove("rectSelect");
 
     })
 }
 
 function removeDefaultSize() {
-    let selectSize = Array.from(document.getElementsByClassName('size-icon'));
+    let selectSize = Array.from(document.getElementsByClassName("size-icon"));
     selectSize.forEach(i => {
-        i.classList.remove('sizeSelect');
+        i.classList.remove("sizeSelect");
         // i.disabled=false;
     })
 }
@@ -284,11 +284,11 @@ function outStock() {
 }
 let countNumber = 1;
 function count() {
-    let plus = document.querySelector('.plus');
-    let subtract = document.querySelector('.subtract');
-    let quantity = document.querySelector('.quantity');
+    let plus = document.querySelector(".plus");
+    let subtract = document.querySelector(".subtract");
+    let quantity = document.querySelector(".quantity");
 
-    plus.addEventListener('click', () => {
+    plus.addEventListener("click", () => {
 
         //呼叫庫存函數
         getStock();
@@ -303,7 +303,7 @@ function count() {
         }
 
     })
-    subtract.addEventListener('click', () => {
+    subtract.addEventListener("click", () => {
         if (countNumber > 0) {
             countNumber -= 1;
             quantity.textContent = countNumber;
@@ -330,8 +330,8 @@ class Order {
 
 
 function userOrder() {
-    let cartButton = document.querySelector('.add_in_cart');
-    cartButton.addEventListener('click', () => {
+    let cartButton = document.querySelector(".add_in_cart");
+    cartButton.addEventListener("click", () => {
 
         id = productID.textContent;
         name = title.textContent;
@@ -346,11 +346,11 @@ function userOrder() {
         remain = stockQuantity;
         let newOrder = new Order(id, name, price, color, size, qty, pic, remain);
         if (newOrder.qty === 0) {
-            alert('請輸入數量');
+            alert("請輸入數量");
         } else if (newOrder.qty > newOrder.remain){
-            alert('您選的數量大於可購買數量');
+            alert("您選的數量大於可購買數量");
         }else {
-            alert('商品已為您加入購物車');
+            alert("商品已為您加入購物車");
         }
 
         // stop
@@ -372,7 +372,7 @@ function userOrder() {
     localStorage.setItem("List", JSON.stringify(orderList));
 
 
-    let cartNum = document.querySelector('.cartNum');  
+    let cartNum = document.querySelector(".cartNum");  
         cartNum.textContent = orderList.length;
     
 

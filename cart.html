@@ -20,15 +20,15 @@
 
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '2888776061346906',
+                appId: "2888776061346906",
                 cookie: true,  // enable cookies to allow the server to access 
                 // the session
                 xfbml: true,  // parse social plugins on this page
-                version: 'v3.3' // The Graph API version to use for the call
+                version: "v3.3" // The Graph API version to use for the call
             });
 
             FB.getLoginStatus(function (response) {
-                if (response.status === 'connected') {
+                if (response.status === "connected") {
                     indexStatusChangeCallback(response);
                 }
             });
@@ -39,7 +39,7 @@
             js = d.createElement(s); js.id = id;
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+        }(document, "script", "facebook-jssdk"));
     </script>
     <div class="web">
         <div class="base">
@@ -238,7 +238,7 @@
     <script src="https://js.tappaysdk.com/tpdirect/v5.1.0"></script>
     <script src="js/cart.js"></script>
     <script>
-        TPDirect.setupSDK(APP_ID, APP_KEY, 'sandbox');
+        TPDirect.setupSDK(APP_ID, APP_KEY, "sandbox");
     </script>
     <script src="js/checkfb.js"></script>
 
