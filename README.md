@@ -1,6 +1,6 @@
 # STYLiSH
 
-### A fashion e-Commerce website.
+### A fashion e-Commerce website
 ![](images/readme/index.png)
 ## Features
  * Implemented RWD with pure HTML and CSS
