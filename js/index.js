@@ -8,7 +8,7 @@ function render(parseData) {
         let pic = document.createElement("div");
         pic.className = "p_pic";
         let picsrc = document.createElement("img");
-        picsrc.src = `${products.data[i].main_image}`        
+        picsrc.src = `${products.data[i].main_image}`;  
         let id = document.createElement("a");
         id.className = "p_id";
         id.href = `product.html?id=${products.data[i].id}`;
@@ -39,7 +39,7 @@ function render(parseData) {
         content.appendChild(id);
         document.getElementById("p_container").appendChild(content);
     }
-};
+}
 
 //infiniteRoll
 let loading = false;
@@ -98,7 +98,7 @@ function campaigns(cam) {
     circleZone.className="circleZone"; 
     let count = document.getElementsByClassName("camID");
     for (let i = 0; i < count.length; i += 1) {
-    circle = document.createElement("div");
+    let circle = document.createElement("div");
     circle.className = "circle";
     circleZone.appendChild(circle);
 }

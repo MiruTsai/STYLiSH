@@ -1,5 +1,5 @@
-let userPic = document.querySelector(".userPic");
-let text = document.querySelector(".content");
+const userPic = document.querySelector(".userPic");
+const text = document.querySelector(".content");
 const text2 = document.querySelector(".content2");
 const member = document.querySelector(".btn_member01_normal");
 let token;
@@ -29,10 +29,7 @@ function sendToken() {
 }
 
 function testAPI() {
-    console.log("Welcome!  Fetching your information.... ");
     FB.api("/me?fields=id,name,email,picture.width(200).height(200)", function (response) {
-        console.log("Successful login for: " + response.name);
-        console.log(response);
         member.src = response.picture.data.url;
         userPic.src = response.picture.data.url;
         text.textContent = `歡迎光臨 ${response.name}`;
@@ -48,9 +45,7 @@ function statusChangeCallback(response) {
         createSendToken();
         sendToken();
         testAPI();
-        console.log("login success");
         token = response.authResponse.accessToken;
-        console.log(token);
     } else {
         text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
         userPic.style.display = "none";
@@ -78,9 +73,6 @@ function checkLoginState() {
         statusChangeCallback(response);
     });
 }
-
-
-
 
 // 登出FB
 function logout() {

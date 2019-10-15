@@ -219,8 +219,8 @@ function getMobileItemTotalPrice() {
 getMobileItemTotalPrice();
 
 // delete feature
-let deleteIcon = document.getElementsByClassName("remove");
-let mobileDeleteIcon = document.getElementsByClassName("mobileRemove")
+const deleteIcon = document.getElementsByClassName("remove");
+const mobileDeleteIcon = document.getElementsByClassName("mobileRemove")
 
 function deleteOrder() {
     for (let i = 0; i < deleteIcon.length; i++) {
@@ -247,9 +247,7 @@ function mobileDeleteOrder() {
 mobileDeleteOrder();
 
 //TAP PAY
-
-
-var fields = {
+let fields = {
     number: {
         // css selector
         element: "#card-number",
@@ -308,8 +306,8 @@ TPDirect.card.setup({
     }
 })
 
-let submitButton = document.querySelector(".payButton");
-let mobileSubmitButton = document.querySelector(".mobilePayButton");
+const submitButton = document.querySelector(".payButton");
+const mobileSubmitButton = document.querySelector(".mobilePayButton");
 
 TPDirect.card.onUpdate(function (update) {
     // update.canGetPrime === true
@@ -319,17 +317,14 @@ TPDirect.card.onUpdate(function (update) {
         submitButton.removeAttribute("disabled");
         mobileSubmitButton.removeAttribute("disabled");
     } else {
-
         // Disable submit Button to get prime.
         submitButton.setAttribute("disabled", true);
         mobileSubmitButton.setAttribute("disabled", true);
     }
-
     // cardTypes = ["mastercard", "visa", "jcb", "amex", "unknown"]
     if (update.cardType === "visa") {
         // Handle card type visa.
     }
-
     // number 欄位是錯誤的
     if (update.status.number === 2) {
 
@@ -341,7 +336,6 @@ TPDirect.card.onUpdate(function (update) {
     }
 
     if (update.status.expiry === 2) {
-
         // setNumberFormGroupToError()
     } else if (update.status.expiry === 0) {
         // setNumberFormGroupToSuccess()
@@ -376,38 +370,6 @@ for (let i = 0; i < radiobutton.length; i++) {
     }
 }
 
-function onSubmit() {
-
-    if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
-        alert("請輸入您的完整聯絡資訊")
-        return
-    };
-
-    // 取得 TapPay Fields 的 status
-    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-
-    // 確認是否可以 getPrime
-    if (tappayStatus.canGetPrime === false) {
-        alert("請輸入完整信用卡資料")
-        return
-    }
-
-    // Get prime
-
-    TPDirect.card.getPrime((result) => {
-        if (result.status !== 0) {
-            alert("請輸入完整信用卡資料")
-            return
-        }
-        alert("get prime 成功，prime: " + result.card.prime)
-        prime = result.card.prime;
-        // send prime to your server, to pay with Pay by Prime API .
-        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
-        createOrder();
-        ajax();
-    })
-}
-
 let sendOrder;
 function createOrder() {
     let order = {
@@ -430,6 +392,37 @@ function createOrder() {
     }
     sendOrder = JSON.stringify(order);
 }
+
+function onSubmit() {
+    if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
+        alert("請輸入您的完整聯絡資訊")
+        return
+    };
+
+    // 取得 TapPay Fields 的 status
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+
+    // 確認是否可以 getPrime
+    if (tappayStatus.canGetPrime === false) {
+        alert("請輸入完整信用卡資料")
+        return
+    }
+    // Get prime
+    TPDirect.card.getPrime((result) => {
+        if (result.status !== 0) {
+            alert("請輸入完整信用卡資料")
+            return
+        }
+        alert("get prime 成功，prime: " + result.card.prime)
+        prime = result.card.prime;
+        // send prime to your server, to pay with Pay by Prime API .
+        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+        createOrder();
+        ajax();
+    })
+}
+
+
 
 //-----得到訂單編號，並導向thank you page。------//
 

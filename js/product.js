@@ -67,7 +67,6 @@ function productRender(parseData) {
     let countContainer = document.createElement("div");
     countContainer.className = "countContainer";
 
-
     let plus = document.createElement("button");
     plus.className = "plus";
     plus.textContent = "+";
@@ -108,7 +107,6 @@ function productRender(parseData) {
     let place = document.createElement("div");
     place.className = "place"
     place.textContent = `產地：${pDetail.data.place}`;
-
     noteContainer.appendChild(place);
     info.appendChild(title);
     info.appendChild(productID);
@@ -151,7 +149,7 @@ function productRender(parseData) {
     selectItem();
     count();
     userOrder();
-    
+
     //stock
     stock = pDetail.data.variants;
     getStock();
@@ -177,11 +175,9 @@ function selectItem() {
     rects[index].classList.add("rectSelect");
     hexColor = rgbToHex(rects[index].style.backgroundColor);
     hexColorText = rects[index].title;
-    
     //選顏色
     for (let i = 0; i < rects.length; i++) {
         rects[i].addEventListener("click", event => {
-
             //先一次全部取消
             removeDefaultColor();
             removeDefaultSize();
@@ -192,7 +188,6 @@ function selectItem() {
             //記錄選中的顏色
             hexColor = rgbToHex(event.target.style.backgroundColor);
             hexColorText = event.target.title;
-
 
             //得到庫存
             getStock();
@@ -209,7 +204,6 @@ function selectItem() {
                     size[i].disabled = false;
                 }
             }
-
         })
     }
 
@@ -218,12 +212,9 @@ function selectItem() {
     //尺寸預設值
     sizeIcons[index].classList.add("sizeSelect");
     selectSize = sizeIcons[index].textContent;
-    
-    
 
     //選尺寸
     for (let i = 0; i < sizeIcons.length; i++) {
-
         sizeIcons[i].addEventListener("click", event => {
             if (sizeIcons[i].disabled === true) {
                 return;
@@ -231,9 +222,7 @@ function selectItem() {
                 removeDefaultSize();
                 event.target.classList.add("sizeSelect");
                 selectSize = event.target.textContent;
-
                 getStock();
-
             }
         }
         )
@@ -244,7 +233,6 @@ function removeDefaultColor() {
     let selectColor = Array.from(document.getElementsByClassName("rect"));
     selectColor.forEach(i => {
         i.classList.remove("rectSelect");
-
     })
 }
 
@@ -252,7 +240,6 @@ function removeDefaultSize() {
     let selectSize = Array.from(document.getElementsByClassName("size-icon"));
     selectSize.forEach(i => {
         i.classList.remove("sizeSelect");
-        // i.disabled=false;
     })
 }
 
@@ -268,11 +255,9 @@ function rgbToHex(rgb) {
 // counter
 
 function getStock() {
-
     stockQuantity = stock.filter(remain => {
         return (`#${remain.color_code}` === hexColor && remain.size === selectSize)
     })[0].stock;
-
 }
 
 function outStock() {
@@ -282,12 +267,12 @@ function outStock() {
         }
     }
 }
+
 let countNumber = 1;
 function count() {
     let plus = document.querySelector(".plus");
     let subtract = document.querySelector(".subtract");
     let quantity = document.querySelector(".quantity");
-
     plus.addEventListener("click", () => {
 
         //呼叫庫存函數
@@ -301,7 +286,6 @@ function count() {
         } else if (stockQuantity === 0) {
             quantity.textContent = 0;
         }
-
     })
     subtract.addEventListener("click", () => {
         if (countNumber > 0) {
@@ -310,8 +294,6 @@ function count() {
         }
     })
 }
-
-
 
 //Order List 
 
@@ -328,11 +310,9 @@ class Order {
     }
 }
 
-
 function userOrder() {
     let cartButton = document.querySelector(".add_in_cart");
     cartButton.addEventListener("click", () => {
-
         id = productID.textContent;
         name = title.textContent;
         price = itemPrice.textContent;
@@ -347,36 +327,27 @@ function userOrder() {
         let newOrder = new Order(id, name, price, color, size, qty, pic, remain);
         if (newOrder.qty === 0) {
             alert("請輸入數量");
-        } else if (newOrder.qty > newOrder.remain){
+        } else if (newOrder.qty > newOrder.remain) {
             alert("您選的數量大於可購買數量");
-        }else {
+        } else {
             alert("商品已為您加入購物車");
         }
-
         // stop
-        console.log(orderList, newOrder)
-
+        console.log(orderList, newOrder);
         for (let i = 0; i < orderList.length; i++) {
-        if (orderList[i].id === newOrder.id && orderList[i].color.code === newOrder.color.code
-            && orderList[i].size === newOrder.size) {
-            //比到相同的，把數量相加後結束函式
-            orderList[i].qty += newOrder.qty;
-            return;
+            if (orderList[i].id === newOrder.id && orderList[i].color.code === newOrder.color.code
+                && orderList[i].size === newOrder.size) {
+                //比到相同的，把數量相加後結束函式
+                orderList[i].qty += newOrder.qty;
+                return;
+            }
         }
-    }
+        //比到不同的，加入清單
+        orderList.push(newOrder);
 
-    //比到不同的，加入清單
-    orderList.push(newOrder);
-
-    // console.log(orderList)
-    localStorage.setItem("List", JSON.stringify(orderList));
-
-
-    let cartNum = document.querySelector(".cartNum");  
+        // console.log(orderList)
+        localStorage.setItem("List", JSON.stringify(orderList));
+        let cartNum = document.querySelector(".cartNum");
         cartNum.textContent = orderList.length;
-    
-
-    
-
-})
+    })
 }
