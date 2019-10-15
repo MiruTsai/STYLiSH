@@ -17,6 +17,9 @@
  * Established products search and loading pages with infinite scroll features to enhance user experience
  * A complete check out system integrated TapPay"s payment SDK
  * Implemented member system (Native and Facebook Login) 
+ ### Product page
+![](images/readme/STYLISH-product.png)
+ 
  ### Shopping cart feature
 ![](images/readme/shoppingCart.jpg)
  ### Carousel slider
