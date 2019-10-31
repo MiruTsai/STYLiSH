@@ -34,7 +34,13 @@ function search() {
     let userinput = document.querySelector(".searchBar").value;
     document.getElementById("p_container").innerHTML = null;
     productPage(productAPI + "search?keyword=" + userinput, function (response) {
-        render(response);
+        if (response===[]) {
+            alert("沒有你找尋的商品喔")
+            userinput.value="";
+            return
+        } else {
+            render(response);
+        }
     });
 }
 
@@ -45,6 +51,7 @@ function searchKey() {
     if (event.keyCode === 13) {
         productPage(productAPI + "search?keyword=" + userinput, function (response) {
             render(response);
+            console.log(response);
         })
     };
 }
@@ -73,6 +80,7 @@ function moSearch() {
     document.getElementById("p_container").innerHTML = null;
     productPage(productAPI + "search?keyword=" + userinput, function (response) {
         render(response);
+
     })
 }
 

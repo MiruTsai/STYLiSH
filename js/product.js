@@ -167,10 +167,22 @@ let userSize;
 let userItem;
 let index = 0;
 
+function removeDefaultColor() {
+    let selectColor = Array.from(document.getElementsByClassName("rect"));
+    selectColor.forEach(i => {
+        i.classList.remove("rectSelect");
+    })
+}
+
+function removeDefaultSize() {
+    let selectSize = Array.from(document.getElementsByClassName("size-icon"));
+    selectSize.forEach(i => {
+        i.classList.remove("sizeSelect");
+    })
+}
+
 function selectItem() {
-
     let rects = document.getElementsByClassName("rect");
-
     //顏色預設值
     rects[index].classList.add("rectSelect");
     hexColor = rgbToHex(rects[index].style.backgroundColor);
@@ -206,13 +218,10 @@ function selectItem() {
             }
         })
     }
-
-
     let sizeIcons = document.getElementsByClassName("size-icon");
     //尺寸預設值
     sizeIcons[index].classList.add("sizeSelect");
     selectSize = sizeIcons[index].textContent;
-
     //選尺寸
     for (let i = 0; i < sizeIcons.length; i++) {
         sizeIcons[i].addEventListener("click", event => {
@@ -229,19 +238,7 @@ function selectItem() {
     }
 }
 
-function removeDefaultColor() {
-    let selectColor = Array.from(document.getElementsByClassName("rect"));
-    selectColor.forEach(i => {
-        i.classList.remove("rectSelect");
-    })
-}
 
-function removeDefaultSize() {
-    let selectSize = Array.from(document.getElementsByClassName("size-icon"));
-    selectSize.forEach(i => {
-        i.classList.remove("sizeSelect");
-    })
-}
 
 //rgb轉Hex
 function rgbToHex(rgb) {
@@ -283,8 +280,12 @@ function count() {
             countNumber += 1;
             quantity.textContent = countNumber;
             //庫存為0,數量為0; 
+            if (countNumber >= stockQuantity) {
+                alert("這款只剩 " + stockQuantity + " 件喔！");
+            }
         } else if (stockQuantity === 0) {
             quantity.textContent = 0;
+            alert("沒有庫存囉！")
         }
     })
     subtract.addEventListener("click", () => {
