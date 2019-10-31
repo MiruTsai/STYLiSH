@@ -8,7 +8,7 @@ function render(parseData) {
         let pic = document.createElement("div");
         pic.className = "p_pic";
         let picsrc = document.createElement("img");
-        picsrc.src = `${products.data[i].main_image}`;  
+        picsrc.src = `${products.data[i].main_image}`;
         let id = document.createElement("a");
         id.className = "p_id";
         id.href = `product.html?id=${products.data[i].id}`;
@@ -31,7 +31,7 @@ function render(parseData) {
         title.innerText = `${products.data[i].title}`;
         price.innerText = `TWD.${products.data[i].price}`
         pic.appendChild(picsrc);
-        id.appendChild(pic);                
+        id.appendChild(pic);
         id.appendChild(category);
         id.appendChild(color);
         id.appendChild(title);
@@ -95,31 +95,44 @@ function campaigns(cam) {
         document.getElementById("main-banner").appendChild(campaign);
     }
     let circleZone = document.createElement("div");
-    circleZone.className="circleZone"; 
+    circleZone.className = "circleZone";
     let count = document.getElementsByClassName("camID");
-    for (let i = 0; i < count.length; i += 1) {
-    let circle = document.createElement("div");
-    circle.className = "circle";
-    circleZone.appendChild(circle);
-}
-document.getElementById("main-banner").appendChild(circleZone);
+    for (let i = 0; i < count.length; i++) {
+        let circle = document.createElement("div");
+        circle.className = "circle";
+        circle.name = i;
+        circleZone.appendChild(circle);
+    }
+    document.getElementById("main-banner").appendChild(circleZone);
 }
 //slideShow
+const slide = document.getElementsByClassName("campaign");
+const chooseCircle = document.getElementsByClassName("circle");
 let slideIndex = 0;
-function slideShow() {
-    let slide = document.getElementsByClassName("campaign");
-    let chooseCircle = document.getElementsByClassName("circle");
+
+function resetSlide(){
     for (let i = 0; i < slide.length; i++) {
         slide[i].style.display = "none";
-        chooseCircle[i].removeAttribute("id");
+        chooseCircle[i].className = "circle";
     }
+}
+
+function slideShow() {
+    resetSlide();
     slideIndex++;
     if (slideIndex > slide.length) { slideIndex = 1 }
     slide[slideIndex - 1].style.display = "block";
-    chooseCircle[slideIndex - 1].id = "choosen";
+    chooseCircle[slideIndex - 1].className = "circle choosen";
+    for (let j = 0; j < chooseCircle.length; j++) {
+        chooseCircle[j].addEventListener('click', (e) => {
+            resetSlide();
+            slide[e.target.name].style.display = "block";
+            chooseCircle[e.target.name].className = "circle choosen";
+        })
+    }
     setTimeout(slideShow, 10000);
 }
-productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) { 
-    campaigns(response); 
-    slideShow(); 
+productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) {
+    campaigns(response);
+    slideShow();
 });
