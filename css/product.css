@@ -8,7 +8,6 @@ input[type=radio]+label{
     opacity: 0;
     color: #8b572a;
 }
-
 .productPage{
     width:70%;
     margin:0 auto;
@@ -18,7 +17,6 @@ input[type=radio]+label{
     display:flex; 
     flex-wrap: wrap;
 }
-
 .main_pic,
 .info{
     padding: 0 30px;     
@@ -87,7 +85,6 @@ button[disabled]{
 .countContainer{    
     justify-content: flex-start;
 }
-
 .colorContainer,
 .sizeContainer,
 .countContainer{

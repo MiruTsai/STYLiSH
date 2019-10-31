@@ -264,7 +264,6 @@ let fields = {
     }
 }
 
-
 TPDirect.card.setup({
     fields: fields,
     styles: {
@@ -327,7 +326,6 @@ TPDirect.card.onUpdate(function (update) {
     }
     // number 欄位是錯誤的
     if (update.status.number === 2) {
-
         // setNumberFormGroupToError()
     } else if (update.status.number === 0) {
         // setNumberFormGroupToSuccess()
@@ -342,7 +340,6 @@ TPDirect.card.onUpdate(function (update) {
     } else {
         // setNumberFormGroupToNormal()
     }
-
     if (update.status.cvc === 2) {
         // setNumberFormGroupToError()
     } else if (update.status.cvc === 0) {
@@ -351,9 +348,6 @@ TPDirect.card.onUpdate(function (update) {
         // setNumberFormGroupToNormal()
     }
 })
-
-// call TPDirect.card.getPrime when user submit form to get tappay prime
-// $("form").on("submit", onSubmit)
 
 const userName = document.getElementById("userName");
 const mobileNumber = document.getElementById("mobileNumber");
@@ -422,18 +416,13 @@ function onSubmit() {
     })
 }
 
-
-
 //-----得到訂單編號，並導向thank you page。------//
-
-
 //得到儲存在localstorage的FBtoken
 const cartFBtoken = JSON.parse(localStorage.getItem("userToken"));
 
 function ajax() {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
-
     //如果有FBtoken(已登入FB)
     if (cartFBtoken) {
 
@@ -459,5 +448,4 @@ function ajax() {
         };
         xhr.send(sendOrder);
     }
-
 }

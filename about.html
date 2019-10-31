@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>STYLiSH 公司簡介</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/privacy.css" media="all" />
+</head>
+
+<body>
+        <div class="web">
+                <div class="base">
+                    <div class="btn_00">
+                        <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
+                        <div class="btn_01">
+                            <ul class="shopHeader">
+                                <li><a href="index.html?tag=women">女裝</a></li>
+                                <li><a href="index.html?tag=men">男裝</a></li>
+                                <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="userAct">
+                        <div class="web_searchbar">
+                            <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
+                            <img class="search" src="images/search.png" onclick="search()">
+                        </div>
+                        <div class="cartAct">
+                            <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
+                            <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                            <div class="cartNum" onclick="goCart()"></div>
+                            <div class="cart">購物車</div>
+                            <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
+                            <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                            <div class="member">會員</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile_logo01">
+                    <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
+                    <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
+                    <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
+                    <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
+                </div>
+                <div class=mobile_nav01>
+                    <ul class="mobile_nav">
+                        <li><a href="index.html?tag=women">女裝</a></li>
+                        <li><a href="index.html?tag=men">男裝</a></li>
+                        <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                    </ul>
+                </div>
+                <div class="mobile_user">
+                    <div class="cart">
+                        <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                        <span onclick="goCart()">購物車</span>
+                    </div>
+                    <span class="mo_cart_center">|</span>
+                    <div class="member">
+                        <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                        <span>會員</span>
+                    </div>
+                </div>
+                <div class="baseBorder"></div>
+    <main>
+        <div class="view">
+            <h1>關於 STYLiSH</h1>
+            <div class="mainTitle">STYLiSH起源</div>
+            <p>一個初次踏入程式領域的孩子，經過三個禮拜獨立開發後，第一個完成的網站。</p>
+            <div class="mainTitle">STYLiSH精神</div>
+            <p>Love & Peace</p>
+    </main>
+    <div class="Rectangle-4">
+            <div class="footer">
+                <div class="footer_menu">
+                    <ul class="compDescrib">
+                        <li><a href="about.html">關於Stylish</a></li>
+                        <li><a href="service.html">服務條款</a></li>
+                        <li><a href="privacy.html">隱私政策</a></li>
+                        <li><a href="mailto:zct398@gmail.com">聯絡我們</a></li>
+                        <li id="FAQ"><a href="FAQ.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="socialMedia">
+                    <img class="btn_line01_normal" src="images/line.png">
+                    <img class="btn_twitter01_normal" src="images/twitter.png">
+                    <img class="btn_facebook01_normal" src="images/facebook.png">
+                </div>
+            </div>
+            <div class="copyright">&copy; 2018 All rights reserved.</div>
+        </div>
+    <script src="js/app.js"></script>
+    <script src="js/checkfb.js"></script>
+</body>
+
+</html>

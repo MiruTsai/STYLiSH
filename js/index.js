@@ -119,31 +119,7 @@ function slideShow() {
     chooseCircle[slideIndex - 1].id = "choosen";
     setTimeout(slideShow, 10000);
 }
-productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) { campaigns(response); slideShow(); });
-
-//all clothes   past entrance ////
-// function all() {
-//     document.getElementById("p_container").innerHTML = null;
-//     category = "all";
-//     productPage(`${productAPI}${category}`, function (response) { render(response); });
-// }
-
-//female clothes
-// function female() {
-//     document.getElementById("p_container").innerHTML = null;
-//     category = "women";
-//     productPage(`${productAPI}${category}`, function (response) { render(response); })
-// }
-
-//male clothes
-// function male() {
-//     document.getElementById("p_container").innerHTML = null;
-//     category = "men";    
-//     productPage(`${productAPI}${category}`, function (response) { render(response); })
-// }
-//accessories
-// function accessories() {
-//     document.getElementById("p_container").innerHTML = null;
-//     category = "accessories"
-//     productPage(`${productAPI}${category}`, function (response) { render(response); })
-// }
+productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) { 
+    campaigns(response); 
+    slideShow(); 
+});

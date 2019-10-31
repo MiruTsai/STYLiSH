@@ -2,41 +2,16 @@
 <html>
 
 <head>
-    <title>STYLISH</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/index.css">
+    <title>STYLiSH FAQ</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/thankyou.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/privacy.css" media="all" />
+
 </head>
 
 <body>
-    <script>
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                indexStatusChangeCallback(response);
-            });
-        }
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: "2888776061346906",
-                cookie: true,
-                xfbml: true,
-                version: "v3.3"
-            });
-
-            FB.getLoginStatus(function (response) {
-                if (response.status === "connected") {
-                    indexStatusChangeCallback(response);
-                }
-            });
-        };
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "facebook-jssdk"));
-    </script>
     <div class="web">
         <div class="base">
             <div class="btn_00">
@@ -90,10 +65,47 @@
             </div>
         </div>
         <div class="baseBorder"></div>
-        <div id="main-banner">
-        </div>
-        <div id="p_container">
-        </div>
+        <main>
+            <div class="view">
+                <h1>FAQ</h1>
+                <div class="faq">
+                    <div class="sidebar">
+                        <ul>
+                            <li><a href="#explain">購物說明</a></li>
+                            <li><a href="#question">購物常見問題</a></li>
+                            <li><a href="#sizeGuide">尺寸對照表</a></li>
+                        </ul>
+                    </div>
+                    <div class="center"></div>
+                    <div class="faqText">
+                        <div id="explain" class="mainTitle">購物說明</div>
+                        <ul>
+                            <li>STYLiSH全部商品皆以現貨供應，以最平實的價格，最快速的配送，提供您簡單.方便.快速的購物方式 ，讓您享受最便利的購物環境。</li>
+                            <li>瀏覽商品 > 選擇顏色、尺寸 ＞ 登入會員 ＞ 選擇結帳及交易方式 ＞ 完成訂單 > 收到商品定訂單之後無法提供修改。</li>
+                            <li>提醒您，商品加入購物車但未結帳前，並無保留商品庫存功能，商品庫存分配將以結帳順序為依據。</li>
+                        </ul> 　
+                        <div id="question" class="mainTitle">購物常見問題</div>
+                        <p>如何查詢訂單狀態?</p>
+                        <ul>
+                            <li>請點選網頁右上方會員圖示按鈕，輸入您的帳號及密碼登入後，點擊[訂單查詢]選項，即可查詢訂單處理狀態。</li>
+                        </ul>
+                        <p>折價代碼在哪邊輸入折抵？</p>
+                        <ul>
+                            <li>於購物車結帳頁→「折扣代碼」欄位填入即可享有折扣優惠</li>
+                        </ul>
+                        <p>鑑賞期如何計算？</p>
+                        <ul>
+                            <li>STYLiSH之鑑賞期為7日，以簽收隔日為第一日 (不論簽收人是否為買家本人，只要簽收便開始計算鑑賞期)。</li>
+                        </ul>
+                        <div id="sizeGuide" class="mainTitle">尺寸對照表</div>
+                        <img class="clothes" src="images/1400x.jpg">
+                        <img class="clothes" src="images/14002.jpg">
+                        <img src="images/L4.jpg">
+                    </div>
+                </div>
+            </div>
+
+        </main>
         <div class="Rectangle-4">
             <div class="footer">
                 <div class="footer_menu">
@@ -115,7 +127,6 @@
         </div>
     </div>
     <script src="js/app.js"></script>
-    <script src="js/index.js"></script>
     <script src="js/checkfb.js"></script>
 </body>
 
