@@ -238,8 +238,6 @@ function selectItem() {
     }
 }
 
-
-
 //rgb轉Hex
 function rgbToHex(rgb) {
     var bg = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
@@ -250,7 +248,6 @@ function rgbToHex(rgb) {
 }
 
 // counter
-
 function getStock() {
     stockQuantity = stock.filter(remain => {
         return (`#${remain.color_code}` === hexColor && remain.size === selectSize)
@@ -271,15 +268,11 @@ function count() {
     let subtract = document.querySelector(".subtract");
     let quantity = document.querySelector(".quantity");
     plus.addEventListener("click", () => {
-
-        //呼叫庫存函數
         getStock();
-
         //如果數量小於庫存,數量+1
         if (countNumber < stockQuantity) {
             countNumber += 1;
             quantity.textContent = countNumber;
-            //庫存為0,數量為0; 
             if (countNumber >= stockQuantity) {
                 alert("這款只剩 " + stockQuantity + " 件喔！");
             }
@@ -297,7 +290,6 @@ function count() {
 }
 
 //Order List 
-
 class Order {
     constructor(id, name, price, color, size, qty, pic, remain) {
         this.id = id,
@@ -333,8 +325,6 @@ function userOrder() {
         } else {
             alert("商品已為您加入購物車");
         }
-        // stop
-        console.log(orderList, newOrder);
         for (let i = 0; i < orderList.length; i++) {
             if (orderList[i].id === newOrder.id && orderList[i].color.code === newOrder.color.code
                 && orderList[i].size === newOrder.size) {
@@ -345,8 +335,6 @@ function userOrder() {
         }
         //比到不同的，加入清單
         orderList.push(newOrder);
-
-        // console.log(orderList)
         localStorage.setItem("List", JSON.stringify(orderList));
         let cartNum = document.querySelector(".cartNum");
         cartNum.textContent = orderList.length;
