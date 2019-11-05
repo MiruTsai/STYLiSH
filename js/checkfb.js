@@ -4,30 +4,30 @@ const text2 = document.querySelector(".content2");
 const member = document.querySelector(".btn_member01_normal");
 let token;
 
-let fb={};
+let fb = {};
 
-fb.load=function(){
-	// Load the SDK asynchronously
-	(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "https://connect.facebook.net/en_US/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, "script", "facebook-jssdk"));
+fb.load = function () {
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, "script", "facebook-jssdk"));
 };
-fb.init=function(){
-	FB.init({
-		appId: "2888776061346906",
-                cookie: true,
-                xfbml: true, 
-                version: "v3.3"
-	});
-	FB.getLoginStatus(function(response){
-		statusChangeCallback(response);
-	});
+fb.init = function () {
+    FB.init({
+        appId: "2888776061346906",
+        cookie: true,
+        xfbml: true,
+        version: "v3.3"
+    });
+    FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+    });
 };
-window.fbAsyncInit=fb.init;
+window.fbAsyncInit = fb.init;
 window.addEventListener("DOMContentLoaded", fb.load);
 
 
@@ -58,7 +58,10 @@ function sendToken() {
 function testAPI() {
     FB.api("/me?fields=id,name,email,picture.width(200).height(200)", function (response) {
         member.src = response.picture.data.url;
-        userPic.src = response.picture.data.url;
+        if (window.location.pathname === "/STYLiSH/profile.html") {
+            const userPic = document.querySelector(".userPic");
+            userPic.src = response.picture.data.url;
+        }
         text.textContent = `歡迎光臨 ${response.name}`;
         text2.textContent = `您的E-MAIL是 ${response.email}`;
     });
@@ -68,7 +71,7 @@ function testAPI() {
 // 呼叫FB"檢查登入狀態"函式
 function statusChangeCallback(response) {
     if (response.status === "connected") {
-        if(window.location.pathname==="/STYLiSH/profile.html"){
+        if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic");
             userPic.style.display = "block";
         }
@@ -78,7 +81,7 @@ function statusChangeCallback(response) {
         token = response.authResponse.accessToken;
     } else {
         text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
-        if(window.location.pathname==="/STYLiSH/profile.html"){
+        if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic");
             userPic.style.display = "none";
         }
