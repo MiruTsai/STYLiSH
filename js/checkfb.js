@@ -8,27 +8,27 @@ let fb={};
 
 fb.load=function(){
 	// Load the SDK asynchronously
-	(function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, "script", "facebook-jssdk"));
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "https://connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, "script", "facebook-jssdk"));
+};
 fb.init=function(){
 	FB.init({
 		appId: "2888776061346906",
                 cookie: true,
-                xfbml: true,
+                xfbml: true, 
                 version: "v3.3"
 	});
 	FB.getLoginStatus(function(response){
-		app.fb.loginStatusChange(response);
+		statusChangeCallback(response);
 	});
 };
-}
 window.fbAsyncInit=fb.init;
-window.addEventListener("DOMContentLoaded", fb.load);
+
 
 //創建API所需body
 let parseToken;
