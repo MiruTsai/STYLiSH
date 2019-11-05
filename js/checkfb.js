@@ -1,4 +1,4 @@
-const userPic = document.querySelector(".userPic");
+
 const text = document.querySelector(".content");
 const text2 = document.querySelector(".content2");
 const member = document.querySelector(".btn_member01_normal");
@@ -68,32 +68,25 @@ function testAPI() {
 // 呼叫FB"檢查登入狀態"函式
 function statusChangeCallback(response) {
     if (response.status === "connected") {
-        userPic.style.display = `block`;
+        if(window.location.pathname==="/STYLiSH/profile.html"){
+            const userPic = document.querySelector(".userPic");
+            userPic.style.display = "block";
+        }
         createSendToken();
         sendToken();
         testAPI();
         token = response.authResponse.accessToken;
     } else {
         text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
-        userPic.style.display = "none";
+        if(window.location.pathname==="/STYLiSH/profile.html"){
+            const userPic = document.querySelector(".userPic");
+            userPic.style.display = "none";
+        }
     }
 }
 
 //如果FB狀態為登入，右上會員頭像擷取FB帳號圖片。
-function memberIcon() {
-    FB.api("/me?fields=id,name,email,picture.width(200).height(200)", function (response) {
-        member.src = response.picture.data.url;
-    });
-}
 
-function indexStatusChangeCallback(response) {
-    if (response.status === "connected") {
-        memberIcon();
-    }
-    else {
-        return
-    }
-}
 
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
