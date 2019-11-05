@@ -28,7 +28,7 @@ fb.init=function(){
 };
 }
 window.fbAsyncInit=fb.init;
-
+window.addEventListener("DOMContentLoaded", fb.load);
 
 //創建API所需body
 let parseToken;
