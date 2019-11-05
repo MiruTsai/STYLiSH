@@ -1,6 +1,6 @@
 
-const text = document.querySelector(".content");
-const text2 = document.querySelector(".content2");
+
+
 const member = document.querySelector(".btn_member01_normal");
 let token;
 
@@ -60,10 +60,13 @@ function testAPI() {
         member.src = response.picture.data.url;
         if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic");
+            const text = document.querySelector(".content");
+            const text2 = document.querySelector(".content2");
             userPic.src = response.picture.data.url;
+            text.textContent = `歡迎光臨 ${response.name}`;
+            text2.textContent = `您的E-MAIL是 ${response.email}`;
         }
-        text.textContent = `歡迎光臨 ${response.name}`;
-        text2.textContent = `您的E-MAIL是 ${response.email}`;
+       
     });
 }
 
@@ -80,10 +83,12 @@ function statusChangeCallback(response) {
         testAPI();
         token = response.authResponse.accessToken;
     } else {
-        text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
         if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic");
-            userPic.style.display = "none";
+            const text = document.querySelector(".content");
+            const text2 = document.querySelector(".content2");
+            userPic.style.display = "none";            
+            text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
         }
     }
 }
