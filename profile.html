@@ -10,34 +10,6 @@
 </head>
 
 <body>
-    <!-- <script>
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: "2888776061346906",
-                cookie: true,  // enable cookies to allow the server to access 
-                // the session
-                xfbml: true,  // parse social plugins on this page
-                version: "v3.3" // The Graph API version to use for the call
-            });
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        };
-        // Load the SDK asynchronously
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "facebook-jssdk"));
-    </script> -->
     <div class="web">
         <div class="base">
             <div class="btn_00">
@@ -100,8 +72,9 @@
             <div id="fb-root"></div>
             <script async defer crossorigin="anonymous"
                 src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.3&appId=2888776061346906&autoLogAppEvents=1"></script>
-            <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" scope="public_profile,email"
-                data-auto-logout-link="false" data-use-continue-as="false" onlogin="window.location.reload(true)"></div>
+            <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with"
+                scope="public_profile,email" data-auto-logout-link="false" data-use-continue-as="false"
+                onlogin="window.location.reload(true)"></div>
             <button class="FBlogout" onclick="logout()">登出</button>
         </div>
         <div class="Rectangle-4">
@@ -127,4 +100,5 @@
         <script src="js/checkfb.js"></script>
     </div>
 </body>
+
 </html>

@@ -1,9 +1,5 @@
-
-
-
 const member = document.querySelector(".btn_member01_normal");
 let token;
-
 let fb = {};
 
 fb.load = function () {
@@ -66,7 +62,6 @@ function testAPI() {
             text.textContent = `歡迎光臨 ${response.name}`;
             text2.textContent = `您的E-MAIL是 ${response.email}`;
         }
-       
     });
 }
 

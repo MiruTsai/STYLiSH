@@ -8,88 +8,90 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/privacy.css" media="all" />
 </head>
+
 <body>
     <div class="web">
-    <div class="base">
-        <div class="btn_00">
-            <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
-            <div class="btn_01">
-                <ul class="shopHeader">
-                    <li><a href="index.html?tag=women">女裝</a></li>
-                    <li><a href="index.html?tag=men">男裝</a></li>
-                    <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+        <div class="base">
+            <div class="btn_00">
+                <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
+                <div class="btn_01">
+                    <ul class="shopHeader">
+                        <li><a href="index.html?tag=women">女裝</a></li>
+                        <li><a href="index.html?tag=men">男裝</a></li>
+                        <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="userAct">
+                <div class="web_searchbar">
+                    <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
+                    <img class="search" src="images/search.png" onclick="search()">
+                </div>
+                <div class="cartAct">
+                    <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
+                    <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                    <div class="cartNum" onclick="goCart()"></div>
+                    <div class="cart">購物車</div>
+                    <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
+                    <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                    <div class="member">會員</div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile_logo01">
+            <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
+            <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
+            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
+            <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
+        </div>
+        <div class=mobile_nav01>
+            <ul class="mobile_nav">
+                <li><a href="index.html?tag=women">女裝</a></li>
+                <li><a href="index.html?tag=men">男裝</a></li>
+                <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+            </ul>
+        </div>
+        <div class="mobile_user">
+            <div class="cart">
+                <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                <span onclick="goCart()">購物車</span>
+            </div>
+            <span class="mo_cart_center">|</span>
+            <div class="member">
+                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                <span>會員</span>
+            </div>
+        </div>
+        <div class="baseBorder"></div>
+        <main>
+            <div class="view">
+                <h1>隱私政策</h1>
+                <div class="mainTitle">使用者隱私權保護聲明</div>
+                <p> STYLiSH國際股份有限公司（以下簡稱STYLiSH）針對消費者與個人資料之蒐集和運用，依中華民國「電腦處理個人資料保護法」及本隱私權保護聲明，STYLiSH已加強相關之保護措施，但也鄭重提醒您：請勿在網路上公開透露您個人資料，因該資料有可能會被他人蒐集和使用，特別是在網路上公開的發言場合，如聊天室、留言版，更應避免發表個人身份、密碼或電子郵件等相關個人資料。
+                </p>
+                <div class="mainTitle">個人資料蒐集及使用</div>
+                <ul>
+                    <li>當您瀏覽STYLiSH相關網站時，不會主動要求輸入個人資料。</li>
+                    <li>當使用者要完成購物流程、訂閱電子報、或參加其他活動時，STYLiSH會要求使用者登錄個人資料，以便完成交易與相關會員服務。</li>
+                    <li>STYLiSH及其相關網站所取得的個人資料，都僅供STYLiSH內部依照原說明的使用目的和範圍。</li>
+                    <li>除非事先說明或依照台灣相關法律規定外，STYLiSH不會擅自將使用者的個人資料提供給第三者或作為其他目的之用。</li>
+                    <li>TYLiSH會自動記錄使用者在網站內的瀏覽活動等相關資料，但這些資料僅供作為流量分析和網路行為調查，以便於改善網站的服務品質。</li> 　
+                </ul>
+                <div class="mainTitle">使用者資料</div>
+                <ul>
+                    <li>為了保障各位會員權益，第一次光臨本網站消費的顧客，只要確認完成交易後，即會自動升級為會員。</li>
+                    <li>註冊過程中您可以為自己設定一組電子郵件及密碼，經由該帳號，您可依照網站說明使用相關會員服務。</li>
+                    <li>請妥善保管您的會員帳號及密碼，不要將上述資料提供給任何人，在使用完畢後，請登出您的帳號。</li>
+                    <li>如果您與他人共用一台電腦或使用公共電腦，請記得關閉您的瀏覽器，以防止他人看到上述資料或取得進入您帳號的方法。</li>
+                </ul> 　
+                <div class="mainTitle">隱私權保護政策之修訂</div>
+                <ul>
+                    <li>STYLiSH保留更改本聲明各項內容之權利，我們將於網站同一位置公告更改之聲明外，不另外對會員進行個別通知。</li>
+                    <li>若您對本隱私權保護政策有任何問題，請直接與本公司聯繫。</li>
                 </ul>
             </div>
-        </div>
-        <div class="userAct">
-            <div class="web_searchbar">
-                <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
-                <img class="search" src="images/search.png" onclick="search()">
-            </div>
-            <div class="cartAct">
-                <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
-                <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
-                <div class="cartNum" onclick="goCart()"></div>
-                <div class="cart">購物車</div>
-                <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
-                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
-                <div class="member">會員</div>
-            </div>
-        </div>
-    </div>
-    <div class="mobile_logo01">
-        <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
-        <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
-        <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
-        <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
-    </div>
-    <div class=mobile_nav01>
-        <ul class="mobile_nav">
-            <li><a href="index.html?tag=women">女裝</a></li>
-            <li><a href="index.html?tag=men">男裝</a></li>
-            <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
-        </ul>
-    </div>
-    <div class="mobile_user">
-        <div class="cart">
-            <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
-            <span onclick="goCart()">購物車</span>
-        </div>
-        <span class="mo_cart_center">|</span>
-        <div class="member">
-            <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
-            <span>會員</span>
-        </div>
-    </div>
-    <div class="baseBorder"></div>
-    <main>
-        <div class="view">
-            <h1>隱私政策</h1>
-            <div class="mainTitle">使用者隱私權保護聲明</div>
-            <p> STYLiSH國際股份有限公司（以下簡稱STYLiSH）針對消費者與個人資料之蒐集和運用，依中華民國「電腦處理個人資料保護法」及本隱私權保護聲明，STYLiSH已加強相關之保護措施，但也鄭重提醒您：請勿在網路上公開透露您個人資料，因該資料有可能會被他人蒐集和使用，特別是在網路上公開的發言場合，如聊天室、留言版，更應避免發表個人身份、密碼或電子郵件等相關個人資料。</p>
-            <div class="mainTitle">個人資料蒐集及使用</div>
-            <ul>
-                <li>當您瀏覽STYLiSH相關網站時，不會主動要求輸入個人資料。</li>
-                <li>當使用者要完成購物流程、訂閱電子報、或參加其他活動時，STYLiSH會要求使用者登錄個人資料，以便完成交易與相關會員服務。</li>
-                <li>STYLiSH及其相關網站所取得的個人資料，都僅供STYLiSH內部依照原說明的使用目的和範圍。</li>
-                <li>除非事先說明或依照台灣相關法律規定外，STYLiSH不會擅自將使用者的個人資料提供給第三者或作為其他目的之用。</li>
-                <li>TYLiSH會自動記錄使用者在網站內的瀏覽活動等相關資料，但這些資料僅供作為流量分析和網路行為調查，以便於改善網站的服務品質。</li> 　
-            </ul>
-            <div class="mainTitle">使用者資料</div>
-            <ul>
-                <li>為了保障各位會員權益，第一次光臨本網站消費的顧客，只要確認完成交易後，即會自動升級為會員。</li>
-                <li>註冊過程中您可以為自己設定一組電子郵件及密碼，經由該帳號，您可依照網站說明使用相關會員服務。</li>
-                <li>請妥善保管您的會員帳號及密碼，不要將上述資料提供給任何人，在使用完畢後，請登出您的帳號。</li>
-                <li>如果您與他人共用一台電腦或使用公共電腦，請記得關閉您的瀏覽器，以防止他人看到上述資料或取得進入您帳號的方法。</li>
-            </ul> 　
-            <div class="mainTitle">隱私權保護政策之修訂</div>
-            <ul>
-                <li>STYLiSH保留更改本聲明各項內容之權利，我們將於網站同一位置公告更改之聲明外，不另外對會員進行個別通知。</li>
-                <li>若您對本隱私權保護政策有任何問題，請直接與本公司聯繫。</li>
-            </ul>
-        </div>
-    </main>
-    <div class="Rectangle-4">
+        </main>
+        <div class="Rectangle-4">
             <div class="footer">
                 <div class="footer_menu">
                     <ul class="compDescrib">
@@ -112,4 +114,5 @@
     <script src="js/app.js"></script>
     <script src="js/checkfb.js"></script>
 </body>
+
 </html>
