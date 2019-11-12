@@ -12,6 +12,16 @@ margin:0 auto;
 .web{
   background-color: #ffffff;
 }
+.mask{
+  display: none;
+  opacity: 0.7;
+  background-color: white;
+  position: fixed;
+  top:50px;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+}
 .base{    
   height: 100px;
   background-color: #ffffff; 
@@ -46,13 +56,14 @@ border-right:0px;
   width: 35px;
   height: 35px;
   position: absolute;
-  z-index: 2;
+  z-index: 1001;
   right:150px;
   top:33px;
 
 }
 .combinedShape {
   position: relative;
+  z-index: 1000;
   width: 214px;
   height: 40px;
   border: solid 1px #979797;
@@ -140,7 +151,9 @@ border-right:0px;
 .choosen{
   background-color: #3f3a3a;
 }
-
+.noProduct{
+  margin: 58px auto;
+}
 .cartAct{
 align-items: center;
 }

@@ -1,12 +1,12 @@
 const AppScoolHostAPI = "https://api.appworks-school.tw/api/1.0";
 const productAPI = "https://api.appworks-school.tw/api/1.0/products/";
+const mask = document.querySelector(".mask");
 let pagingQuery = "?paging="
 let category;
 let sourcePage = `${productAPI}${category}${pagingQuery}`;
 let paging;
 let tag = "";
 let orderList = [];
-let parseOrderList = JSON.parse(localStorage.getItem("List"));
 let orderListCount = document.querySelector(".orderList");
 
 //product category 
@@ -31,57 +31,83 @@ if (tag === null) {
 }
 
 function search() {
-    let userinput = document.querySelector(".searchBar").value;
+    let userInput = document.querySelector(".searchBar").value;
+    if (!userInput) {
+        alert("請輸入欲搜尋商品！");
+        return
+    }
     document.getElementById("p_container").innerHTML = null;
-    productPage(productAPI + "search?keyword=" + userinput, function (response) {
-        if (response === []) {
-            alert("沒有你找尋的商品喔");
-            userinput.value = "";
-            return
-        } else {
-            render(response);
-        }
+    productPage(productAPI + "search?keyword=" + userInput, function (response) {
+        render(response);
     });
 }
 
 //search bar keyboard
 function searchKey() {
-    let userinput = document.querySelector(".searchBar").value;
-    document.getElementById("p_container").innerHTML = null;
-    if (event.keyCode === 13) {
-        productPage(productAPI + "search?keyword=" + userinput, function (response) {
-            render(response);
-        })
-    };
+    let userInput = document.querySelector(".searchBar").value;
+    if (!userInput) {
+        alert("請輸入欲搜尋商品！")
+        return
+    } else {
+        if (event.keyCode === 13) {
+            productPage(productAPI + "search?keyword=" + userInput, function (response) {
+                document.getElementById("p_container").innerHTML = null;
+                closeMask();
+                render(response);
+            });
+        };
+    }
 }
 
 //mobile searchbar keyboard
-function moSearchKey() {
-    let userinput = document.querySelector(".moSearch").value;
-    document.getElementById("p_container").innerHTML = null;
-    if (event.keyCode === 13) {
-        productPage(productAPI + "search?keyword=" + userinput, function (response) {
+function moSearchKeyCode() {
+    let userInput = document.querySelector(".moSearch").value;
+    if (!userInput) {
+        alert("請輸入欲搜尋商品！");
+        return
+    } else {
+        if (event.keyCode === 13) {
+            productPage(productAPI + "search?keyword=" + userInput, function (response) {
+                document.getElementById("p_container").innerHTML = null;
+                closeMask();
+                render(response);
+            });
+        }
+    }
+}
+
+//mobile searchbar
+function moSearch() {
+    let userInput = document.querySelector(".moSearch").value;
+    if (!userInput) {
+        alert("請輸入欲搜尋商品！");
+        return
+    } else {
+        productPage(productAPI + "search?keyword=" + userInput, function (response) {
+            document.getElementById("p_container").innerHTML = null;
+            closeMask();
             render(response);
-        })
-    };
+        });
+    }
 }
 
 //open mobile searchbar
 function openSearchBar() {
+    mask.style.display = "block";
     document.querySelector(".moSearch").style.display = "inline-block";
     document.querySelector(".search_mo").style.display = "none";
     document.querySelector(".s_search_mo").style.display = "inline-block";
 }
 
-//mobile searchbar output
-function moSearch() {
-    let userinput = document.querySelector(".moSearch").value;
-    document.getElementById("p_container").innerHTML = null;
-    productPage(productAPI + "search?keyword=" + userinput, function (response) {
-        render(response);
-    })
+//close mobile searchbar
+function closeMask() {
+    mask.addEventListener("click", function () {
+        document.querySelector(".moSearch").style.display = "none";
+        document.querySelector(".search_mo").style.display = "block";
+        document.querySelector(".s_search_mo").style.display = "none";
+        mask.style.display = "none";
+    });
 }
-
 //購物車商品數量
 let cartNum = document.querySelector(".cartNum");
 //如果沒有資料留下來的話，塞給它空陣列

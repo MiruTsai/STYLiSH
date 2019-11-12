@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/cart.css">
-
 </head>
 
 <body>
     <div class="web">
+        <div class="mask" onclick="closeMask()"></div>
         <div class="base">
             <div class="btn_00">
                 <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
@@ -44,7 +44,7 @@
 
             <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
 
-            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
+            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKeyCode()"></input>
             <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
         </div>
         <div class=mobile_nav01>

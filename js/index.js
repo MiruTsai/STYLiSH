@@ -1,43 +1,52 @@
 //render index
+const indexContainer = document.getElementById("p_container");
+
 function render(parseData) {
     let products = JSON.parse(parseData);
     paging = products.paging;
-    for (let i = 0; i < products.data.length; i += 1) {
-        let content = document.createElement("div");
-        content.className = "p_content";
-        let pic = document.createElement("div");
-        pic.className = "p_pic";
-        let picsrc = document.createElement("img");
-        picsrc.src = `${products.data[i].main_image}`;
-        let id = document.createElement("a");
-        id.className = "p_id";
-        id.href = `product.html?id=${products.data[i].id}`;
-        let title = document.createElement("div");
-        title.className = "p_title";
-        let price = document.createElement("div");
-        price.className = "p_price";
-        let category = document.createElement("div");
-        category.className = "p_category";
-        category.style.display = "none";
-        category.innerText = `${products.data[i].category}`;
-        let color = document.createElement("div");
-        color.className = "p_color";
-        for (let j = 0; j < products.data[i].colors.length; j += 1) {
-            let rect = document.createElement("div");
-            rect.className = "rect";
-            rect.style.backgroundColor = `#${products.data[i].colors[j].code}`;
-            color.appendChild(rect);
+    if (products.data.length === 0) {
+        let noProduct = document.createElement("div");
+        noProduct.className = "noProduct";
+        noProduct.textContent = "沒有您搜尋的商品喔！";
+        indexContainer.appendChild(noProduct);
+    } else {
+        for (let i = 0; i < products.data.length; i += 1) {
+            let content = document.createElement("div");
+            content.className = "p_content";
+            let pic = document.createElement("div");
+            pic.className = "p_pic";
+            let picsrc = document.createElement("img");
+            picsrc.src = `${products.data[i].main_image}`;
+            let id = document.createElement("a");
+            id.className = "p_id";
+            id.href = `product.html?id=${products.data[i].id}`;
+            let title = document.createElement("div");
+            title.className = "p_title";
+            let price = document.createElement("div");
+            price.className = "p_price";
+            let category = document.createElement("div");
+            category.className = "p_category";
+            category.style.display = "none";
+            category.innerText = `${products.data[i].category}`;
+            let color = document.createElement("div");
+            color.className = "p_color";
+            for (let j = 0; j < products.data[i].colors.length; j += 1) {
+                let rect = document.createElement("div");
+                rect.className = "rect";
+                rect.style.backgroundColor = `#${products.data[i].colors[j].code}`;
+                color.appendChild(rect);
+            }
+            title.innerText = `${products.data[i].title}`;
+            price.innerText = `TWD.${products.data[i].price}`
+            pic.appendChild(picsrc);
+            id.appendChild(pic);
+            id.appendChild(category);
+            id.appendChild(color);
+            id.appendChild(title);
+            id.appendChild(price);
+            content.appendChild(id);
+            indexContainer.appendChild(content);
         }
-        title.innerText = `${products.data[i].title}`;
-        price.innerText = `TWD.${products.data[i].price}`
-        pic.appendChild(picsrc);
-        id.appendChild(pic);
-        id.appendChild(category);
-        id.appendChild(color);
-        id.appendChild(title);
-        id.appendChild(price);
-        content.appendChild(id);
-        document.getElementById("p_container").appendChild(content);
     }
 }
 
@@ -110,7 +119,7 @@ const slide = document.getElementsByClassName("campaign");
 const chooseCircle = document.getElementsByClassName("circle");
 let slideIndex = 0;
 
-function resetSlide(){
+function resetSlide() {
     for (let i = 0; i < slide.length; i++) {
         slide[i].style.display = "none";
         chooseCircle[i].className = "circle";

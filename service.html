@@ -12,113 +12,116 @@
 
 <body>
     <div class="web">
-    <div class="base">
-        <div class="btn_00">
-            <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
-            <div class="btn_01">
-                <ul class="shopHeader">
-                    <li><a href="index.html?tag=women">女裝</a></li>
-                    <li><a href="index.html?tag=men">男裝</a></li>
-                    <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
-                </ul>
+        <div class="mask" onclick="closeMask()"></div>
+        <div class="base">
+            <div class="btn_00">
+                <img class="btn_logo01" src="images/logo.png" onclick="goIndex()">
+                <div class="btn_01">
+                    <ul class="shopHeader">
+                        <li><a href="index.html?tag=women">女裝</a></li>
+                        <li><a href="index.html?tag=men">男裝</a></li>
+                        <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="userAct">
+                <div class="web_searchbar">
+                    <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
+                    <img class="search" src="images/search.png" onclick="search()">
+                </div>
+                <div class="cartAct">
+                    <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
+                    <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                    <div class="cartNum" onclick="goCart()"></div>
+                    <div class="cart">購物車</div>
+                    <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
+                    <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                    <div class="member">會員</div>
+                </div>
             </div>
         </div>
-        <div class="userAct">
-            <div class="web_searchbar">
-                <input type="text" class="combinedShape searchBar" value="" onkeypress="searchKey()"></input>
-                <img class="search" src="images/search.png" onclick="search()">
-            </div>
-            <div class="cartAct">
-                <img class="btn_shopping-cart01_add" src="images/cart.png" onclick="goCart()">
-                <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
-                <div class="cartNum" onclick="goCart()"></div>
-                <div class="cart">購物車</div>
-                <img class="btn_member01_normal" src="images/member.png" onclick="goProfile()">
-                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
-                <div class="member">會員</div>
-            </div>
+        <div class="mobile_logo01">
+            <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
+            <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
+            <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKeyCode()"></input>
+            <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
         </div>
-    </div>
-    <div class="mobile_logo01">
-        <img class="mobile_logo" src="images/logo.png" onclick="goIndex()">
-        <img class="search_mo" src="images/search.png" onclick="openSearchBar()">
-        <input type="text" class="moSearch searchBar" value="" onkeypress="moSearchKey()"></input>
-        <img class="s_search_mo" src="images/search.png" onclick="moSearch()">
-    </div>
-    <div class=mobile_nav01>
-        <ul class="mobile_nav">
-            <li><a href="index.html?tag=women">女裝</a></li>
-            <li><a href="index.html?tag=men">男裝</a></li>
-            <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
-        </ul>
-    </div>
-    <div class="mobile_user">
-        <div class="cart">
-            <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
-            <span onclick="goCart()">購物車</span>
-        </div>
-        <span class="mo_cart_center">|</span>
-        <div class="member">
-            <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
-            <span>會員</span>
-        </div>
-    </div>
-    <div class="baseBorder"></div>
-    <main>
-        <div class="view">
-            <h1>服務條款</h1>
-            <div class="mainTitle">認知與接受條款</div>
-            <p>STYLiSH國際股份有限公司（以下簡稱STYLiSH），係依據本服務條款提供STYLiSH服務(以下簡稱「本服務」)。當您使用本服務時，即表示您已閱讀、瞭解並同意接受本服務條款之所有內容。此外，當您使用
-                STYLiSH 的特定服務時，可能會依據該特定服務之性質，而須遵守 STYLiSH 所另行公告之服務條款或相關規定。此另行公告之服務條款或相關規定（包括但不限於反垃圾郵件政策）亦均併入屬於本服務條款之一部分。
-                STYLiSH有權於任何時間修改或變更本服務條款之內容，建議您隨時注意該等修改或變更。您於任何修改或變更後繼續使用本服務，視為您已閱讀、瞭解並同意接受該等修改或變更。如果您不同意本服務條款的內容，或者您所屬的國家或地域排除本服務條款內容之全部或部份時，您應立即停止使用本服務。
-                若您為未滿二十歲，除應符合上述規定外，並應於您的家長（或監護人）閱讀、瞭解並同意本服務條款之所有內容及其後修改變更後，方得使用或繼續使用本服務。當您使用或繼續使用本服務時，即推定您的家長（或監護人）已閱讀、瞭解並同意接受本服務條款之所有內容及其後修改變更。
-            </p> 　
-            <div class="mainTitle">兒童及青少年之保護</div>
-            <p>兒童及青少年上網已經成為無可避免之趨勢，使用網際網路獲取知識更可以培養子女的成熟度與競爭能力。然而網路上的確存有不適宜兒童及青少年接受的訊息，例如色情與暴力的訊息，兒童及青少年有可能因此受到心靈與肉體上的傷害。因此，為確保兒童及青少年使用網路的安全，並避免隱私權受到侵犯，家長（或監護人）應盡到下列義務：
-            </p>
-            <ul>
-                <li>先檢閱各該網站是否有保護個人資料的「隱私權政策」，再決定是否同意提出相關的個人資料；並應持續叮嚀兒童及青少年不可洩漏自己或家人的任何資料（包括姓名、地址、電話、電子郵件信箱、照片、信用卡號等）給任何人。也不可以單獨接受網友的邀請或贈送禮物而與之見面。
-                </li>
-                <li>謹慎選擇合適網站供兒童及青少年瀏覽。未滿十二歲之兒童上網時，應全程在旁陪伴，十二歲以上未滿十八歲之青少年上網前亦應斟酌是否給予同意。</li> 　
+        <div class=mobile_nav01>
+            <ul class="mobile_nav">
+                <li><a href="index.html?tag=women">女裝</a></li>
+                <li><a href="index.html?tag=men">男裝</a></li>
+                <li id="accessories"><a href="index.html?tag=accessories">配件</a></li>
             </ul>
-            <div class="mainTitle">使用者的守法義務及承諾</div>
-            <p>您承諾絕不為任何非法目的或以任何非法方式使用本服務，並承諾遵守中華民國相關法規及一切使用網際網路之國際慣例。您若係中華民國以外之使用者，並同意遵守所屬國家或地域之法令。您同意並保證不得利用本服務從事侵害他人權益或違法之行為，包括但不限於：
-            </p>
-            <ul>
-                <li>上載、張貼、公布或傳送任何誹謗、侮辱、具威脅性、攻擊性、不雅、猥褻、不實、違反公共秩序或善良風俗或其他不法之文字、圖片或任何形式的檔案於本服務上。</li>
-                <li>侵害他人名譽、隱私權、營業秘密、商標權、著作權、專利權、其他智慧財產權及其他權利。</li>
-                <li>違反依法律或契約所應負之保密義務。</li>
-                <li>冒用他人名義使用本服務； EX. 上載、張貼、傳輸或散佈任何含有電腦病毒或任何對電腦軟、硬體產生中斷、破壞或限制功能之程式碼之資料。</li>
-                <li>上載、張貼、傳輸或散佈任何含有電腦病毒或任何對電腦軟、硬體產生中斷、破壞或限制功能之程式碼之資料。</li>
-                <li>從事不法交易行為或張貼虛假不實、引人犯罪之訊息。</li>
-                <li>干擾或中斷本服務或伺服器或連結本服務之網路，或不遵守連結至本服務之相關需求、程序、政策或規則等。</li>
-            </ul> 　
-            <div class="mainTitle">一般條款</div>
-            <p>本服務條款構成您與 STYLiSH 就您使用本服務之完整合意，取代您先前與 STYLiSH 間有關本服務所為之任何約定。本服務條款之解釋與適用，以及與本服務條款有關的爭議，除法律另有規定者外，均應依照中華民國法律予以處理，並以台灣台北地方法院為第一審管轄法院。               STYLiSH
-                未行使或執行本服務條款任何權利或規定，不構成前開權利或規定之棄權。若任何本服務條款規定，經有管轄權之法院認定無效，當事人仍同意法院應努力使當事人於前開規定所表達之真意生效，且本服務條款之其他規定仍應完全有效。本服務條款之標題僅係為方便起見，不具任何法律或契約效果。
-                若有任何違反本服務條款之行為，請立即與 STYLiSH 客服聯絡。</p>
         </div>
-    </main>
-    <div class="Rectangle-4">
-        <div class="footer">
-            <div class="footer_menu">
-                <ul class="compDescrib">
-                    <li><a href="about.html">關於Stylish</a></li>
-                    <li><a href="service.html">服務條款</a></li>
-                    <li><a href="privacy.html">隱私政策</a></li>
-                    <li><a href="mailto:zct398@gmail.com">聯絡我們</a></li>
-                    <li id="FAQ"><a href="FAQ.html">FAQ</a></li>
+        <div class="mobile_user">
+            <div class="cart">
+                <img class="btn_shopping-mob" src="images/cart-mobile.png" onclick="goCart()">
+                <span onclick="goCart()">購物車</span>
+            </div>
+            <span class="mo_cart_center">|</span>
+            <div class="member">
+                <img class="btn_member01_mob" src="images/member-mobile.png" onclick="goProfile()">
+                <span>會員</span>
+            </div>
+        </div>
+        <div class="baseBorder"></div>
+        <main>
+            <div class="view">
+                <h1>服務條款</h1>
+                <div class="mainTitle">認知與接受條款</div>
+                <p>STYLiSH國際股份有限公司（以下簡稱STYLiSH），係依據本服務條款提供STYLiSH服務(以下簡稱「本服務」)。當您使用本服務時，即表示您已閱讀、瞭解並同意接受本服務條款之所有內容。此外，當您使用
+                    STYLiSH 的特定服務時，可能會依據該特定服務之性質，而須遵守 STYLiSH
+                    所另行公告之服務條款或相關規定。此另行公告之服務條款或相關規定（包括但不限於反垃圾郵件政策）亦均併入屬於本服務條款之一部分。
+                    STYLiSH有權於任何時間修改或變更本服務條款之內容，建議您隨時注意該等修改或變更。您於任何修改或變更後繼續使用本服務，視為您已閱讀、瞭解並同意接受該等修改或變更。如果您不同意本服務條款的內容，或者您所屬的國家或地域排除本服務條款內容之全部或部份時，您應立即停止使用本服務。
+                    若您為未滿二十歲，除應符合上述規定外，並應於您的家長（或監護人）閱讀、瞭解並同意本服務條款之所有內容及其後修改變更後，方得使用或繼續使用本服務。當您使用或繼續使用本服務時，即推定您的家長（或監護人）已閱讀、瞭解並同意接受本服務條款之所有內容及其後修改變更。
+                </p> 　
+                <div class="mainTitle">兒童及青少年之保護</div>
+                <p>兒童及青少年上網已經成為無可避免之趨勢，使用網際網路獲取知識更可以培養子女的成熟度與競爭能力。然而網路上的確存有不適宜兒童及青少年接受的訊息，例如色情與暴力的訊息，兒童及青少年有可能因此受到心靈與肉體上的傷害。因此，為確保兒童及青少年使用網路的安全，並避免隱私權受到侵犯，家長（或監護人）應盡到下列義務：
+                </p>
+                <ul>
+                    <li>先檢閱各該網站是否有保護個人資料的「隱私權政策」，再決定是否同意提出相關的個人資料；並應持續叮嚀兒童及青少年不可洩漏自己或家人的任何資料（包括姓名、地址、電話、電子郵件信箱、照片、信用卡號等）給任何人。也不可以單獨接受網友的邀請或贈送禮物而與之見面。
+                    </li>
+                    <li>謹慎選擇合適網站供兒童及青少年瀏覽。未滿十二歲之兒童上網時，應全程在旁陪伴，十二歲以上未滿十八歲之青少年上網前亦應斟酌是否給予同意。</li> 　
                 </ul>
+                <div class="mainTitle">使用者的守法義務及承諾</div>
+                <p>您承諾絕不為任何非法目的或以任何非法方式使用本服務，並承諾遵守中華民國相關法規及一切使用網際網路之國際慣例。您若係中華民國以外之使用者，並同意遵守所屬國家或地域之法令。您同意並保證不得利用本服務從事侵害他人權益或違法之行為，包括但不限於：
+                </p>
+                <ul>
+                    <li>上載、張貼、公布或傳送任何誹謗、侮辱、具威脅性、攻擊性、不雅、猥褻、不實、違反公共秩序或善良風俗或其他不法之文字、圖片或任何形式的檔案於本服務上。</li>
+                    <li>侵害他人名譽、隱私權、營業秘密、商標權、著作權、專利權、其他智慧財產權及其他權利。</li>
+                    <li>違反依法律或契約所應負之保密義務。</li>
+                    <li>冒用他人名義使用本服務； EX. 上載、張貼、傳輸或散佈任何含有電腦病毒或任何對電腦軟、硬體產生中斷、破壞或限制功能之程式碼之資料。</li>
+                    <li>上載、張貼、傳輸或散佈任何含有電腦病毒或任何對電腦軟、硬體產生中斷、破壞或限制功能之程式碼之資料。</li>
+                    <li>從事不法交易行為或張貼虛假不實、引人犯罪之訊息。</li>
+                    <li>干擾或中斷本服務或伺服器或連結本服務之網路，或不遵守連結至本服務之相關需求、程序、政策或規則等。</li>
+                </ul> 　
+                <div class="mainTitle">一般條款</div>
+                <p>本服務條款構成您與 STYLiSH 就您使用本服務之完整合意，取代您先前與 STYLiSH
+                    間有關本服務所為之任何約定。本服務條款之解釋與適用，以及與本服務條款有關的爭議，除法律另有規定者外，均應依照中華民國法律予以處理，並以台灣台北地方法院為第一審管轄法院。 STYLiSH
+                    未行使或執行本服務條款任何權利或規定，不構成前開權利或規定之棄權。若任何本服務條款規定，經有管轄權之法院認定無效，當事人仍同意法院應努力使當事人於前開規定所表達之真意生效，且本服務條款之其他規定仍應完全有效。本服務條款之標題僅係為方便起見，不具任何法律或契約效果。
+                    若有任何違反本服務條款之行為，請立即與 STYLiSH 客服聯絡。</p>
             </div>
-            <div class="socialMedia">
-                <img class="btn_line01_normal" src="images/line.png">
-                <img class="btn_twitter01_normal" src="images/twitter.png">
-                <img class="btn_facebook01_normal" src="images/facebook.png">
+        </main>
+        <div class="Rectangle-4">
+            <div class="footer">
+                <div class="footer_menu">
+                    <ul class="compDescrib">
+                        <li><a href="about.html">關於Stylish</a></li>
+                        <li><a href="service.html">服務條款</a></li>
+                        <li><a href="privacy.html">隱私政策</a></li>
+                        <li><a href="mailto:zct398@gmail.com">聯絡我們</a></li>
+                        <li id="FAQ"><a href="FAQ.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="socialMedia">
+                    <img class="btn_line01_normal" src="images/line.png">
+                    <img class="btn_twitter01_normal" src="images/twitter.png">
+                    <img class="btn_facebook01_normal" src="images/facebook.png">
+                </div>
             </div>
+            <div class="copyright">&copy; 2018 All rights reserved.</div>
         </div>
-        <div class="copyright">&copy; 2018 All rights reserved.</div>
     </div>
-</div>
     <script src="js/app.js"></script>
     <script src="js/checkfb.js"></script>
 </body>
