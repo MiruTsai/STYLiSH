@@ -14,16 +14,13 @@ input[type=radio]+label{
     padding: 50px 0;
 }
 .productContainer{   
-    display:flex; 
+    display: flex; 
     flex-wrap: wrap;
+    justify-content: center;
 }
 .main_pic,
 .info{
     padding: 0 30px;     
-}
-.main_pic{
-    flex-basis:65%;
-    width:40%;
 }
 .info{
     flex-basis:35%;
@@ -142,7 +139,6 @@ button[disabled]{
 .place{
     margin-top: 50px;
 }
-
 .note{
     margin:30px 0 50px 0;
 }
@@ -188,18 +184,16 @@ button[disabled]{
     color: #3f3a3a;    
     margin:10px 30px;
 }
-.subpic{
+.subpic,.subpic2{
     height: 100%;
     width:  100%;
     padding: 0 30px;
 }
-
-
 .disable{
     opacity: 0.2;
 }
 /* media query */
-@media(max-width:1200px){
+@media(max-width:1024px){
 .productPage{
     width:90%;
     padding: 10px 0;
@@ -211,15 +205,20 @@ button[disabled]{
 .info{
     padding: 0 10px;
 }
+.info{
+    flex-basis:90%;
+}
+.explain{
+    flex-basis: 15%;
+}
 .detail{    
     margin: 20px 10px;    
 }
-
 }
+
 @media(max-width:640px){
 
-.main_pic,
-.info{
+.main_pic{
     width:100%;
     padding: 0px;    
 }
@@ -240,7 +239,6 @@ button[disabled]{
 .countContainer{
     justify-content: center;
 }
-
 .plus,
 .subtract{
     margin:0 20px;
@@ -248,8 +246,6 @@ button[disabled]{
 .add_in_cart{
     width:100%;
 }
-
-
 .explain{    
     flex-basis: 40%;
     letter-spacing: 4px;    
@@ -258,7 +254,6 @@ button[disabled]{
     line-height: 1.5;
     color:#8b572a;
 }
-
 .longLine{
     height:1px;
     flex-basis: 80%;
@@ -276,11 +271,8 @@ button[disabled]{
     top:33px;
     right:82px;
 }
-
-
 }
 @media (max-width:480px){
-
 .productPage{
     width:100%;
     padding:0 0 20px 0;
@@ -297,6 +289,7 @@ button[disabled]{
 }
 .info{
     padding:0 15px;
+    flex-basis: 100%;
 }
 
 .place{

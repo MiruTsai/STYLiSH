@@ -25,8 +25,6 @@ fb.init = function () {
 };
 window.fbAsyncInit = fb.init;
 window.addEventListener("DOMContentLoaded", fb.load);
-
-
 //創建API所需body
 let parseToken;
 let FBtoken;
@@ -34,7 +32,7 @@ function createSendToken() {
     FBtoken = {
         provider: "facebook",
         access_token: token
-    }
+    };
     parseToken = JSON.stringify(FBtoken);
 }
 
@@ -46,7 +44,7 @@ function sendToken() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             localStorage.setItem("userToken", xhr.responseText);
-        };
+        }
     };
     xhr.send(parseToken);
 }
@@ -64,7 +62,6 @@ function testAPI() {
         }
     });
 }
-
 
 // 呼叫FB"檢查登入狀態"函式
 function statusChangeCallback(response) {
@@ -89,8 +86,6 @@ function statusChangeCallback(response) {
 }
 
 //如果FB狀態為登入，右上會員頭像擷取FB帳號圖片。
-
-
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);

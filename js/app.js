@@ -30,6 +30,24 @@ if (tag === null) {
     category = tag;
 }
 
+//open mobile searchbar
+function openSearchBar() {
+    mask.style.display = "block";
+    document.querySelector(".moSearch").style.display = "inline-block";
+    document.querySelector(".search_mo").style.display = "none";
+    document.querySelector(".s_search_mo").style.display = "inline-block";
+}
+
+//close mobile searchbar
+function closeMask() {
+    mask.addEventListener("click", function () {
+        document.querySelector(".moSearch").style.display = "none";
+        document.querySelector(".search_mo").style.display = "block";
+        document.querySelector(".s_search_mo").style.display = "none";
+        mask.style.display = "none";
+    });
+}
+
 function search() {
     let userInput = document.querySelector(".searchBar").value;
     if (!userInput) {
@@ -46,7 +64,7 @@ function search() {
 function searchKey() {
     let userInput = document.querySelector(".searchBar").value;
     if (!userInput) {
-        alert("請輸入欲搜尋商品！")
+        alert("請輸入欲搜尋商品！");
         return
     } else {
         if (event.keyCode === 13) {
@@ -91,23 +109,6 @@ function moSearch() {
     }
 }
 
-//open mobile searchbar
-function openSearchBar() {
-    mask.style.display = "block";
-    document.querySelector(".moSearch").style.display = "inline-block";
-    document.querySelector(".search_mo").style.display = "none";
-    document.querySelector(".s_search_mo").style.display = "inline-block";
-}
-
-//close mobile searchbar
-function closeMask() {
-    mask.addEventListener("click", function () {
-        document.querySelector(".moSearch").style.display = "none";
-        document.querySelector(".search_mo").style.display = "block";
-        document.querySelector(".s_search_mo").style.display = "none";
-        mask.style.display = "none";
-    });
-}
 //購物車商品數量
 let cartNum = document.querySelector(".cartNum");
 //如果沒有資料留下來的話，塞給它空陣列

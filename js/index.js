@@ -76,8 +76,6 @@ window.addEventListener("scroll", function () {
 productPage(`${productAPI}${category}`, function (response) { render(response); })
 
 //campaigns
-let bannerText;
-
 function campaigns(cam) {
     let data = JSON.parse(cam).data;
     for (let i = 0; i < data.length; i++) {
@@ -133,7 +131,7 @@ function slideShow() {
     slide[slideIndex - 1].style.display = "block";
     chooseCircle[slideIndex - 1].className = "circle choosen";
     for (let j = 0; j < chooseCircle.length; j++) {
-        chooseCircle[j].addEventListener('click', (e) => {
+        chooseCircle[j].addEventListener("click", (e) => {
             resetSlide();
             slide[e.target.name].style.display = "block";
             chooseCircle[e.target.name].className = "circle choosen";

@@ -1,21 +1,19 @@
-
 const cartOrderList = document.querySelector(".cartOrderList");
-const empty = document.createElement("div");
-empty.className = "empty";
 const APP_ID = 12348;
 const APP_KEY = "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF";
 let prime;
 let parseOrderList = JSON.parse(localStorage.getItem("List"));
-
 let mobileItemUnitPrice;
 let webQuantity;
 let itemUnitPrice;
 let itemTotalPrice;
-let mobileUnitPrice
+let mobileUnitPrice;
 let mobileTotalPrice;
-let mobileQuantity
+let mobileQuantity;
 
 if (parseOrderList === null) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
     cartOrderList.appendChild(empty);
     empty.textContent = "購物車空空的耶";
 } else {
@@ -106,7 +104,7 @@ if (parseOrderList === null) {
         mobileUnitPrice.className = "mobileUnitPrice";
         let unitPrice = document.createElement("span");
         unitPrice.className = "title";
-        unitPrice.textContent = "單價"
+        unitPrice.textContent = "單價";
         itemUnitPrice = document.createElement("div");
         itemUnitPrice.className = "itemUnitPrice";
         itemUnitPrice.textContent = parseOrderList[i].price;
@@ -155,8 +153,8 @@ if (parseOrderList === null) {
     }
 }
 
-const counter = document.getElementsByClassName("quantity")
-const mobileCounter = document.getElementsByClassName("mobileQuantity")
+const counter = document.getElementsByClassName("quantity");
+const mobileCounter = document.getElementsByClassName("mobileQuantity");
 const billMoneyArea = document.querySelector(".billMoney");
 const shippingMoneyArea = document.querySelector(".shippingMoney");
 const totalMoneyArea = document.querySelector(".totalMoney");
@@ -383,28 +381,21 @@ function createOrder() {
 
 function onSubmit() {
     if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
-        alert("請輸入您的完整聯絡資訊")
+        alert("請輸入您的完整聯絡資訊");
         return
     };
-
-    // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus()
-
-    // 確認是否可以 getPrime
     if (tappayStatus.canGetPrime === false) {
         alert("請輸入完整信用卡資料")
         return
     }
-    // Get prime
     TPDirect.card.getPrime((result) => {
         if (result.status !== 0) {
-            alert("請輸入完整信用卡資料")
+            alert("請輸入完整信用卡資料");
             return
         }
         alert("get prime 成功，prime: " + result.card.prime)
         prime = result.card.prime;
-        // send prime to your server, to pay with Pay by Prime API .
-        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
         createOrder();
         ajax();
     })
@@ -419,7 +410,6 @@ function ajax() {
     xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
     //如果有FBtoken(已登入FB)
     if (cartFBtoken) {
-
         xhr.setRequestHeader("Authorization", `Bearer ${cartFBtoken}`);
         xhr.setRequestHeader("Content-type", "application/json");
         xhr.onreadystatechange = function () {
