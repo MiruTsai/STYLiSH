@@ -40,12 +40,12 @@ function openSearchBar() {
 
 //close mobile searchbar
 function closeMask() {
-    mask.addEventListener("click", function () {
-        document.querySelector(".moSearch").style.display = "none";
-        document.querySelector(".search_mo").style.display = "block";
-        document.querySelector(".s_search_mo").style.display = "none";
-        mask.style.display = "none";
-    });
+    document.getElementById("p_container").innerHTML = null;
+    document.querySelector(".moSearch").style.display = "none";
+    document.querySelector(".search_mo").style.display = "block";
+    document.querySelector(".s_search_mo").style.display = "none";
+    mask.style.display = "none";
+
 }
 
 function search() {
@@ -68,9 +68,9 @@ function searchKey() {
         return
     } else {
         if (event.keyCode === 13) {
+            closeMask();
             productPage(productAPI + "search?keyword=" + userInput, function (response) {
                 document.getElementById("p_container").innerHTML = null;
-                closeMask();
                 render(response);
             });
         };
@@ -86,7 +86,6 @@ function moSearchKeyCode() {
     } else {
         if (event.keyCode === 13) {
             productPage(productAPI + "search?keyword=" + userInput, function (response) {
-                document.getElementById("p_container").innerHTML = null;
                 closeMask();
                 render(response);
             });
@@ -102,7 +101,6 @@ function moSearch() {
         return
     } else {
         productPage(productAPI + "search?keyword=" + userInput, function (response) {
-            document.getElementById("p_container").innerHTML = null;
             closeMask();
             render(response);
         });
