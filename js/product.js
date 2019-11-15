@@ -2,18 +2,16 @@
 // let params = new URL(originalURL);
 let id = params.searchParams.get("id");
 const productContainer = document.querySelector(".productContainer");
+const title = document.querySelector(".title");
+const itemPrice = document.querySelector(".price");
+const productID = document.querySelector(".id");
+const picture = document.querySelector(".main_pic");
 let stock;
 let noneStock;
-let itemPrice;
-let cartButton;
 let stockQuantity;
 
 function productRender(parseData) {
     let pDetail = JSON.parse(parseData);
-    const picture = document.querySelector(".main_pic");
-    const title = document.querySelector(".title");
-    const productID = document.querySelector(".id");
-    const itemPrice = document.querySelector(".price");
     const colorContainer = document.querySelector(".colorContainer");
     const sizeContainer = document.querySelector(".sizeContainer");
     const noteContainer = document.querySelector(".noteContainer");
