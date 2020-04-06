@@ -59,7 +59,6 @@ border-right:0px;
   z-index: 1001;
   right:150px;
   top:33px;
-
 }
 .combinedShape {
   position: relative;
@@ -72,11 +71,14 @@ border-right:0px;
 }
 .moSearch{
   display: none;
-  width:100px;
+  width:130px;
   border: solid 1px #979797;
   border-radius: 25px;    
-  font-size:12px;  padding-left: 10px;
-  background-color: #ffffff;
+  font-size:12px;  
+  padding: 8px;  
+  position:absolute;
+  right:10px;
+  z-index:101;
 }
 
 .cartNum{
@@ -162,7 +164,7 @@ align-items: center;
 .btn_member01_mob,
 .btn_shopping-mob,
 .mobile_nav,
-.mobile_logo01,
+.moSearchBar,
 .mobile_user,
 .moSearch,
 .search_mo,
@@ -293,14 +295,7 @@ align-items: center;
 }
 
 /* Face Book */
-/* .fb_iframe_widget {
-  display: block;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
+
 .FBloginZone{
   margin: 170px auto;
   text-align: center;
@@ -415,16 +410,13 @@ height:70px;
   display: flex;
   align-items: center;
 }
-.moSearch,
-.combinedShape{
-  display: none;
-  width:120px;
-  border: solid 1px #979797;
-  border-radius: 25px;    
-  font-size:12px;
-  padding-left: 10px;
-  background-color: #ffffff;
-  
+.moSearchBar .search_mo{
+  display: block;
+}
+
+
+.web_searchbar{
+  display: none;  
 }
 .search{
   position: static;
@@ -435,6 +427,9 @@ height:70px;
 .s_search_mo{
   width: 25px;
   height:25px;
+  position: absolute;
+  right:20px;
+  z-index: 102;
 }
 .rect{
   width: 12px;
@@ -461,18 +456,21 @@ margin-right: 30px;
 }
 
 @media (max-width:450px) {
-
-/*display none/on*/
 .baseBorder,
 .btn_shopping-cart01_add,
 .btn_member01_normal,
-.base{ display: none;
+.base{ 
+  display: none;
 }
 .cart,
 .member{
 display: inline-block;
 color:#ffffff;
 }
+.moSearchBar{
+  display: flex;
+}
+
 .mobile_nav{
 width: 100%;
 display: flex;
@@ -491,15 +489,15 @@ text-align: center;
   height:185px;
 }
 
-
-.mobile_logo01{
+.moSearchBar{
 width: 360px;
-display: flex;
 height: 50px;
 text-align: center;
 align-items: center;
 justify-content: space-around;
 }
+
+
 
 .mobile_logo{
 height: 20px;

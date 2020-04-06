@@ -45,7 +45,7 @@ function closeMask() {
     document.querySelector(".s_search_mo").style.display = "none";
     mask.style.display = "none";
 }
-mask.addEventListener('click',closeMask)
+mask.addEventListener('click', closeMask)
 
 
 function search() {
@@ -63,33 +63,37 @@ function search() {
 //search bar keyboard
 function searchKey() {
     let userInput = document.querySelector(".searchBar").value;
-    if (!userInput) {
-        alert("請輸入欲搜尋商品！");
-        return
-    } else {
-        if (event.keyCode === 13) {
-            closeMask();
+    if (event.keyCode === 13) {
+        if (!userInput) {
+            alert("請輸入欲搜尋商品！");
+            return
+        } else {
             productPage(productAPI + "search?keyword=" + userInput, function (response) {
+                closeMask();
                 document.getElementById("p_container").innerHTML = null;
                 render(response);
             });
-        };
+        }
+    } else {
+        return
     }
 }
 
 //mobile searchbar keyboard
 function moSearchKeyCode() {
     let userInput = document.querySelector(".moSearch").value;
-    if (!userInput) {
-        alert("請輸入欲搜尋商品！");
-        return
-    } else {
-        if (event.keyCode === 13) {
+    if (event.keyCode === 13) {
+        if (!userInput) {
+            alert("請輸入欲搜尋商品！");
+            return
+        } else {
             productPage(productAPI + "search?keyword=" + userInput, function (response) {
                 closeMask();
                 render(response);
             });
         }
+    } else {
+        return
     }
 }
 
@@ -113,33 +117,30 @@ function getLocalStorage() {
     if (JSON.parse(localStorage.getItem("List")) === null) {
         orderList = [];
         cartNum.textContent = 0;
-    } else {        
+    } else {
         orderList = JSON.parse(localStorage.getItem("List"));
         cartNum.textContent = orderList.length;
     }
 }
 
 function goIndex() {
-    document.querySelector('.btn_logo').addEventListener('click',function(){
+    document.querySelector('.btn_logo').addEventListener('click', function () {
         window.location.href = "index.html";
     });
-    document.querySelector('.mobile_logo').addEventListener('click',function(){
-        window.location.href = "index.html";
-    });    
 }
 
-function cartAction (target){
+function cartAction(target) {
     let action = document.querySelector(target)
-    action.addEventListener('click',function(e){        
-        if(e.target.classList.contains('btn_shopping-cart01_add')||e.target.classList.contains('btn_shopping-mob')||e.target.classList.contains('cartNum')){
+    action.addEventListener('click', function (e) {
+        if (e.target.classList.contains('btn_shopping-cart01_add') || e.target.classList.contains('btn_shopping-mob') || e.target.classList.contains('cartNum')) {
             window.location.href = "cart.html";
-        }else if(   e.target.classList.contains('btn_member01_normal')||e.target.classList.contains('btn_member01_mob')){
+        } else if (e.target.classList.contains('btn_member01_normal') || e.target.classList.contains('btn_member01_mob')) {
             window.location.href = "profile.html";
         }
     })
 }
 
-window.addEventListener('DOMContentLoaded',function(){
+window.addEventListener('DOMContentLoaded', function () {
     goIndex();
     cartAction('.cartAct');
     cartAction('.mobile_user');
