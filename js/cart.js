@@ -211,10 +211,12 @@ function getMobileItemTotalPrice() {
 getMobileItemTotalPrice();
 
 // delete feature
-const deleteIcon = document.getElementsByClassName("remove");
-const mobileDeleteIcon = document.getElementsByClassName("mobileRemove")
 
-function deleteOrder() {
+function addDeleteOrderFX(target) {
+    let deleteIcon = document.getElementsByClassName(target);
+    if(!deleteIcon){
+        return
+    }
     for (let i = 0; i < deleteIcon.length; i++) {
         deleteIcon[i].addEventListener("click", () => {
             alert("已從購物車移除");
@@ -224,19 +226,8 @@ function deleteOrder() {
         })
     }
 }
-deleteOrder();
 
-function mobileDeleteOrder() {
-    for (let i = 0; i < mobileDeleteIcon.length; i++) {
-        mobileDeleteIcon[i].addEventListener("click", () => {
-            alert("已從購物車移除");
-            parseOrderList.splice(i, 1);
-            localStorage.setItem("List", JSON.stringify(parseOrderList));
-            window.location.reload();
-        })
-    }
-}
-mobileDeleteOrder();
+
 
 //TAP PAY
 let fields = {
@@ -345,19 +336,23 @@ const userName = document.getElementById("userName");
 const mobileNumber = document.getElementById("mobileNumber");
 const email = document.getElementById("email");
 const address = document.getElementById("address");
-const radiobutton = document.getElementsByName("shippingTime");
 const shippingCountry = document.querySelector(".shippingCountry");
 const payment = document.querySelector(".paymentMethod");
-let chooseTime;
 
-for (let i = 0; i < radiobutton.length; i++) {
-    if (radiobutton[i].checked === true) {
-        chooseTime = radiobutton[i].value;
+
+function getShipTime (){
+    const radiobutton = document.getElementsByName("shippingTime");
+    let chooseTime;
+    for (let i = 0; i < radiobutton.length; i++) {
+        if (radiobutton[i].checked === true) {
+            chooseTime = radiobutton[i].value;
+        }
     }
+    return chooseTime
 }
 
-let sendOrder;
 function createOrder() {
+    let chooseTime = getShipTime ();
     let order = {
         "prime": prime,
         "order": {
@@ -376,10 +371,11 @@ function createOrder() {
             "list": parseOrderList
         }
     }
-    sendOrder = JSON.stringify(order);
+    return JSON.stringify(order);
 }
 
 function onSubmit() {
+    let chooseTime = getShipTime ();
     if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
         alert("請輸入您的完整聯絡資訊");
         return
@@ -406,7 +402,8 @@ function onSubmit() {
 const cartFBtoken = JSON.parse(localStorage.getItem("userToken"));
 
 function ajax() {
-    let xhr = new XMLHttpRequest();
+    let order = createOrder();
+    let xhr = new XMLHttpRequest();    
     xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
     //如果有FBtoken(已登入FB)
     if (cartFBtoken) {
@@ -418,8 +415,8 @@ function ajax() {
                 localStorage.setItem("orderNumber", JSON.stringify(xhr.responseText));
                 window.location.assign("thankyou.html");
             };
-        };
-        xhr.send(sendOrder);
+        };        
+        xhr.send(order);
     } else {
         //沒登入FB
         xhr.setRequestHeader("Content-type", "application/json");
@@ -430,6 +427,11 @@ function ajax() {
                 window.location.assign("thankyou.html");
             };
         };
-        xhr.send(sendOrder);
+        xhr.send(order);
     }
 }
+
+window.addEventListener('DOMContentLoaded',function(){
+    addDeleteOrderFX('mobileRemove');
+    addDeleteOrderFX('remove');
+})

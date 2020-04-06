@@ -44,8 +44,9 @@ function closeMask() {
     document.querySelector(".search_mo").style.display = "block";
     document.querySelector(".s_search_mo").style.display = "none";
     mask.style.display = "none";
-
 }
+mask.addEventListener('click',closeMask)
+
 
 function search() {
     let userInput = document.querySelector(".searchBar").value;
@@ -106,31 +107,41 @@ function moSearch() {
     }
 }
 
-//購物車商品數量
-let cartNum = document.querySelector(".cartNum");
-//如果沒有資料留下來的話，塞給它空陣列
+//購物車商品數量，如果沒有資料留下來的話，塞給它空陣列
 function getLocalStorage() {
-    if (localStorage.getItem("List") === null) {
+    let cartNum = document.querySelector(".cartNum");
+    if (JSON.parse(localStorage.getItem("List")) === null) {
         orderList = [];
         cartNum.textContent = 0;
-    } else {
-        //讀取使用者購買物品數量，因為localStorage已經將JSON資料轉成編碼，所以轉回來JSON
+    } else {        
         orderList = JSON.parse(localStorage.getItem("List"));
         cartNum.textContent = orderList.length;
     }
-};
-
-getLocalStorage();
-
-function goCart() {
-    window.location.href = "cart.html";
-};
+}
 
 function goIndex() {
-    window.location.href = "index.html";
-};
+    document.querySelector('.btn_logo').addEventListener('click',function(){
+        window.location.href = "index.html";
+    });
+    document.querySelector('.mobile_logo').addEventListener('click',function(){
+        window.location.href = "index.html";
+    });    
+}
 
-function goProfile() {
-    window.location.href = "profile.html";
-};
+function cartAction (target){
+    let action = document.querySelector(target)
+    action.addEventListener('click',function(e){        
+        if(e.target.classList.contains('btn_shopping-cart01_add')||e.target.classList.contains('btn_shopping-mob')||e.target.classList.contains('cartNum')){
+            window.location.href = "cart.html";
+        }else if(   e.target.classList.contains('btn_member01_normal')||e.target.classList.contains('btn_member01_mob')){
+            window.location.href = "profile.html";
+        }
+    })
+}
 
+window.addEventListener('DOMContentLoaded',function(){
+    goIndex();
+    cartAction('.cartAct');
+    cartAction('.mobile_user');
+    getLocalStorage();
+})
