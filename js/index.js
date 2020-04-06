@@ -1,9 +1,9 @@
 //render index
 const indexContainer = document.getElementById("p_container");
-
+let paging;
 function render(parseData) {
-    let products = JSON.parse(parseData);
-    paging = products.paging;
+    let products = JSON.parse(parseData);    
+    paging = products.next_paging;
     if (products.data.length === 0) {
         let noProduct = document.createElement("div");
         noProduct.className = "noProduct";
@@ -53,8 +53,8 @@ function render(parseData) {
 //infiniteRoll
 let loading = false;
 function infiniteRoll() {
-    let exportPage;
-    if (paging) {
+    let exportPage;    
+    if (paging) {        
         exportPage = `${productAPI}${category}${pagingQuery}${paging}`
     } else {
         return
@@ -66,7 +66,7 @@ function infiniteRoll() {
 window.addEventListener("scroll", function () {
     let footerTop = document.querySelector(".Rectangle-4").getBoundingClientRect().top;
     let yScroll = window.pageYOffset;
-    if (footerTop - yScroll < 0 && !loading) {
+    if (footerTop - yScroll < 0 && !loading) {        
         window.requestAnimationFrame(function () {
             infiniteRoll();
         });

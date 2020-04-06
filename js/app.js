@@ -4,7 +4,6 @@ const mask = document.querySelector(".mask");
 let pagingQuery = "?paging="
 let category;
 let sourcePage = `${productAPI}${category}${pagingQuery}`;
-let paging;
 let tag = "";
 let orderList = [];
 let orderListCount = document.querySelector(".orderList");
