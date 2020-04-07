@@ -431,7 +431,7 @@ function ajax() {
     }
 }
 
-window.addEventListener('DOMContentLoaded',function(){
-    addDeleteOrderFX('mobileRemove');
-    addDeleteOrderFX('remove');
+window.addEventListener("DOMContentLoaded",function(){
+    addDeleteOrderFX("mobileRemove");
+    addDeleteOrderFX("remove");
 })

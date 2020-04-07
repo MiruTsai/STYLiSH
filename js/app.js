@@ -1,12 +1,11 @@
 const AppScoolHostAPI = "https://api.appworks-school.tw/api/1.0";
 const productAPI = "https://api.appworks-school.tw/api/1.0/products/";
 const mask = document.querySelector(".mask");
+const orderListCount = document.querySelector(".orderList");
 let pagingQuery = "?paging="
 let category;
 let sourcePage = `${productAPI}${category}${pagingQuery}`;
 let tag = "";
-let orderList = [];
-let orderListCount = document.querySelector(".orderList");
 
 //product category 
 function productPage(src, callback) {
@@ -45,7 +44,7 @@ function closeMask() {
     document.querySelector(".s_search_mo").style.display = "none";
     mask.style.display = "none";
 }
-mask.addEventListener('click', closeMask)
+mask.addEventListener("click", closeMask);
 
 
 function search() {
@@ -113,36 +112,35 @@ function moSearch() {
 
 //購物車商品數量，如果沒有資料留下來的話，塞給它空陣列
 function getLocalStorage() {
-    let cartNum = document.querySelector(".cartNum");
-    if (JSON.parse(localStorage.getItem("List")) === null) {
-        orderList = [];
+    let orderList = JSON.parse(localStorage.getItem("List")),
+        cartNum = document.querySelector(".cartNum");
+    if (!orderList) {
         cartNum.textContent = 0;
     } else {
-        orderList = JSON.parse(localStorage.getItem("List"));
         cartNum.textContent = orderList.length;
     }
 }
 
 function goIndex() {
-    document.querySelector('.btn_logo').addEventListener('click', function () {
+    document.querySelector(".btn_logo").addEventListener("click", function () {
         window.location.href = "index.html";
     });
 }
 
 function cartAction(target) {
-    let action = document.querySelector(target)
-    action.addEventListener('click', function (e) {
-        if (e.target.classList.contains('btn_shopping-cart01_add') || e.target.classList.contains('btn_shopping-mob') || e.target.classList.contains('cartNum')) {
+    let action = document.querySelector(target);
+    action.addEventListener("click", function (e) {
+        if (e.target.classList.contains("btn_shopping-cart01_add") || e.target.classList.contains("btn_shopping-mob") || e.target.classList.contains("cartNum")) {
             window.location.href = "cart.html";
-        } else if (e.target.classList.contains('btn_member01_normal') || e.target.classList.contains('btn_member01_mob')) {
+        } else if (e.target.classList.contains("btn_member01_normal") || e.target.classList.contains("btn_member01_mob")) {
             window.location.href = "profile.html";
         }
     })
 }
 
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener("DOMContentLoaded", function () {
     goIndex();
-    cartAction('.cartAct');
-    cartAction('.mobile_user');
+    cartAction(".cartAct");
+    cartAction(".mobile_user");
     getLocalStorage();
 })
