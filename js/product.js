@@ -57,18 +57,15 @@ function productRender(parseData) {
         noteContainer.appendChild(description);
     }
     place.textContent = `產地：${pDetail.data.place}`;
-    story.textContent = pDetail.data.story
-    subpic1.src = pDetail.data.images[0]
-    subpic2.src = pDetail.data.images[1]
+    story.textContent = pDetail.data.story;
+    subpic1.src = pDetail.data.images[0];
+    subpic2.src = pDetail.data.images[1];
     stock = pDetail.data.variants;
-    console.log(stock)
     selectItem();
     count();
     userOrder();
     getStock();
 }
-
-productPage(productAPI + "details?id=" + currentProductID, function (response) { productRender(response); });
 
 function removeDefaultColor() {
     let selectColor = Array.from(document.getElementsByClassName("rect"));
@@ -109,7 +106,7 @@ function selectItem() {
             currentStock = getStock();
             let noSize = outStock();
             let size = document.getElementsByClassName("size-icon");
-            for (let i = 0; i < size.length; i++) {
+            for (let i = 0, max = size.length; i < max; i++) {
                 if (size[i].textContent === noSize) {
                     size[i].disabled = true;
                 } else {
@@ -136,8 +133,8 @@ function selectItem() {
 }
 
 function getStock() {
-    let selectSize = document.querySelector('.sizeSelected').textContent,
-        hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor),
+    let selectSize = document.querySelector(".sizeSelected").textContent,
+        hexColor = rgbToHex(document.querySelector(".rectSelected").style.backgroundColor),
         stockQuantity = stock.filter(item => {
             return (`#${item.color_code}` === hexColor && item.size === selectSize)
         })[0].stock;
@@ -145,7 +142,7 @@ function getStock() {
 }
 
 function outStock() {
-    let hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor);
+    let hexColor = rgbToHex(document.querySelector(".rectSelected").style.backgroundColor);
     for (let i = 0; i < stock.length; i++) {
         if (hexColor === `#${stock[i].color_code}` && stock[i].stock === 0) {
             return stock[i].size;
@@ -156,7 +153,7 @@ function outStock() {
 function count() {
     let plus = document.querySelector(".plus"),
         subtract = document.querySelector(".subtract"),
-        quantity = document.querySelector(".quantity"),        
+        quantity = document.querySelector(".quantity"),
         countNumber = 1;
     plus.addEventListener("click", () => {
         //如果數量小於庫存,數量+1
@@ -168,7 +165,7 @@ function count() {
             }
         } else if (currentStock === 0) {
             quantity.textContent = 0;
-            alert("沒有庫存囉！")
+            alert("沒有庫存囉！");
         }
     })
     subtract.addEventListener("click", () => {
@@ -196,8 +193,8 @@ function userOrder() {
     let cartButton = document.querySelector(".add_in_cart"),
         count = document.querySelector(".quantity"),
         stockQuantity = getStock(),
-        hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor),
-        hexColorText = document.querySelector('.rectSelected').title,
+        hexColor = rgbToHex(document.querySelector(".rectSelected").style.backgroundColor),
+        hexColorText = document.querySelector(".rectSelected").title,
         orderList = JSON.parse(localStorage.getItem("List")),
         cartNum = document.querySelector(".cartNum");
     cartButton.addEventListener("click", () => {
@@ -226,3 +223,7 @@ function userOrder() {
         cartNum.textContent = orderList.length;
     })
 }
+
+window.addEventListener("DOMContentLoaded", function () {
+    productPage(productAPI + "details?id=" + currentProductID, function (response) { productRender(response); });
+})
