@@ -7,6 +7,7 @@ const itemPrice = document.querySelector(".price");
 const productID = document.querySelector(".id");
 const picture = document.querySelector(".main_pic");
 let stock;
+let currentStock = 0;
 
 function productRender(parseData) {
     let pDetail = JSON.parse(parseData);
@@ -60,6 +61,7 @@ function productRender(parseData) {
     subpic1.src = pDetail.data.images[0]
     subpic2.src = pDetail.data.images[1]
     stock = pDetail.data.variants;
+    console.log(stock)
     selectItem();
     count();
     userOrder();
@@ -93,19 +95,18 @@ function rgbToHex(rgb) {
 
 function selectItem() {
     let rects = document.getElementsByClassName("rect"),
-    selectSize,    
-    hexColor = rgbToHex(rects[0].style.backgroundColor),
-    hexColorText = rects[0].title;
+        selectSize,
+        hexColor = rgbToHex(rects[0].style.backgroundColor),
+        hexColorText = rects[0].title;
     rects[0].classList.add("rectSelected");
     //選顏色
     for (let i = 0, max = rects.length; i < max; i++) {
         rects[i].addEventListener("click", event => {
             removeDefaultColor();
-            removeDefaultSize();
             event.target.classList.add("rectSelected");
             hexColor = rgbToHex(event.target.style.backgroundColor);
             hexColorText = event.target.title;
-            getStock();
+            currentStock = getStock();
             let noSize = outStock();
             let size = document.getElementsByClassName("size-icon");
             for (let i = 0; i < size.length; i++) {
@@ -128,7 +129,7 @@ function selectItem() {
                 removeDefaultSize();
                 event.target.classList.add("sizeSelected");
                 selectSize = event.target.textContent;
-                getStock();
+                currentStock = getStock();
             }
         })
     }
@@ -136,7 +137,7 @@ function selectItem() {
 
 function getStock() {
     let selectSize = document.querySelector('.sizeSelected').textContent,
-    hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor);    
+        hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor),
         stockQuantity = stock.filter(item => {
             return (`#${item.color_code}` === hexColor && item.size === selectSize)
         })[0].stock;
@@ -155,19 +156,17 @@ function outStock() {
 function count() {
     let plus = document.querySelector(".plus"),
         subtract = document.querySelector(".subtract"),
-        quantity = document.querySelector(".quantity"),
-        stockQuantity = getStock(),
+        quantity = document.querySelector(".quantity"),        
         countNumber = 1;
     plus.addEventListener("click", () => {
-        getStock();
         //如果數量小於庫存,數量+1
-        if (countNumber < stockQuantity) {
+        if (countNumber < currentStock) {
             countNumber += 1;
             quantity.textContent = countNumber;
-            if (countNumber >= stockQuantity) {
-                alert("這款只剩 " + stockQuantity + " 件喔！");
+            if (countNumber >= currentStock) {
+                alert("這款只剩 " + currentStock + " 件喔！");
             }
-        } else if (stockQuantity === 0) {
+        } else if (currentStock === 0) {
             quantity.textContent = 0;
             alert("沒有庫存囉！")
         }
@@ -197,6 +196,8 @@ function userOrder() {
     let cartButton = document.querySelector(".add_in_cart"),
         count = document.querySelector(".quantity"),
         stockQuantity = getStock(),
+        hexColor = rgbToHex(document.querySelector('.rectSelected').style.backgroundColor),
+        hexColorText = document.querySelector('.rectSelected').title,
         orderList = JSON.parse(localStorage.getItem("List")),
         cartNum = document.querySelector(".cartNum");
     cartButton.addEventListener("click", () => {

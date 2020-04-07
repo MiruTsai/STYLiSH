@@ -52,7 +52,7 @@ input[type=radio]+label{
     border: 1px solid grey;
     margin-left: 28px;
 }
-.rectSelect{    
+.rectSelected{    
     border: 3px double grey;        
 }
 button[disabled]{
@@ -69,7 +69,7 @@ button[disabled]{
     outline: none;
     border: 1px solid transparent;
 }
-.sizeSelect{
+.sizeSelected{
     background-color: slategrey;
 }
 .colorContainer{    
