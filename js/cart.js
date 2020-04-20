@@ -1,6 +1,13 @@
 const cartOrderList = document.querySelector(".cartOrderList");
 const APP_ID = 12348;
 const APP_KEY = "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF";
+const userName = document.getElementById("userName");
+const mobileNumber = document.getElementById("mobileNumber");
+const email = document.getElementById("email");
+const shippingCountry = document.querySelector(".shippingCountry");
+
+const submitButton = document.querySelector(".payButton");
+const mobileSubmitButton = document.querySelector(".mobilePayButton");
 let prime;
 let parseOrderList = JSON.parse(localStorage.getItem("List"));
 let mobileItemUnitPrice;
@@ -11,163 +18,108 @@ let mobileUnitPrice;
 let mobileTotalPrice;
 let mobileQuantity;
 
-if (parseOrderList === null) {
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    cartOrderList.appendChild(empty);
-    empty.textContent = "購物車空空的耶";
-} else {
-    for (let i = 0; i < parseOrderList.length; i++) {
-        let orderItem = document.createElement("div");
-        orderItem.className = "orderItem";
-        let mobileItemInfo = document.createElement("div");
-        mobileItemInfo.className = "mobileItemInfo";
-        let itemInfo = document.createElement("div");
-        itemInfo.className = "itemInfo";
-        let itemPic = document.createElement("img");
-        itemPic.className = "itemPic";
-        itemPic.src = parseOrderList[i].pic;
-        let itemDetail = document.createElement("div");
-        itemDetail.className = "itemDetail";
-        let itemTitle = document.createElement("div");
-        itemTitle.className = "itemTitle";
-        itemTitle.textContent = parseOrderList[i].name;
-        let itemID = document.createElement("div");
-        itemID.className = "itemID";
-        itemID.textContent = parseOrderList[i].id;
-        let itemDescription = document.createElement("div");
-        itemDescription.className = "itemDescription";
-        let color = document.createElement("div");
-        color.className = "color";
-        let colorText = document.createElement("div");
-        colorText.className = "colorText";
-        colorText.textContent = "顏色";
-        let centerLine1 = document.createElement("div");
-        centerLine1.className = "centerLine";
-        centerLine1.textContent = "|";
-        let colorName = document.createElement("div");
-        colorName.className = "colorName";
-        colorName.textContent = parseOrderList[i].color.name;
-        color.appendChild(colorText);
-        color.appendChild(centerLine1);
-        color.appendChild(colorName);
-        let size = document.createElement("div");
-        size.className = "size";
-        let sizeText = document.createElement("div");
-        sizeText.className = "sizeText";
-        sizeText.textContent = "尺寸";
-        let sizeName = document.createElement("div");
-        sizeName.className = "sizeName";
-        sizeName.textContent = parseOrderList[i].size;
-        size.appendChild(sizeText);
-        centerLine2 = document.createElement("div");
-        centerLine2.className = "centerLine";
-        centerLine2.textContent = "|";
-        size.appendChild(centerLine2);
-        size.appendChild(sizeName);
 
-        itemDescription.appendChild(color);
-        itemDescription.appendChild(size);
-        itemDetail.appendChild(itemTitle);
-        itemDetail.appendChild(itemID);
-        itemDetail.appendChild(itemDescription);
-        itemInfo.appendChild(itemPic);
-        itemInfo.appendChild(itemDetail);
-
-        let mobileRemove = document.createElement("img");
-        mobileRemove.className = "mobileRemove";
-        mobileRemove.src = "images/cart-remove.png";
-        let mobileQty = document.createElement("div");
-        mobileQty.className = "mobileQty";
-        let mobileQtyText = document.createElement("div");
-        mobileQtyText.className = "mobileQtyText";
-        let qtyText = document.createElement("span");
-        qtyText.className = "title";
-        qtyText.textContent = "數量";
-        webQuantity = document.createElement("input");
-        webQuantity.className = "quantity";
-        webQuantity.type = "number";
-        webQuantity.min = 1;
-        webQuantity.max = parseOrderList[i].remain;
-        webQuantity.placeholder = parseOrderList[i].qty;
-
-        mobileQuantity = document.createElement("input");
-        mobileQuantity.className = "mobileQuantity";
-        mobileQuantity.type = "number";
-        mobileQuantity.min = 1;
-        mobileQuantity.max = parseOrderList[i].remain;
-        mobileQuantity.placeholder = parseOrderList[i].qty;
-        mobileQtyText.appendChild(qtyText);
-        mobileQtyText.appendChild(mobileQuantity);
-
-        mobileUnitPrice = document.createElement("div");
-        mobileUnitPrice.className = "mobileUnitPrice";
-        let unitPrice = document.createElement("span");
-        unitPrice.className = "title";
-        unitPrice.textContent = "單價";
-        itemUnitPrice = document.createElement("div");
-        itemUnitPrice.className = "itemUnitPrice";
-        itemUnitPrice.textContent = parseOrderList[i].price;
-
-        mobileItemUnitPrice = document.createElement("div");
-        mobileItemUnitPrice.className = "mobileItemUnitPrice";
-        mobileItemUnitPrice.textContent = parseOrderList[i].price;
-
-        mobileUnitPrice.appendChild(unitPrice);
-        mobileUnitPrice.appendChild(mobileItemUnitPrice);
-        let mobileTotal = document.createElement("div");
-        mobileTotal.className = "mobileTotal";
-        let mobileTotalText = document.createElement("span");
-        mobileTotalText.className = "title";
-        mobileTotalText.textContent = "小計";
-        itemTotalPrice = document.createElement("div");
-        itemTotalPrice.className = "itemTotalPrice";
-        itemTotalPrice.textContent = `TWD.${Number(parseOrderList[i].price.slice(4)) * webQuantity.placeholder}`;
-
-        mobileTotalPrice = document.createElement("div");
-        mobileTotalPrice.className = "mobileTotalPrice";
-        mobileTotalPrice.textContent = `TWD.${Number(parseOrderList[i].price.slice(4)) * mobileQuantity.placeholder}`;
-
-        mobileTotal.appendChild(mobileTotalText);
-        mobileTotal.appendChild(mobileTotalPrice);
-        mobileQty.appendChild(mobileQtyText);
-        mobileQty.appendChild(mobileUnitPrice);
-        mobileQty.appendChild(mobileTotal);
-        mobileItemInfo.appendChild(itemInfo);
-        mobileItemInfo.appendChild(mobileRemove);
-
-        let itemQty = document.createElement("div");
-        itemQty.className = "itemQty";
-        let remove = document.createElement("img");
-        remove.className = "remove";
-        remove.src = "images/cart-remove.png";
-        itemQty.appendChild(webQuantity);
-        itemQty.appendChild(itemUnitPrice);
-        itemQty.appendChild(itemTotalPrice);
-        itemQty.appendChild(remove);
-
-        orderItem.appendChild(mobileItemInfo);
-        orderItem.appendChild(mobileQty);
-        orderItem.appendChild(itemQty);
-        cartOrderList.appendChild(orderItem);
+function renderCartOrderList() {
+    if (parseOrderList === null) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        cartOrderList.appendChild(empty);
+        empty.textContent = "購物車空空的耶";
+    } else {
+        for (let i = 0; i < parseOrderList.length; i++) {
+            let orderItem = createElement("div", "orderItem"),
+                mobileItemInfo = createElement("div", "mobileItemInfo"),
+                itemInfo = createElement("div", "itemInfo"),
+                itemPic = createElement("img", "itemPic");
+            itemPic.src = parseOrderList[i].pic;
+            let detail = createElement("div", "itemDetail"),
+                title = createElement("div", "itemTitle", parseOrderList[i].name),
+                itemID = createElement("div", "itemID", parseOrderList[i].id),
+                description = createElement("div", "description"),
+                color = createElement("div", "color"),
+                colorText = createElement("div", "colorText", "顏色"),
+                centerLine1 = createElement("div", "centerLine", "|"),
+                colorName = createElement("div", "colorName", parseOrderList[i].color.name);
+            color.appendChild(colorText);
+            color.appendChild(centerLine1);
+            color.appendChild(colorName);
+            let size = createElement("div", "size"),
+                sizeText = createElement("div", "sizeText", "尺寸"),
+                sizeName = document.createElement("div", "sizeName", parseOrderList[i].size),
+                centerLine2 = document.createElement("div", "centerLine", "|");
+            size.appendChild(sizeText);
+            size.appendChild(centerLine2);
+            size.appendChild(sizeName);
+            description.appendChild(color);
+            description.appendChild(size);
+            detail.appendChild(title);
+            detail.appendChild(itemID);
+            detail.appendChild(description);
+            itemInfo.appendChild(itemPic);
+            itemInfo.appendChild(detail);
+            let mobileRemove = createElement("img", "mobileRemove");
+            mobileRemove.src = "images/cart-remove.png";
+            let mobileQty = createElement("div", "mobileQty"),
+                mobileQtyText = createElement("div", "mobileQtyText"),
+                qtyText = createElement("span", "title", "數量"),
+                webQuantity = createElement("input", "quantity");
+            webQuantity.type = "number";
+            webQuantity.min = 1;
+            webQuantity.max = parseOrderList[i].remain;
+            webQuantity.defaultValue = parseOrderList[i].qty;
+            mobileQuantity = createElement("input", "mobileQuantity");
+            mobileQuantity.type = "number";
+            mobileQuantity.min = 1;
+            mobileQuantity.max = parseOrderList[i].remain;
+            mobileQuantity.defaultValue = parseOrderList[i].qty;
+            mobileQtyText.appendChild(qtyText);
+            mobileQtyText.appendChild(mobileQuantity);
+            let mobileUnitPrice = createElement("div", "mobileUnitPrice"),
+                unitPrice = createElement("span", "title", "單價"),
+                itemUnitPrice = createElement("div", "itemUnitPrice", parseOrderList[i].price),
+                mobileItemUnitPrice = createElement("div", "mobileItemUnitPrice", parseOrderList[i].price);
+            mobileUnitPrice.appendChild(unitPrice);
+            mobileUnitPrice.appendChild(mobileItemUnitPrice);
+            let mobileTotal = createElement("div", "mobileTotal"),
+                mobileTotalText = createElement("span", "title", "小計");
+            itemTotalPrice = createElement("div", "itemTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * webQuantity.defaultValue}`);
+            mobileTotalPrice = createElement("div", "mobileTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * mobileQuantity.defaultValue}`);
+            mobileTotal.appendChild(mobileTotalText);
+            mobileTotal.appendChild(mobileTotalPrice);
+            mobileQty.appendChild(mobileQtyText);
+            mobileQty.appendChild(mobileUnitPrice);
+            mobileQty.appendChild(mobileTotal);
+            mobileItemInfo.appendChild(itemInfo);
+            mobileItemInfo.appendChild(mobileRemove);
+            let itemQty = createElement("div", "itemQty"),
+                remove = createElement("img", "remove");
+            remove.src = "images/cart-remove.png";
+            itemQty.appendChild(webQuantity);
+            itemQty.appendChild(itemUnitPrice);
+            itemQty.appendChild(itemTotalPrice);
+            itemQty.appendChild(remove);
+            orderItem.appendChild(mobileItemInfo);
+            orderItem.appendChild(mobileQty);
+            orderItem.appendChild(itemQty);
+            cartOrderList.appendChild(orderItem);
+        }
     }
 }
-
 const counter = document.getElementsByClassName("quantity");
 const mobileCounter = document.getElementsByClassName("mobileQuantity");
 const billMoneyArea = document.querySelector(".billMoney");
 const shippingMoneyArea = document.querySelector(".shippingMoney");
-const totalMoneyArea = document.querySelector(".totalMoney");
 const itemTotalPriceArea = document.getElementsByClassName("itemTotalPrice");
 const unitPrice = document.getElementsByClassName("itemUnitPrice");
 const shippingMoney = document.querySelector(".shippingMoney");
 shippingMoney.textContent = 60;
-const totalMoney = document.querySelector(".totalMoney");
+
 const mobileTotalPriceArea = document.getElementsByClassName("mobileTotalPrice");
 const mobileItemUnitPriceArea = document.getElementsByClassName("mobileItemUnitPrice");
 
 //web pay
 function getOrderListPrice() {
+    const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
     for (let i = 0; i < itemTotalPriceArea.length; i++) {
         total += parseInt(itemTotalPriceArea[i].textContent.slice(4));
@@ -175,7 +127,7 @@ function getOrderListPrice() {
     billMoneyArea.textContent = total;
     totalMoney.textContent = total + parseInt(shippingMoney.textContent);
 }
-getOrderListPrice();
+
 
 function getItemTotalPrice() {
     for (let i = 0; i < counter.length; i++) {
@@ -190,6 +142,7 @@ getItemTotalPrice();
 
 //mobile pay
 function getMobileOrderListPrice() {
+    const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
     for (let i = 0; i < mobileTotalPriceArea.length; i++) {
         total += parseInt(mobileTotalPriceArea[i].textContent.slice(4));
@@ -214,7 +167,7 @@ getMobileItemTotalPrice();
 
 function addDeleteOrderFX(target) {
     let deleteIcon = document.getElementsByClassName(target);
-    if(!deleteIcon){
+    if (!deleteIcon) {
         return
     }
     for (let i = 0; i < deleteIcon.length; i++) {
@@ -226,8 +179,6 @@ function addDeleteOrderFX(target) {
         })
     }
 }
-
-
 
 //TAP PAY
 let fields = {
@@ -288,8 +239,7 @@ TPDirect.card.setup({
     }
 })
 
-const submitButton = document.querySelector(".payButton");
-const mobileSubmitButton = document.querySelector(".mobilePayButton");
+
 
 TPDirect.card.onUpdate(function (update) {
     // update.canGetPrime === true
@@ -332,15 +282,10 @@ TPDirect.card.onUpdate(function (update) {
     }
 })
 
-const userName = document.getElementById("userName");
-const mobileNumber = document.getElementById("mobileNumber");
-const email = document.getElementById("email");
-const address = document.getElementById("address");
-const shippingCountry = document.querySelector(".shippingCountry");
-const payment = document.querySelector(".paymentMethod");
 
 
-function getShipTime (){
+
+function getShipTime() {
     const radiobutton = document.getElementsByName("shippingTime");
     let chooseTime;
     for (let i = 0; i < radiobutton.length; i++) {
@@ -352,7 +297,10 @@ function getShipTime (){
 }
 
 function createOrder() {
-    let chooseTime = getShipTime ();
+    const address = document.getElementById("address");
+    const payment = document.querySelector(".paymentMethod");
+    const totalMoney = document.querySelector(".totalMoney");
+    let chooseTime = getShipTime();
     let order = {
         "prime": prime,
         "order": {
@@ -375,7 +323,8 @@ function createOrder() {
 }
 
 function onSubmit() {
-    let chooseTime = getShipTime ();
+    const address = document.getElementById("address");
+    let chooseTime = getShipTime();
     if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
         alert("請輸入您的完整聯絡資訊");
         return
@@ -403,7 +352,7 @@ const cartFBtoken = JSON.parse(localStorage.getItem("userToken"));
 
 function ajax() {
     let order = createOrder();
-    let xhr = new XMLHttpRequest();    
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
     //如果有FBtoken(已登入FB)
     if (cartFBtoken) {
@@ -415,7 +364,7 @@ function ajax() {
                 localStorage.setItem("orderNumber", JSON.stringify(xhr.responseText));
                 window.location.assign("thankyou.html");
             };
-        };        
+        };
         xhr.send(order);
     } else {
         //沒登入FB
@@ -431,7 +380,10 @@ function ajax() {
     }
 }
 
-window.addEventListener("DOMContentLoaded",function(){
+window.addEventListener("DOMContentLoaded", function () {
+    TPDirect.setupSDK(APP_ID, APP_KEY, "sandbox");
+    renderCartOrderList();
+    getOrderListPrice();
     addDeleteOrderFX("mobileRemove");
     addDeleteOrderFX("remove");
 })

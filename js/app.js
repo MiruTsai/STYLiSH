@@ -4,7 +4,7 @@ const mask = document.querySelector(".mask");
 const orderListCount = document.querySelector(".orderList");
 let pagingQuery = "?paging="
 let category;
-let sourcePage = `${productAPI}${category}${pagingQuery}`;
+let sourcePage = productAPI + category + pagingQuery;
 let tag = "";
 
 //ajax 
@@ -28,6 +28,15 @@ if (tag === null) {
     category = tag;
 }
 
+
+function createElement(htmlTag, className, textContent) {
+    let obj = document.createElement(htmlTag);
+    obj.className = className
+    if (textContent) {
+        obj.textContent = textContent
+    }
+    return obj
+}
 //open mobile searchbar
 function openSearchBar() {
     mask.style.display = "block";

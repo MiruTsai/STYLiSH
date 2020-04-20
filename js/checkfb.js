@@ -1,55 +1,56 @@
 const member = document.querySelector(".btn_member01_normal");
 let token;
-let fb = {};
+let fb = {
+    load:function(){
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "facebook-jssdk"));
+    },
+    init:function () {
+        FB.init({
+            appId: "2888776061346906",
+            cookie: true,
+            xfbml: true,
+            version: "v3.3"
+        });
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+    }
+};
 
-fb.load = function () {
-    // Load the SDK asynchronously
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, "script", "facebook-jssdk"));
-};
-fb.init = function () {
-    FB.init({
-        appId: "2888776061346906",
-        cookie: true,
-        xfbml: true,
-        version: "v3.3"
-    });
-    FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-    });
-};
 window.fbAsyncInit = fb.init;
 window.addEventListener("DOMContentLoaded", fb.load);
 //創建API所需body
-let parseToken;
-let FBtoken;
+
 function createSendToken() {
-    FBtoken = {
+    let FBtoken = {
         provider: "facebook",
         access_token: token
     };
-    parseToken = JSON.stringify(FBtoken);
+    return JSON.stringify(FBtoken);
 }
 
-// 將FBtoken送 sign in api
-function sendToken() {
+// 將FBtoken送 sign in API
+function userSignIn() {
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", `${AppScoolHostAPI}/user/signin`);
+    let token = createSendToken();
+    xhr.open("POST", AppScoolHostAPI + "/user/signin");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             localStorage.setItem("userToken", xhr.responseText);
         }
     };
-    xhr.send(parseToken);
+    xhr.send(token);
 }
 
-function testAPI() {
+function getUserInfo() {
     FB.api("/me?fields=id,name,email,picture.width(200).height(200)", function (response) {
         member.src = response.picture.data.url;
         if (window.location.pathname === "/STYLiSH/profile.html") {
@@ -71,8 +72,8 @@ function statusChangeCallback(response) {
             userPic.style.display = "block";
         }
         createSendToken();
-        sendToken();
-        testAPI();
+        userSignIn();
+        getUserInfo();
         token = response.authResponse.accessToken;
     } else {
         if (window.location.pathname === "/STYLiSH/profile.html") {

@@ -2,42 +2,29 @@
 const indexContainer = document.getElementById("p_container");
 let paging;
 function render(parseData) {
-    let products = JSON.parse(parseData);    
+    let products = JSON.parse(parseData);
     paging = products.next_paging;
     if (products.data.length === 0) {
-        let noProduct = document.createElement("div");
-        noProduct.className = "noProduct";
-        noProduct.textContent = "沒有您搜尋的商品喔！";
+        let noProduct = createElement("div", "noProduct", "沒有您搜尋的商品喔！");
         indexContainer.appendChild(noProduct);
     } else {
         for (let i = 0; i < products.data.length; i += 1) {
-            let content = document.createElement("div");
-            content.className = "p_content";
-            let pic = document.createElement("div");
-            pic.className = "p_pic";
-            let picsrc = document.createElement("img");
-            picsrc.src = `${products.data[i].main_image}`;
-            let id = document.createElement("a");
-            id.className = "p_id";
-            id.href = `product.html?id=${products.data[i].id}`;
-            let title = document.createElement("div");
-            title.className = "p_title";
-            let price = document.createElement("div");
-            price.className = "p_price";
-            let category = document.createElement("div");
-            category.className = "p_category";
+            let content = createElement("div", "p_content"),
+                pic = createElement("div", "p_pic"),
+                picsrc = createElement("img", "picSrc")
+            picsrc.src = products.data[i].main_image;
+            let id = createElement("a", "p_id")
+            id.href = "product.html?id=" + products.data[i].id;
+            let title = createElement("div", "p_title", products.data[i].title),
+                price = createElement("div", "p_price", "TWD." + products.data[i].price),
+                category = createElement("div", "p_category", products.data[i].category);
             category.style.display = "none";
-            category.innerText = `${products.data[i].category}`;
-            let color = document.createElement("div");
-            color.className = "p_color";
-            for (let j = 0; j < products.data[i].colors.length; j += 1) {
-                let rect = document.createElement("div");
-                rect.className = "rect";
-                rect.style.backgroundColor = `#${products.data[i].colors[j].code}`;
+            let color = createElement("div", "p_color");
+            for (let j = 0; j < products.data[i].colors.length; j++) {
+                let rect = createElement("div", "rect");
+                rect.style.backgroundColor = "#" + products.data[i].colors[j].code;
                 color.appendChild(rect);
             }
-            title.innerText = `${products.data[i].title}`;
-            price.innerText = `TWD.${products.data[i].price}`
             pic.appendChild(picsrc);
             id.appendChild(pic);
             id.appendChild(category);
@@ -53,9 +40,9 @@ function render(parseData) {
 //infiniteRoll
 let loading = false;
 function infiniteRoll() {
-    let exportPage;    
-    if (paging) {        
-        exportPage = `${productAPI}${category}${pagingQuery}${paging}`
+    let exportPage;
+    if (paging) {
+        exportPage = productAPI + category + pagingQuery + paging
     } else {
         return
     }
@@ -66,47 +53,38 @@ function infiniteRoll() {
 window.addEventListener("scroll", function () {
     let footerTop = document.querySelector(".Rectangle-4").getBoundingClientRect().top;
     let yScroll = window.pageYOffset;
-    if (footerTop - yScroll < 0 && !loading) {        
+    if (footerTop - yScroll < 0 && !loading) {
         window.requestAnimationFrame(function () {
             infiniteRoll();
         });
     }
 })
 
-productPage(`${productAPI}${category}`, function (response) { render(response); })
 
 //campaigns
 function campaigns(cam) {
     let data = JSON.parse(cam).data;
     for (let i = 0; i < data.length; i++) {
-        let campaign = document.createElement("div");
-        campaign.className = ("campaign");
-        let bannerStory = document.createElement("div");
+        let campaign = createElement("div", "campaign"),
+            bannerStory = document.createElement("div", "bannerPic");
         bannerStory.setAttribute("style", `background:url(https://api.appworks-school.tw${data[i].picture})`);
-        bannerStory.className = "bannerPic";
-        let bannerTextContainer = document.createElement("div")
+        let bannerTextContainer = document.createElement("div");
         let splitText = data[i].story.split("\r\n");
         for (let j = 0; j < splitText.length; j += 1) {
-            let bannerText = document.createElement("div");
-            bannerText.className = "main-banner-text";
-            bannerText.innerText = `${splitText[j]}`;
+            let bannerText = createElement("div", "main-banner-text", splitText[j]);
             bannerTextContainer.appendChild(bannerText);
         }
-        let camID = document.createElement("div");
-        camID.className = "camID";
-        camID.innerText = `${data[i].id}`;
+        let camID = createElement("div", "camID", data[i].id);
         camID.style.display = "none";
         bannerStory.appendChild(bannerTextContainer);
         campaign.appendChild(bannerStory);
         campaign.appendChild(camID);
         document.getElementById("main-banner").appendChild(campaign);
     }
-    let circleZone = document.createElement("div");
-    circleZone.className = "circleZone";
-    let count = document.getElementsByClassName("camID");
+    let circleZone = createElement("div", "circleZone"),
+        count = document.getElementsByClassName("camID");
     for (let i = 0; i < count.length; i++) {
-        let circle = document.createElement("div");
-        circle.className = "circle";
+        let circle = createElement("div", "circle");
         circle.name = i;
         circleZone.appendChild(circle);
     }
@@ -139,7 +117,12 @@ function slideShow() {
     }
     setTimeout(slideShow, 10000);
 }
-productPage(`${AppScoolHostAPI}/marketing/campaigns`, function (response) {
-    campaigns(response);
-    slideShow();
-});
+
+
+window.addEventListener('DOMContentLoaded',function(){
+    productPage(productAPI + category, function (response) { render(response); });
+    productPage(AppScoolHostAPI + "/marketing/campaigns", function (response) {
+        campaigns(response);
+        slideShow();
+    });
+})
