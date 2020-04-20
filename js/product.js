@@ -11,14 +11,16 @@ let currentStock = 0;
 
 function productRender(parseData) {
     let pDetail = JSON.parse(parseData);
-    const colorContainer = document.querySelector(".colorContainer");
-    const sizeContainer = document.querySelector(".sizeContainer");
-    const noteContainer = document.querySelector(".noteContainer");
-    const note = document.querySelector(".note");
-    const place = document.querySelector(".place");
-    const story = document.querySelector(".story");
-    const subpic1 = document.querySelector(".subpic");
-    const subpic2 = document.querySelector(".subpic2");
+    const colorContainer = document.querySelector(".colorContainer"),
+        sizeContainer = document.querySelector(".sizeContainer"),
+        noteContainer = document.querySelector(".noteContainer"),
+        note = document.querySelector(".note"),
+        place = document.querySelector(".place"),
+        story = document.querySelector(".story"),
+        subpic1 = document.querySelector(".subpic"),
+        subpic2 = document.querySelector(".subpic2"),
+        addInCartBtn = document.querySelector(".add_in_cart");
+
     picture.src = pDetail.data.main_image;
     picture.textContent = pDetail.data.main_image;
     title.textContent = pDetail.data.title;
@@ -61,9 +63,10 @@ function productRender(parseData) {
     subpic1.src = pDetail.data.images[0];
     subpic2.src = pDetail.data.images[1];
     stock = pDetail.data.variants;
+
+    addInCartBtn.addEventListener('click', createUserOrder)
     selectItem();
     count();
-    userOrder();
     getStock();
 }
 
@@ -176,52 +179,41 @@ function count() {
     })
 }
 
-class Order {
-    constructor(id, name, price, color, size, qty, pic, remain) {
-        this.id = id,
-            this.name = name,
-            this.price = price,
-            this.color = color,
-            this.size = size,
-            this.qty = qty,
-            this.pic = pic,
-            this.remain = remain
-    }
-}
 
-function userOrder() {
-    let cartButton = document.querySelector(".add_in_cart"),
-        count = document.querySelector(".quantity"),
-        stockQuantity = getStock(),
+
+function createUserOrder() {
+    let stockQuantity = getStock();
+    const count = document.querySelector(".quantity"),
         hexColor = rgbToHex(document.querySelector(".rectSelected").style.backgroundColor),
         hexColorText = document.querySelector(".rectSelected").title,
-        orderList = JSON.parse(localStorage.getItem("List")),
+        selectSize = document.querySelector('.sizeSelected').textContent,
+        orderList = JSON.parse(localStorage.getItem("List")) || [],
         cartNum = document.querySelector(".cartNum");
-    cartButton.addEventListener("click", () => {
-        let id = productID.textContent, name = title.textContent, price = itemPrice.textContent,
-            color = { "name": hexColorText, "code": hexColor },
-            size = selectSize, qty = count.textContent, pic = picture.textContent, remain = stockQuantity,
-            newOrder = new Order(id, name, price, color, size, qty, pic, remain);
-        if (newOrder.qty === 0) {
-            alert("請輸入數量");
-        } else if (newOrder.qty > newOrder.remain) {
-            alert("您選的數量大於可購買數量");
-        } else {
-            alert("商品已為您加入購物車");
-        }
+
+    let id = productID.textContent, name = title.textContent, price = itemPrice.textContent,
+        color = { "name": hexColorText, "code": hexColor },
+        size = selectSize, qty = count.textContent, pic = picture.textContent, remain = stockQuantity,
+        newOrder = { "id": id, "name": name, "price": price, "color": color, "size": size, "qty": qty, "pic": pic, "remain": remain }
+    if (newOrder.qty === 0) {
+        alert("請輸入數量");
+    } else if (newOrder.qty > newOrder.remain) {
+        alert("您選的數量大於可購買數量");
+    } else {
+        alert("商品已為您加入購物車");
+    }
+    if (orderList.length > 0) {
         for (let i = 0; i < orderList.length; i++) {
             if (orderList[i].id === newOrder.id && orderList[i].color.code === newOrder.color.code
-                && orderList[i].size === newOrder.size) {
-                //比到相同的，把數量相加後結束函式
-                orderList[i].qty += newOrder.qty;
+                && orderList[i].size === newOrder.size) {                
+                orderList[i].qty = parseInt(orderList[i].qty) + parseInt(newOrder.qty);
+                localStorage.setItem("List", JSON.stringify(orderList));
                 return;
             }
         }
-        //比到不同的，加入清單
-        orderList.push(newOrder);
-        localStorage.setItem("List", JSON.stringify(orderList));
-        cartNum.textContent = orderList.length;
-    })
+    }
+    orderList.push(newOrder);
+    localStorage.setItem("List", JSON.stringify(orderList));
+    cartNum.textContent = orderList.length;
 }
 
 window.addEventListener("DOMContentLoaded", function () {
