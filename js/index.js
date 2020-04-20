@@ -118,8 +118,7 @@ function slideShow() {
     setTimeout(slideShow, 10000);
 }
 
-
-window.addEventListener('DOMContentLoaded',function(){
+window.addEventListener("DOMContentLoaded",function(){
     productPage(productAPI + category, function (response) { render(response); });
     productPage(AppScoolHostAPI + "/marketing/campaigns", function (response) {
         campaigns(response);

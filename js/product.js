@@ -189,7 +189,6 @@ function createUserOrder() {
         selectSize = document.querySelector(".sizeSelected").textContent,
         orderList = JSON.parse(localStorage.getItem("List")) || [],
         cartNum = document.querySelector(".cartNum");
-
     let id = productID.textContent, name = title.textContent, price = itemPrice.textContent,
         color = { "name": hexColorText, "code": hexColor },
         size = selectSize, qty = count.textContent, pic = picture.textContent, remain = stockQuantity,
@@ -204,8 +203,8 @@ function createUserOrder() {
     if (orderList.length > 0) {
         for (let i = 0; i < orderList.length; i++) {
             if (orderList[i].id === newOrder.id && orderList[i].color.code === newOrder.color.code
-                && orderList[i].size === newOrder.size) {                
-                orderList[i].qty = parseInt(orderList[i].qty) + parseInt(newOrder.qty);
+                && orderList[i].size === newOrder.size) {
+                orderList[i].qty = parseInt(orderList[i].qty, 10) + parseInt(newOrder.qty, 10);
                 localStorage.setItem("List", JSON.stringify(orderList));
                 return;
             }

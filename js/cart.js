@@ -63,6 +63,12 @@ function renderCartOrderList() {
             itemInfo.appendChild(detail);
             let mobileRemove = createElement("img", "mobileRemove");
             mobileRemove.src = "images/cart-remove.png";
+            mobileRemove.dataset.order = i;
+            mobileRemove.addEventListener("click", function (e) {
+                deleteOrderItem(e);
+                updateItemOrder();
+                updateMobileItemOrder();
+            })
             let mobileQty = createElement("div", "mobileQty"),
                 mobileQtyText = createElement("div", "mobileQtyText"),
                 qtyText = createElement("span", "title", "數量"),
@@ -100,6 +106,12 @@ function renderCartOrderList() {
             let itemQty = createElement("div", "itemQty"),
                 remove = createElement("img", "remove");
             remove.src = "images/cart-remove.png";
+            remove.dataset.order = i;
+            remove.addEventListener("click", function (e) {
+                deleteOrderItem(e);
+                updateItemOrder();
+                updateMobileItemOrder();
+            })
             itemQty.appendChild(webQuantity);
             itemQty.appendChild(itemUnitPrice);
             itemQty.appendChild(itemTotalPrice);
@@ -126,7 +138,7 @@ function getOrderListPrice() {
     const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
     for (let i = 0; i < itemTotalPriceArea.length; i++) {
-        total += parseInt(itemTotalPriceArea[i].textContent.slice(4));
+        total += parseInt(itemTotalPriceArea[i].textContent.slice(4), 10);
     }
     billMoneyArea.textContent = total;
     if (total > 1000) {
@@ -134,14 +146,14 @@ function getOrderListPrice() {
     } else {
         shippingMoney.textContent = 60;
     }
-    totalMoney.textContent = total + parseInt(shippingMoney.textContent);
+    totalMoney.textContent = total + parseInt(shippingMoney.textContent, 10);
 }
 
 function getMobileOrderListPrice() {
     const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
     for (let i = 0; i < mobileTotalPriceArea.length; i++) {
-        total += parseInt(mobileTotalPriceArea[i].textContent.slice(4));
+        total += parseInt(mobileTotalPriceArea[i].textContent.slice(4), 10);
     }
     billMoneyArea.textContent = total;
     if (total > 1000) {
@@ -149,11 +161,11 @@ function getMobileOrderListPrice() {
     } else {
         shippingMoney.textContent = 60;
     }
-    totalMoney.textContent = total + parseInt(shippingMoney.textContent);
+    totalMoney.textContent = total + parseInt(shippingMoney.textContent, 10);
 }
 
 function getItemTotalPrice(e) {
-    let unitPrice = parseInt(e.target.nextSibling.textContent.slice(4)),
+    let unitPrice = parseInt(e.target.nextSibling.textContent.slice(4), 10),
         totalPriceArea = e.target.nextSibling.nextSibling,
         totalPrice = e.target.value * unitPrice;
     totalPriceArea.textContent = "TWD. " + totalPrice;
@@ -161,29 +173,35 @@ function getItemTotalPrice(e) {
 
 function getMobileItemTotalPrice(e) {
     let target = e.target.parentNode,
-        unitPrice = parseInt(target.nextSibling.lastChild.textContent.slice(4)),
+        unitPrice = parseInt(target.nextSibling.lastChild.textContent.slice(4), 10),
         totalPriceArea = target.nextSibling.nextSibling.lastChild,
         totalPrice = e.target.value * unitPrice;
     totalPriceArea.textContent = "TWD. " + totalPrice;
 }
 
-function addDeleteOrderFX(target) {
-    let deleteIcon = document.getElementsByClassName(target);
-    if (!deleteIcon) {
-        return
+function deleteOrderItem(e) {
+    let parent = e.target.parentNode.parentNode,
+        grandParent = parent.parentNode,
+        order = e.target.dataset.order;
+    alert("已從購物車移除");
+    parseOrderList.splice(order, 1);
+    localStorage.setItem("List", JSON.stringify(parseOrderList));
+    grandParent.removeChild(parent);    
+    getOrderListPrice();
+    getMobileOrderListPrice();
+    getOrderListAmount();
+}
+
+function updateItemOrder() {
+    let remove = document.getElementsByClassName("remove");
+    for (let i = 0; i < remove.length; i++) {
+        remove[i].dataset.order = i;
     }
-    for (let i = 0; i < deleteIcon.length; i++) {
-        deleteIcon[i].addEventListener("click", function (e) {
-            let parent = e.target.parentNode.parentNode,
-                grandParent = parent.parentNode;
-            alert("已從購物車移除");
-            parseOrderList.splice(i, 1);
-            localStorage.setItem("List", JSON.stringify(parseOrderList));
-            grandParent.removeChild(parent);
-            getOrderListPrice();
-            getMobileOrderListPrice();
-            getOrderListAmount();
-        })
+}
+function updateMobileItemOrder() {
+    let remove = document.getElementsByClassName("mobileRemove");
+    for (let i = 0; i < remove.length; i++) {
+        remove[i].dataset.order = i;
     }
 }
 
@@ -301,7 +319,7 @@ function getShipTime() {
 function createOrder() {
     const payment = document.querySelector(".paymentMethod"),
         totalMoney = document.querySelector(".totalMoney"),
-        prime = localStorage.getItem('prime');
+        prime = localStorage.getItem("prime");
     let chooseTime = getShipTime();
     let order = {
         "prime": prime,
@@ -324,9 +342,9 @@ function createOrder() {
     return JSON.stringify(order);
 }
 
-function onSubmit() {    
+function onSubmit() {
     let chooseTime = getShipTime();
-    if (!userName.value || !mobileNumber.value || !email.value || !address.value || !chooseTime) {        
+    if (!userName.value || !mobileNumber.value || !email.value || !address.value || !chooseTime) {
         alert("請輸入您的完整聯絡資訊");
         return
     };
@@ -339,8 +357,8 @@ function onSubmit() {
         if (result.status !== 0) {
             alert("請輸入完整信用卡資料");
             return
-        }        
-        localStorage.setItem("prime", result.card.prime)        
+        }
+        localStorage.setItem("prime", result.card.prime)
         pushOrderToBackend();
     })
 }
@@ -370,6 +388,6 @@ window.addEventListener("DOMContentLoaded", function () {
     TPDirect.setupSDK(APP_ID, APP_KEY, "sandbox");
     renderCartOrderList();
     getOrderListPrice();
-    addDeleteOrderFX("mobileRemove");
-    addDeleteOrderFX("remove");
+    //    addDeleteOrderFX("mobileRemove");
+    // addDeleteOrderFX("remove");
 })

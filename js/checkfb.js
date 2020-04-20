@@ -74,7 +74,7 @@ function statusChangeCallback(response) {
         createSendToken();
         userSignIn();
         getUserInfo();
-        localStorage.setItem('FBtoken', response.authResponse.accessToken);
+        localStorage.setItem("FBtoken", response.authResponse.accessToken);
     } else {
         if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic"),
