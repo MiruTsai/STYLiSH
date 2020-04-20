@@ -2,7 +2,7 @@ const AppScoolHostAPI = "https://api.appworks-school.tw/api/1.0";
 const productAPI = "https://api.appworks-school.tw/api/1.0/products/";
 const mask = document.querySelector(".mask");
 const orderListCount = document.querySelector(".orderList");
-let pagingQuery = "?paging="
+let pagingQuery = "?paging=";
 let category;
 let sourcePage = productAPI + category + pagingQuery;
 let tag = "";
@@ -31,11 +31,11 @@ if (tag === null) {
 
 function createElement(htmlTag, className, textContent) {
     let obj = document.createElement(htmlTag);
-    obj.className = className
+    obj.className = className;
     if (textContent) {
-        obj.textContent = textContent
+        obj.textContent = textContent;
     }
-    return obj
+    return obj;
 }
 //open mobile searchbar
 function openSearchBar() {
@@ -119,7 +119,7 @@ function moSearch() {
 }
 
 //購物車商品數量，如果沒有資料留下來的話，塞給它空陣列
-function getLocalStorage() {
+function getOrderListAmount() {
     let orderList = JSON.parse(localStorage.getItem("List")),
         cartNum = document.querySelector(".cartNum");
     if (!orderList) {
@@ -150,5 +150,5 @@ window.addEventListener("DOMContentLoaded", function () {
     goIndex();
     cartAction(".cartAct");
     cartAction(".mobile_user");
-    getLocalStorage();
+    getOrderListAmount();
 })

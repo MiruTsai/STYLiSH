@@ -3,9 +3,9 @@ const APP_ID = 12348;
 const APP_KEY = "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF";
 const userName = document.getElementById("userName");
 const mobileNumber = document.getElementById("mobileNumber");
+const address = document.getElementById("address");
 const email = document.getElementById("email");
 const shippingCountry = document.querySelector(".shippingCountry");
-
 const submitButton = document.querySelector(".payButton");
 const mobileSubmitButton = document.querySelector(".mobilePayButton");
 let prime;
@@ -19,12 +19,16 @@ let mobileTotalPrice;
 let mobileQuantity;
 
 
+function createEmptyDescription() {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    cartOrderList.appendChild(empty);
+    empty.textContent = "購物車空空的耶";
+}
+
 function renderCartOrderList() {
     if (parseOrderList === null) {
-        const empty = document.createElement("div");
-        empty.className = "empty";
-        cartOrderList.appendChild(empty);
-        empty.textContent = "購物車空空的耶";
+        createEmptyDescription();
     } else {
         for (let i = 0; i < parseOrderList.length; i++) {
             let orderItem = createElement("div", "orderItem"),
@@ -45,8 +49,8 @@ function renderCartOrderList() {
             color.appendChild(colorName);
             let size = createElement("div", "size"),
                 sizeText = createElement("div", "sizeText", "尺寸"),
-                sizeName = document.createElement("div", "sizeName", parseOrderList[i].size),
-                centerLine2 = document.createElement("div", "centerLine", "|");
+                sizeName = createElement("div", "sizeName", parseOrderList[i].size),
+                centerLine2 = createElement("div", "centerLine", "|");
             size.appendChild(sizeText);
             size.appendChild(centerLine2);
             size.appendChild(sizeName);
@@ -63,11 +67,13 @@ function renderCartOrderList() {
                 mobileQtyText = createElement("div", "mobileQtyText"),
                 qtyText = createElement("span", "title", "數量"),
                 webQuantity = createElement("input", "quantity");
+            webQuantity.addEventListener("change", function (e) { getItemTotalPrice(e); getOrderListPrice(); })
             webQuantity.type = "number";
             webQuantity.min = 1;
             webQuantity.max = parseOrderList[i].remain;
             webQuantity.defaultValue = parseOrderList[i].qty;
             mobileQuantity = createElement("input", "mobileQuantity");
+            mobileQuantity.addEventListener("change", function (e) { getMobileItemTotalPrice(e); getMobileOrderListPrice(); })
             mobileQuantity.type = "number";
             mobileQuantity.min = 1;
             mobileQuantity.max = parseOrderList[i].remain;
@@ -113,11 +119,9 @@ const itemTotalPriceArea = document.getElementsByClassName("itemTotalPrice");
 const unitPrice = document.getElementsByClassName("itemUnitPrice");
 const shippingMoney = document.querySelector(".shippingMoney");
 shippingMoney.textContent = 60;
-
 const mobileTotalPriceArea = document.getElementsByClassName("mobileTotalPrice");
 const mobileItemUnitPriceArea = document.getElementsByClassName("mobileItemUnitPrice");
 
-//web pay
 function getOrderListPrice() {
     const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
@@ -125,22 +129,14 @@ function getOrderListPrice() {
         total += parseInt(itemTotalPriceArea[i].textContent.slice(4));
     }
     billMoneyArea.textContent = total;
+    if (total > 1000) {
+        shippingMoney.textContent = 0;
+    } else {
+        shippingMoney.textContent = 60;
+    }
     totalMoney.textContent = total + parseInt(shippingMoney.textContent);
 }
 
-
-function getItemTotalPrice() {
-    for (let i = 0; i < counter.length; i++) {
-        counter[i].addEventListener("click", (e) => {
-            let totalPrice = e.target.value * parseInt(unitPrice[i].textContent.slice(4));
-            itemTotalPriceArea[i].textContent = `TWD.${totalPrice}`;
-            getOrderListPrice();
-        })
-    }
-}
-getItemTotalPrice();
-
-//mobile pay
 function getMobileOrderListPrice() {
     const totalMoney = document.querySelector(".totalMoney");
     let total = 0;
@@ -148,22 +144,28 @@ function getMobileOrderListPrice() {
         total += parseInt(mobileTotalPriceArea[i].textContent.slice(4));
     }
     billMoneyArea.textContent = total;
+    if (total > 1000) {
+        shippingMoney.textContent = 0
+    } else {
+        shippingMoney.textContent = 60;
+    }
     totalMoney.textContent = total + parseInt(shippingMoney.textContent);
 }
-getMobileOrderListPrice();
 
-function getMobileItemTotalPrice() {
-    for (let i = 0; i < mobileCounter.length; i++) {
-        mobileCounter[i].addEventListener("click", (e) => {
-            let totalPrice = e.target.value * parseInt(mobileItemUnitPriceArea[i].textContent.slice(4));
-            mobileTotalPriceArea[i].textContent = `TWD.${totalPrice}`;
-            getMobileOrderListPrice();
-        })
-    }
+function getItemTotalPrice(e) {
+    let unitPrice = parseInt(e.target.nextSibling.textContent.slice(4)),
+        totalPriceArea = e.target.nextSibling.nextSibling,
+        totalPrice = e.target.value * unitPrice;
+    totalPriceArea.textContent = "TWD. " + totalPrice;
 }
-getMobileItemTotalPrice();
 
-// delete feature
+function getMobileItemTotalPrice(e) {
+    let target = e.target.parentNode,
+        unitPrice = parseInt(target.nextSibling.lastChild.textContent.slice(4)),
+        totalPriceArea = target.nextSibling.nextSibling.lastChild,
+        totalPrice = e.target.value * unitPrice;
+    totalPriceArea.textContent = "TWD. " + totalPrice;
+}
 
 function addDeleteOrderFX(target) {
     let deleteIcon = document.getElementsByClassName(target);
@@ -171,11 +173,16 @@ function addDeleteOrderFX(target) {
         return
     }
     for (let i = 0; i < deleteIcon.length; i++) {
-        deleteIcon[i].addEventListener("click", () => {
+        deleteIcon[i].addEventListener("click", function (e) {
+            let parent = e.target.parentNode.parentNode,
+                grandParent = parent.parentNode;
             alert("已從購物車移除");
             parseOrderList.splice(i, 1);
             localStorage.setItem("List", JSON.stringify(parseOrderList));
-            window.location.reload();
+            grandParent.removeChild(parent);
+            getOrderListPrice();
+            getMobileOrderListPrice();
+            getOrderListAmount();
         })
     }
 }
@@ -239,8 +246,6 @@ TPDirect.card.setup({
     }
 })
 
-
-
 TPDirect.card.onUpdate(function (update) {
     // update.canGetPrime === true
     // --> you can call TPDirect.card.getPrime()
@@ -282,9 +287,6 @@ TPDirect.card.onUpdate(function (update) {
     }
 })
 
-
-
-
 function getShipTime() {
     const radiobutton = document.getElementsByName("shippingTime");
     let chooseTime;
@@ -297,9 +299,9 @@ function getShipTime() {
 }
 
 function createOrder() {
-    const address = document.getElementById("address");
-    const payment = document.querySelector(".paymentMethod");
-    const totalMoney = document.querySelector(".totalMoney");
+    const payment = document.querySelector(".paymentMethod"),
+        totalMoney = document.querySelector(".totalMoney"),
+        prime = localStorage.getItem('prime');
     let chooseTime = getShipTime();
     let order = {
         "prime": prime,
@@ -322,10 +324,9 @@ function createOrder() {
     return JSON.stringify(order);
 }
 
-function onSubmit() {
-    const address = document.getElementById("address");
+function onSubmit() {    
     let chooseTime = getShipTime();
-    if (!userName.value || !mobileNumber.value || !email.value || !address.value || chooseTime) {
+    if (!userName.value || !mobileNumber.value || !email.value || !address.value || !chooseTime) {        
         alert("請輸入您的完整聯絡資訊");
         return
     };
@@ -338,46 +339,31 @@ function onSubmit() {
         if (result.status !== 0) {
             alert("請輸入完整信用卡資料");
             return
-        }
-        alert("get prime 成功，prime: " + result.card.prime)
-        prime = result.card.prime;
-        createOrder();
-        ajax();
+        }        
+        localStorage.setItem("prime", result.card.prime)        
+        pushOrderToBackend();
     })
 }
 
 //-----得到訂單編號，並導向thank you page。------//
-//得到儲存在localstorage的FBtoken
-const cartFBtoken = JSON.parse(localStorage.getItem("userToken"));
-
-function ajax() {
+function pushOrderToBackend() {
+    const FBtoken = JSON.parse(localStorage.getItem("userToken"));
     let order = createOrder();
     let xhr = new XMLHttpRequest();
     xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
-    //如果有FBtoken(已登入FB)
-    if (cartFBtoken) {
-        xhr.setRequestHeader("Authorization", `Bearer ${cartFBtoken}`);
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                localStorage.removeItem("List");
-                localStorage.setItem("orderNumber", JSON.stringify(xhr.responseText));
-                window.location.assign("thankyou.html");
-            };
-        };
-        xhr.send(order);
-    } else {
-        //沒登入FB
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                localStorage.removeItem("List");
-                localStorage.setItem("orderNumber", JSON.stringify(xhr.responseText));
-                window.location.assign("thankyou.html");
-            };
-        };
-        xhr.send(order);
+    //如果已登入FB
+    if (FBtoken) {
+        xhr.setRequestHeader("Authorization", "Bearer " + FBtoken);
     }
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            localStorage.removeItem("List");
+            localStorage.setItem("orderNumber", JSON.stringify(xhr.responseText));
+            window.location.assign("thankyou.html");
+        };
+    };
+    xhr.send(order);
 }
 
 window.addEventListener("DOMContentLoaded", function () {

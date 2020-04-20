@@ -43,7 +43,7 @@ function createSendToken() {
 function userSignIn() {
     let xhr = new XMLHttpRequest(),
         FBtoken = createSendToken();
-    xhr.open("POST", `${AppScoolHostAPI}/user/signin`);
+    xhr.open("POST", AppScoolHostAPI + "/user/signin");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -71,10 +71,6 @@ function getUserInfo() {
 // 呼叫FB"檢查登入狀態"函式
 function statusChangeCallback(response) {
     if (response.status === "connected") {
-        // if (window.location.pathname === "/STYLiSH/profile.html") {
-        //     const userPic = document.querySelector(".userPic");
-        //     userPic.style.display = "block";
-        // }
         createSendToken();
         userSignIn();
         getUserInfo();
@@ -82,8 +78,10 @@ function statusChangeCallback(response) {
     } else {
         if (window.location.pathname === "/STYLiSH/profile.html") {
             const userPic = document.querySelector(".userPic"),
+                FBlogOutBtn = document.querySelector(".FBlogout"),
                 text = document.querySelector(".content");
             userPic.style.display = "none";
+            FBlogOutBtn.style.display = "none";
             text.textContent = "歡迎光臨，請登入您的 FACEBOOK 帳號。";
         }
     }
