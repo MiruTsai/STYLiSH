@@ -64,7 +64,7 @@ function productRender(parseData) {
     subpic2.src = pDetail.data.images[1];
     stock = pDetail.data.variants;
 
-    addInCartBtn.addEventListener('click', createUserOrder)
+    addInCartBtn.addEventListener("click", createUserOrder)
     selectItem();
     count();
     getStock();
@@ -186,7 +186,7 @@ function createUserOrder() {
     const count = document.querySelector(".quantity"),
         hexColor = rgbToHex(document.querySelector(".rectSelected").style.backgroundColor),
         hexColorText = document.querySelector(".rectSelected").title,
-        selectSize = document.querySelector('.sizeSelected').textContent,
+        selectSize = document.querySelector(".sizeSelected").textContent,
         orderList = JSON.parse(localStorage.getItem("List")) || [],
         cartNum = document.querySelector(".cartNum");
 

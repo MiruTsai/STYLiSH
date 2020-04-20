@@ -287,9 +287,11 @@ input[type="number"]{
 }
 .orderItem{
     width:100%;
-    border-top:1px solid black;
-    border-bottom:1px solid black; 
+    border-top:1px solid black;    
     padding:20px 0;
+}
+.orderItem:last-child{
+    border-bottom:1px solid black; 
 }
 .mobileQty{
     width:90%;
@@ -320,7 +322,6 @@ input[type="number"]{
 .mobileItemInfo{    
     display: flex;
     justify-content: space-between;
-
 }
 .itemInfo{
     flex-basis: 90%;

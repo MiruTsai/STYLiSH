@@ -35,7 +35,7 @@ margin:0 auto;
   height: 48px;
   object-fit: contain;
 }
-.shopHeader li{    
+.shopNav li{    
   height: 28px;
   font-size: 20px;
   font-weight: normal;
@@ -48,8 +48,8 @@ margin:0 auto;
   color: #3f3a3a;
   border-right:1px solid #3f3a3a;
 }
-#acces{
-border-right:0px;
+.shopNav li:last-child{
+  border: none;
 }
 
 .search{
@@ -249,7 +249,7 @@ border-right: 0px;
   color: #828282;
 }
 /* flex box */
-.shopHeader,
+.shopNav,
 .userAct,
 .cartAct,
 .compDescrib,
@@ -258,8 +258,7 @@ border-right: 0px;
 .footer_menu,
 .socialMedia,
 .Rectangle-4,
-.btn_00,
-.btn_01{
+.btn_00{
   display:flex;
   flex-direction: row;
   align-items: center;
@@ -282,8 +281,7 @@ border-right: 0px;
 justify-content: space-around;
 align-items:center;
 }
-.base,
-.btn_01{    
+.base{    
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -357,12 +355,13 @@ align-items: center;
   flex:1 30%;
   border-right:1px solid white; 
 }
+.mobile_nav li:last-child{
+  border-right: none;
+}
 li a{
   color: white;
 }
-#accessories{
-  border-right:0px;
-}
+
 .bannerPic{  
   height:400px;
 }
@@ -396,7 +395,7 @@ li a{
   margin:auto;
   
 }
-.shopHeader,
+.shopNav,
 .baseBorder{ display: none;
 } 
 }

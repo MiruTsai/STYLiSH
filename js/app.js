@@ -7,7 +7,7 @@ let category;
 let sourcePage = `${productAPI}${category}${pagingQuery}`;
 let tag = "";
 
-//product category 
+//ajax 
 function productPage(src, callback) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -45,7 +45,6 @@ function closeMask() {
     mask.style.display = "none";
 }
 mask.addEventListener("click", closeMask);
-
 
 function search() {
     let userInput = document.querySelector(".searchBar").value;
