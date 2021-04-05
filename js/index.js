@@ -5,23 +5,23 @@ function render(parseData) {
     let products = JSON.parse(parseData);
     paging = products.next_paging;
     if (products.data.length === 0) {
-        let noProduct = createElement("div", "noProduct", "沒有您搜尋的商品喔！");
+        let noProduct = app.createElement("div", "noProduct", "沒有您搜尋的商品喔！");
         indexContainer.appendChild(noProduct);
     } else {
         for (let i = 0; i < products.data.length; i += 1) {
-            let content = createElement("div", "p_content"),
-                pic = createElement("div", "p_pic"),
-                picsrc = createElement("img", "picSrc")
+            let content = app.createElement("div", "p_content"),
+                pic = app.createElement("div", "p_pic"),
+                picsrc = app.createElement("img", "picSrc")
             picsrc.src = products.data[i].main_image;
-            let id = createElement("a", "p_id")
+            let id = app.createElement("a", "p_id")
             id.href = "product.html?id=" + products.data[i].id;
-            let title = createElement("div", "p_title", products.data[i].title),
-                price = createElement("div", "p_price", "TWD." + products.data[i].price),
-                category = createElement("div", "p_category", products.data[i].category);
+            let title = app.createElement("div", "p_title", products.data[i].title),
+                price = app.createElement("div", "p_price", "TWD." + products.data[i].price),
+                category = app.createElement("div", "p_category", products.data[i].category);
             category.style.display = "none";
-            let color = createElement("div", "p_color");
+            let color = app.createElement("div", "p_color");
             for (let j = 0; j < products.data[i].colors.length; j++) {
-                let rect = createElement("div", "rect");
+                let rect = app.createElement("div", "rect");
                 rect.style.backgroundColor = "#" + products.data[i].colors[j].code;
                 color.appendChild(rect);
             }
@@ -38,53 +38,53 @@ function render(parseData) {
 }
 
 //infiniteRoll
-let loading = false;
-function infiniteRoll() {
+app.loading = false;
+app.infiniteRoll = function() {
     let exportPage;
     if (paging) {
-        exportPage = productAPI + category + pagingQuery + paging
+        exportPage = app.API_HOST + "/products/" + app.getParameter() + "?paging=" + paging
     } else {
         return
     }
-    loading = true;
-    productPage(exportPage, function (response) { render(response); loading = false; })
+    app.loading = true;
+    app.getData(exportPage, function (response) { render(response); app.loading = false; })
 }
 
 window.addEventListener("scroll", function () {
     let footerTop = document.querySelector(".Rectangle-4").getBoundingClientRect().top;
     let yScroll = window.pageYOffset;
-    if (footerTop - yScroll < 0 && !loading) {
+    if (footerTop - yScroll < 0 && !app.loading) {
         window.requestAnimationFrame(function () {
-            infiniteRoll();
+            app.infiniteRoll();
         });
     }
 })
 
 
 //campaigns
-function campaigns(cam) {
+app.campaigns = function (cam) {
     let data = JSON.parse(cam).data;
     for (let i = 0; i < data.length; i++) {
-        let campaign = createElement("div", "campaign"),
-            bannerStory = document.createElement("div", "bannerPic");
-        bannerStory.setAttribute("style", `background:url(https://api.appworks-school.tw${data[i].picture})`);
+        let campaign = app.createElement("div", "campaign"),
+            bannerStory = app.createElement("div", "bannerPic");
+        bannerStory.setAttribute("style", `background:url(${data[i].picture})`);
         let bannerTextContainer = document.createElement("div");
         let splitText = data[i].story.split("\r\n");
         for (let j = 0; j < splitText.length; j += 1) {
-            let bannerText = createElement("div", "main-banner-text", splitText[j]);
+            let bannerText = app.createElement("div", "main-banner-text", splitText[j]);
             bannerTextContainer.appendChild(bannerText);
         }
-        let camID = createElement("div", "camID", data[i].id);
+        let camID = app.createElement("div", "camID", data[i].id);
         camID.style.display = "none";
         bannerStory.appendChild(bannerTextContainer);
         campaign.appendChild(bannerStory);
         campaign.appendChild(camID);
         document.getElementById("main-banner").appendChild(campaign);
     }
-    let circleZone = createElement("div", "circleZone"),
+    let circleZone = app.createElement("div", "circleZone"),
         count = document.getElementsByClassName("camID");
     for (let i = 0; i < count.length; i++) {
-        let circle = createElement("div", "circle");
+        let circle = app.createElement("div", "circle");
         circle.name = i;
         circleZone.appendChild(circle);
     }
@@ -119,9 +119,9 @@ function slideShow() {
 }
 
 window.addEventListener("DOMContentLoaded",function(){
-    productPage(productAPI + category, function (response) { render(response); });
-    productPage(AppScoolHostAPI + "/marketing/campaigns", function (response) {
-        campaigns(response);
+    app.getData(app.API_HOST + "/products/" + app.getParameter(), function (response) { render(response); });
+    app.getData(app.API_HOST + "/marketing/campaigns", function (response) {
+    app.campaigns(response);
         slideShow();
     });
 })

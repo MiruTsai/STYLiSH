@@ -1,5 +1,4 @@
-// let originalURL = window.location.href;
-// let params = new URL(originalURL);
+const params = new URL(window.location.href);
 let currentProductID = params.searchParams.get("id");
 const productContainer = document.querySelector(".productContainer");
 const title = document.querySelector(".title");
@@ -10,7 +9,8 @@ let stock;
 let currentStock = 0;
 
 function productRender(parseData) {
-    let pDetail = JSON.parse(parseData);
+    let pDetail = JSON.parse(parseData).data;
+    app.state.product = pDetail;
     const colorContainer = document.querySelector(".colorContainer"),
         sizeContainer = document.querySelector(".sizeContainer"),
         noteContainer = document.querySelector(".noteContainer"),
@@ -21,48 +21,40 @@ function productRender(parseData) {
         subpic2 = document.querySelector(".subpic2"),
         addInCartBtn = document.querySelector(".add_in_cart");
 
-    picture.src = pDetail.data.main_image;
-    picture.textContent = pDetail.data.main_image;
-    title.textContent = pDetail.data.title;
-    productID.textContent = pDetail.data.id;
-    itemPrice.textContent = `TWD.${pDetail.data.price}`;
-    let colorText = document.createElement("div");
-    colorText.className = "color";
-    colorText.textContent = "顏色";
+    picture.src = pDetail.main_image;
+    picture.textContent = pDetail.main_image;
+    title.textContent = pDetail.title;
+    productID.textContent = pDetail.id;
+    itemPrice.textContent = `TWD.${pDetail.price}`;
+    let colorText = app.createElement("div", "color", "顏色");
+    
     colorContainer.appendChild(colorText);
-    for (let i = 0; i < pDetail.data.colors.length; i += 1) {
-        let rect = document.createElement("button");
-        rect.className = "rect";
-        rect.style.backgroundColor = `#${pDetail.data.colors[i].code}`;
-        rect.title = `${pDetail.data.colors[i].name}`;
+    for (let i = 0; i < pDetail.colors.length; i += 1) {
+        let rect = app.createElement("button", "rect");        
+        rect.style.backgroundColor = `#${pDetail.colors[i].code}`;
+        rect.title = `${pDetail.colors[i].name}`;
         colorContainer.appendChild(rect);
     }
-    let size = document.createElement("div");
-    size.textContent = "尺寸";
-    size.className = "size";
+    let size = app.createElement("div", "size", "尺寸");
     sizeContainer.appendChild(size);
-    for (let i = 0; i < pDetail.data.sizes.length; i++) {
-        let sizeIcon = document.createElement("button");
-        sizeIcon.className = "size-icon";
-        sizeIcon.name = "size"
-        sizeIcon.textContent = pDetail.data.sizes[i];
+    for (let i = 0; i < pDetail.sizes.length; i++) {
+        let sizeIcon = app.createElement("button", "size-icon", pDetail.sizes[i]);        
+        sizeIcon.name = "size";
         sizeContainer.appendChild(sizeIcon);
     }
-    note.textContent = pDetail.data.note;
+    note.textContent = pDetail.note;
     let texture = document.querySelector(".texture");
-    texture.textContent = pDetail.data.texture;
-    let splitDescription = pDetail.data.description.split("\r\n");
+    texture.textContent = pDetail.texture;
+    let splitDescription = pDetail.description.split("\r\n");
     for (let i = 0; i < splitDescription.length; i += 1) {
-        let description = document.createElement("div");
-        description.textContent = splitDescription[i];
-        description.className = "texture";
+        let description = app.createElement("div", "texture", splitDescription[i]);        
         noteContainer.appendChild(description);
     }
-    place.textContent = `產地：${pDetail.data.place}`;
-    story.textContent = pDetail.data.story;
-    subpic1.src = pDetail.data.images[0];
-    subpic2.src = pDetail.data.images[1];
-    stock = pDetail.data.variants;
+    place.textContent = `產地：${pDetail.place}`;
+    story.textContent = pDetail.story;
+    subpic1.src = pDetail.images[0];
+    subpic2.src = pDetail.images[1];
+    stock = pDetail.variants;
 
     addInCartBtn.addEventListener("click", createUserOrder)
     selectItem();
@@ -71,14 +63,14 @@ function productRender(parseData) {
 }
 
 function removeDefaultColor() {
-    let selectColor = Array.from(document.getElementsByClassName("rect"));
+    let selectColor = document.getElementsByClassName("rect");
     selectColor.forEach(i => {
         i.classList.remove("rectSelected");
     })
 }
 
 function removeDefaultSize() {
-    let selectSizeIcon = Array.from(document.getElementsByClassName("size-icon"));
+    let selectSizeIcon = document.getElementsByClassName("size-icon");
     selectSizeIcon.forEach(i => {
         i.classList.remove("sizeSelected");
     })
@@ -179,8 +171,6 @@ function count() {
     })
 }
 
-
-
 function createUserOrder() {
     let stockQuantity = getStock();
     const count = document.querySelector(".quantity"),
@@ -216,5 +206,5 @@ function createUserOrder() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-    productPage(productAPI + "details?id=" + currentProductID, function (response) { productRender(response); });
+    app.getData(app.API_HOST + "/products/details?id=" + currentProductID, function (response) { productRender(response); });
 })

@@ -8,7 +8,7 @@ input[type=radio]+label{
     opacity: 0;
     color: #8b572a;
 }
-.productPage{
+.getData{
     width:70%;
     margin:0 auto;
     padding: 50px 0;
@@ -194,7 +194,7 @@ button[disabled]{
 }
 /* media query */
 @media(max-width:1024px){
-.productPage{
+.getData{
     width:90%;
     padding: 10px 0;
 }
@@ -273,7 +273,7 @@ button[disabled]{
 }
 }
 @media (max-width:480px){
-.productPage{
+.getData{
     width:100%;
     padding:0 0 20px 0;
 }

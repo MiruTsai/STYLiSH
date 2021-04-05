@@ -1,6 +1,8 @@
-const cartOrderList = document.querySelector(".cartOrderList");
-const APP_ID = 12348;
-const APP_KEY = "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF";
+const TapPay = {
+    APP_ID: 12348,
+    APP_KEY: "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF"
+}
+const cartOrderList = document.querySelector(".cartOrderList"); 
 const userName = document.getElementById("userName");
 const mobileNumber = document.getElementById("mobileNumber");
 const address = document.getElementById("address");
@@ -20,10 +22,8 @@ let mobileQuantity;
 
 
 function createEmptyDescription() {
-    const empty = document.createElement("div");
-    empty.className = "empty";
+    const empty = app.createElement("div", "empty", "購物車空空的耶");    
     cartOrderList.appendChild(empty);
-    empty.textContent = "購物車空空的耶";
 }
 
 function renderCartOrderList() {
@@ -31,26 +31,26 @@ function renderCartOrderList() {
         createEmptyDescription();
     } else {
         for (let i = 0; i < parseOrderList.length; i++) {
-            let orderItem = createElement("div", "orderItem"),
-                mobileItemInfo = createElement("div", "mobileItemInfo"),
-                itemInfo = createElement("div", "itemInfo"),
-                itemPic = createElement("img", "itemPic");
+            let orderItem = app.createElement("div", "orderItem"),
+                mobileItemInfo = app.createElement("div", "mobileItemInfo"),
+                itemInfo = app.createElement("div", "itemInfo"),
+                itemPic = app.createElement("img", "itemPic");
             itemPic.src = parseOrderList[i].pic;
-            let detail = createElement("div", "itemDetail"),
-                title = createElement("div", "itemTitle", parseOrderList[i].name),
-                itemID = createElement("div", "itemID", parseOrderList[i].id),
-                description = createElement("div", "description"),
-                color = createElement("div", "color"),
-                colorText = createElement("div", "colorText", "顏色"),
-                centerLine1 = createElement("div", "centerLine", "|"),
-                colorName = createElement("div", "colorName", parseOrderList[i].color.name);
+            let detail = app.createElement("div", "itemDetail"),
+                title = app.createElement("div", "itemTitle", parseOrderList[i].name),
+                itemID = app.createElement("div", "itemID", parseOrderList[i].id),
+                description = app.createElement("div", "description"),
+                color = app.createElement("div", "color"),
+                colorText = app.createElement("div", "colorText", "顏色"),
+                centerLine1 = app.createElement("div", "centerLine", "|"),
+                colorName = app.createElement("div", "colorName", parseOrderList[i].color.name);
             color.appendChild(colorText);
             color.appendChild(centerLine1);
             color.appendChild(colorName);
-            let size = createElement("div", "size"),
-                sizeText = createElement("div", "sizeText", "尺寸"),
-                sizeName = createElement("div", "sizeName", parseOrderList[i].size),
-                centerLine2 = createElement("div", "centerLine", "|");
+            let size = app.createElement("div", "size"),
+                sizeText = app.createElement("div", "sizeText", "尺寸"),
+                sizeName = app.createElement("div", "sizeName", parseOrderList[i].size),
+                centerLine2 = app.createElement("div", "centerLine", "|");
             size.appendChild(sizeText);
             size.appendChild(centerLine2);
             size.appendChild(sizeName);
@@ -61,24 +61,24 @@ function renderCartOrderList() {
             detail.appendChild(description);
             itemInfo.appendChild(itemPic);
             itemInfo.appendChild(detail);
-            let mobileRemove = createElement("img", "mobileRemove");
+            let mobileRemove = app.createElement("img", "mobileRemove");
             mobileRemove.src = "images/cart-remove.png";
             mobileRemove.dataset.order = i;
             mobileRemove.addEventListener("click", function (e) {
                 deleteOrderItem(e);
-                updateItemOrder();
-                updateMobileItemOrder();
+                updateItemOrder("remove");
+                updateItemOrder("mobileRemove");
             })
-            let mobileQty = createElement("div", "mobileQty"),
-                mobileQtyText = createElement("div", "mobileQtyText"),
-                qtyText = createElement("span", "title", "數量"),
-                webQuantity = createElement("input", "quantity");
+            let mobileQty = app.createElement("div", "mobileQty"),
+                mobileQtyText = app.createElement("div", "mobileQtyText"),
+                qtyText = app.createElement("span", "title", "數量"),
+                webQuantity = app.createElement("input", "quantity");
             webQuantity.addEventListener("change", function (e) { getItemTotalPrice(e); getOrderListPrice(); })
             webQuantity.type = "number";
             webQuantity.min = 1;
             webQuantity.max = parseOrderList[i].remain;
             webQuantity.defaultValue = parseOrderList[i].qty;
-            mobileQuantity = createElement("input", "mobileQuantity");
+            mobileQuantity = app.createElement("input", "mobileQuantity");
             mobileQuantity.addEventListener("change", function (e) { getMobileItemTotalPrice(e); getMobileOrderListPrice(); })
             mobileQuantity.type = "number";
             mobileQuantity.min = 1;
@@ -86,16 +86,16 @@ function renderCartOrderList() {
             mobileQuantity.defaultValue = parseOrderList[i].qty;
             mobileQtyText.appendChild(qtyText);
             mobileQtyText.appendChild(mobileQuantity);
-            let mobileUnitPrice = createElement("div", "mobileUnitPrice"),
-                unitPrice = createElement("span", "title", "單價"),
-                itemUnitPrice = createElement("div", "itemUnitPrice", parseOrderList[i].price),
-                mobileItemUnitPrice = createElement("div", "mobileItemUnitPrice", parseOrderList[i].price);
+            let mobileUnitPrice = app.createElement("div", "mobileUnitPrice"),
+                unitPrice = app.createElement("span", "title", "單價"),
+                itemUnitPrice = app.createElement("div", "itemUnitPrice", parseOrderList[i].price),
+                mobileItemUnitPrice = app.createElement("div", "mobileItemUnitPrice", parseOrderList[i].price);
             mobileUnitPrice.appendChild(unitPrice);
             mobileUnitPrice.appendChild(mobileItemUnitPrice);
-            let mobileTotal = createElement("div", "mobileTotal"),
-                mobileTotalText = createElement("span", "title", "小計");
-            itemTotalPrice = createElement("div", "itemTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * webQuantity.defaultValue}`);
-            mobileTotalPrice = createElement("div", "mobileTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * mobileQuantity.defaultValue}`);
+            let mobileTotal = app.createElement("div", "mobileTotal"),
+                mobileTotalText = app.createElement("span", "title", "小計");
+            itemTotalPrice = app.createElement("div", "itemTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * webQuantity.defaultValue}`);
+            mobileTotalPrice = app.createElement("div", "mobileTotalPrice", `TWD.${Number(parseOrderList[i].price.slice(4)) * mobileQuantity.defaultValue}`);
             mobileTotal.appendChild(mobileTotalText);
             mobileTotal.appendChild(mobileTotalPrice);
             mobileQty.appendChild(mobileQtyText);
@@ -103,14 +103,14 @@ function renderCartOrderList() {
             mobileQty.appendChild(mobileTotal);
             mobileItemInfo.appendChild(itemInfo);
             mobileItemInfo.appendChild(mobileRemove);
-            let itemQty = createElement("div", "itemQty"),
-                remove = createElement("img", "remove");
+            let itemQty = app.createElement("div", "itemQty"),
+                remove = app.createElement("img", "remove");
             remove.src = "images/cart-remove.png";
             remove.dataset.order = i;
             remove.addEventListener("click", function (e) {
                 deleteOrderItem(e);
-                updateItemOrder();
-                updateMobileItemOrder();
+                updateItemOrder("remove");
+                updateItemOrder("mobileRemove");                
             })
             itemQty.appendChild(webQuantity);
             itemQty.appendChild(itemUnitPrice);
@@ -192,18 +192,13 @@ function deleteOrderItem(e) {
     getOrderListAmount();
 }
 
-function updateItemOrder() {
-    let remove = document.getElementsByClassName("remove");
+function updateItemOrder(className) {
+    let remove = document.getElementsByClassName(className);
     for (let i = 0; i < remove.length; i++) {
         remove[i].dataset.order = i;
     }
 }
-function updateMobileItemOrder() {
-    let remove = document.getElementsByClassName("mobileRemove");
-    for (let i = 0; i < remove.length; i++) {
-        remove[i].dataset.order = i;
-    }
-}
+
 
 //TAP PAY
 let fields = {
@@ -368,7 +363,7 @@ function pushOrderToBackend() {
     const FBtoken = JSON.parse(localStorage.getItem("userToken"));
     let order = createOrder();
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", `${AppScoolHostAPI}/order/checkout`);
+    xhr.open("POST", app.API_HOST + "/order/checkout");
     //如果已登入FB
     if (FBtoken) {
         xhr.setRequestHeader("Authorization", "Bearer " + FBtoken);
@@ -385,7 +380,7 @@ function pushOrderToBackend() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
-    TPDirect.setupSDK(APP_ID, APP_KEY, "sandbox");
+    TPDirect.setupSDK(TaPay.APP_ID, TapPay.APP_KEY, "sandbox");
     renderCartOrderList();
     getOrderListPrice();
     //    addDeleteOrderFX("mobileRemove");

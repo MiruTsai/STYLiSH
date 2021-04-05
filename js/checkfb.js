@@ -43,7 +43,7 @@ function createSendToken() {
 function userSignIn() {
     let xhr = new XMLHttpRequest(),
         FBtoken = createSendToken();
-    xhr.open("POST", AppScoolHostAPI + "/user/signin");
+    xhr.open("POST", app.API_HOST + "/user/signin");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {

@@ -1,14 +1,22 @@
-const AppScoolHostAPI = "https://api.appworks-school.tw/api/1.0";
-const productAPI = "https://api.appworks-school.tw/api/1.0/products/";
+const app = {
+    API_HOST: "https://api.appworks-school.tw/api/1.0",
+    state: {product: null}
+}
+
 const mask = document.querySelector(".mask");
 const orderListCount = document.querySelector(".orderList");
-let pagingQuery = "?paging=";
-let category;
-let sourcePage = productAPI + category + pagingQuery;
-let tag = "";
+
+app.getParameter = function () {
+    let url = new URL(window.location.href);
+    let tag = url.searchParams.get("tag")
+    if (!tag) {
+        tag = "all";
+    }
+    return tag;
+}
 
 //ajax 
-function productPage(src, callback) {
+app.getData = function (src, callback) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -19,17 +27,7 @@ function productPage(src, callback) {
     xhr.send();
 }
 
-let originalURL = window.location.href;
-let params = new URL(originalURL);
-tag = params.searchParams.get("tag")
-if (tag === null) {
-    category = "all";
-} else {
-    category = tag;
-}
-
-
-function createElement(htmlTag, className, textContent) {
+app.createElement = function (htmlTag, className, textContent) {
     let obj = document.createElement(htmlTag);
     obj.className = className;
     if (textContent) {
@@ -55,27 +53,27 @@ function closeMask() {
 }
 mask.addEventListener("click", closeMask);
 
-function search() {
-    let userInput = document.querySelector(".searchBar").value;
+app.search = function () {
+    const userInput = document.querySelector(".searchBar").value;
     if (!userInput) {
         alert("請輸入欲搜尋商品！");
         return
     }
     document.getElementById("p_container").innerHTML = null;
-    productPage(productAPI + "search?keyword=" + userInput, function (response) {
+    app.getData(app.API_HOST + "/products/search?keyword=" + userInput, function (response) {
         render(response);
     });
 }
 
 //search bar keyboard
 function searchKey() {
-    let userInput = document.querySelector(".searchBar").value;
+    const userInput = document.querySelector(".searchBar").value;
     if (event.keyCode === 13) {
         if (!userInput) {
             alert("請輸入欲搜尋商品！");
             return
         } else {
-            productPage(productAPI + "search?keyword=" + userInput, function (response) {
+            app.getData(app.API_HOST + "/products/search?keyword=" + userInput, function (response) {
                 closeMask();
                 document.getElementById("p_container").innerHTML = null;
                 render(response);
@@ -94,7 +92,7 @@ function moSearchKeyCode() {
             alert("請輸入欲搜尋商品！");
             return
         } else {
-            productPage(productAPI + "search?keyword=" + userInput, function (response) {
+            app.getData(app.API_HOST + "/products/search?keyword=" + userInput, function (response) {
                 closeMask();
                 render(response);
             });
@@ -111,7 +109,7 @@ function moSearch() {
         alert("請輸入欲搜尋商品！");
         return
     } else {
-        productPage(productAPI + "search?keyword=" + userInput, function (response) {
+        app.getData(app.API_HOST + "/products/search?keyword=" + userInput, function (response) {
             closeMask();
             render(response);
         });
@@ -119,7 +117,7 @@ function moSearch() {
 }
 
 //購物車商品數量，如果沒有資料留下來的話，塞給它空陣列
-function getOrderListAmount() {
+app.getOrderListAmount = function () {
     let orderList = JSON.parse(localStorage.getItem("List")),
         cartNum = document.querySelector(".cartNum");
     if (!orderList) {
@@ -150,5 +148,5 @@ window.addEventListener("DOMContentLoaded", function () {
     goIndex();
     cartAction(".cartAct");
     cartAction(".mobile_user");
-    getOrderListAmount();
+    app.getOrderListAmount();
 })
